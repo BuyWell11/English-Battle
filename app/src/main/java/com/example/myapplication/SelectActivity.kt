@@ -3,6 +3,8 @@ package com.example.myapplication
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import com.example.myapplication.databinding.UserSelectBinding
 
 class SelectActivity : AppCompatActivity() {
@@ -33,16 +35,35 @@ class SelectActivity : AppCompatActivity() {
                     val name = binding.nameInput.text.toString()
                     if (name.isBlank()){
                         binding.nameInput.error = "No name"
+                        return
                     }
                     binding.btn1.text = name
                     binding.frames.visibility = View.GONE
                 }
             }
             binding.btn2.id ->{
-
+                if(binding.btn2.text.toString() == "New Character"){
+                    binding.frames.visibility = View.VISIBLE
+                    val name = binding.nameInput.text.toString()
+                    if (name.isBlank()){
+                        binding.nameInput.error = "No name"
+                        return
+                    }
+                    binding.btn1.text = name
+                    binding.frames.visibility = View.GONE
+                }
             }
             binding.btn3.id ->{
-
+                if(binding.btn3.text.toString() == "New Character"){
+                    binding.frames.visibility = View.VISIBLE
+                    val name = binding.nameInput.text.toString()
+                    if (name.isBlank()){
+                        binding.nameInput.error = "No name"
+                        return
+                    }
+                    binding.btn1.text = name
+                    binding.frames.visibility = View.GONE
+                }
             }
         }
     }

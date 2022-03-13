@@ -8,7 +8,7 @@
     <LinearLayout
         android:id="@+id/linear"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="100dp"
         android:orientation="horizontal"
         android:gravity="bottom"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -68,7 +68,9 @@
         android:layout_width="205dp"
         android:layout_height="206dp"
         android:layout_marginBottom="8dp"
+        android:layout_marginStart="100dp"
         android:src="@drawable/monster"
+        app:layout_constraintEnd_toEndOf="@id/linear"
         app:layout_constraintBottom_toTopOf="@id/linear"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="491dp"/>
