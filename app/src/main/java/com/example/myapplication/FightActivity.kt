@@ -12,6 +12,7 @@ class FightActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = FightBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         binding.lowdmg.setOnClickListener{
             onLDSpressed()
         }

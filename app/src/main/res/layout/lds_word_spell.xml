@@ -22,14 +22,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/task"
         android:layout_width="218dp"
         android:layout_height="51dp"
         android:layout_marginStart="256dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="257dp"
         android:gravity="center"
-        android:text="TextView"
+        android:text=""
         android:textSize="25sp"
         app:layout_constraintBottom_toTopOf="@+id/gridLayout"
         app:layout_constraintEnd_toEndOf="parent"
@@ -54,33 +54,44 @@
             android:layout_width="250dp"
             android:layout_height="50dp"
             android:layout_margin="12dp"
-            android:background="@drawable/background_shape"
-            android:text="duck" />
+            android:background="@drawable/background_shape" />
 
         <Button
             android:id="@+id/answer2"
             android:layout_width="250dp"
             android:layout_height="50dp"
             android:layout_margin="12dp"
-            android:background="@drawable/background_shape"
-            android:text="cat" />
+            android:background="@drawable/background_shape" />
 
         <Button
             android:id="@+id/answer3"
             android:layout_width="250dp"
             android:layout_height="50dp"
             android:layout_margin="12dp"
-            android:background="@drawable/background_shape"
-            android:text="rat" />
+            android:background="@drawable/background_shape" />
 
         <Button
             android:id="@+id/answer4"
             android:layout_width="250dp"
             android:layout_height="50dp"
             android:layout_margin="12dp"
-            android:background="@drawable/background_shape"
-            android:text="horse" />
+            android:background="@drawable/background_shape" />
     </GridLayout>
 
+    <TextView
+        android:id="@+id/result"
+        android:layout_width="300dp"
+        android:layout_height="159dp"
+        android:layout_marginStart="215dp"
+        android:layout_marginTop="120dp"
+        android:layout_marginEnd="216dp"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:background="@drawable/background_shape"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
