@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.databinding.LdsWordSpellBinding
 
 
-class LdsActivity : AppCompatActivity() {
+class LdsWordActivity : AppCompatActivity() {
     lateinit var binding : LdsWordSpellBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

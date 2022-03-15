@@ -40,7 +40,12 @@
             android:screenOrientation="landscape"/>
 
         <activity
-            android:name=".LdsActivity"
+            android:name=".LdsWordActivity"
+            android:exported="true"
+            android:screenOrientation="landscape"/>
+
+        <activity
+            android:name=".LdsPictureActivity"
             android:exported="true"
             android:screenOrientation="landscape"/>
 

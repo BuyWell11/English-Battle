@@ -29,8 +29,16 @@ class FightActivity : AppCompatActivity() {
 
     private fun onLDSpressed()
     {
-        val intent = Intent(this, LdsActivity::class.java)
-        startActivity(intent)
+        val random = (0..1).random()
+        if (random == 0) {
+            val intent = Intent(this, LdsWordActivity::class.java)
+            startActivity(intent)
+        }
+        else if(random == 1)
+        {
+            val intent = Intent(this, LdsPictureActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun onMDSpressed()
