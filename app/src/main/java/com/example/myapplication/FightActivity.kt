@@ -48,6 +48,7 @@ class FightActivity : AppCompatActivity() {
 
     private fun onHDSpressed()
     {
-
+        val intent = Intent(this, HdsChooseWordActivity::class.java)
+        startActivity(intent)
     }
 }

@@ -4,4 +4,5 @@
     <string name="input_wizard_name">Input wizard name</string>
     <string name="lds_task_1">What does this word mean?</string>
     <string name="lds_task_2">What is in the picture?</string>
+    <string name="hds_task_1">Choose the correct word.</string>
 </resources>

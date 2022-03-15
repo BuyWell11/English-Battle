@@ -49,6 +49,11 @@
             android:exported="true"
             android:screenOrientation="landscape"/>
 
+        <activity
+            android:name=".HdsChooseWordActivity"
+            android:exported="true"
+            android:screenOrientation="landscape"/>
+
     </application>
 
 </manifest>
