@@ -48,7 +48,14 @@ class FightActivity : AppCompatActivity() {
 
     private fun onHDSpressed()
     {
-        val intent = Intent(this, HdsChooseWordActivity::class.java)
-        startActivity(intent)
+        val random = (0..1).random()
+        if (random == 0) {
+            val intent = Intent(this, HdsTranslationActivity::class.java)
+            startActivity(intent)
+        }
+        else if(random == 1) {
+            val intent = Intent(this, HdsChooseWordActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

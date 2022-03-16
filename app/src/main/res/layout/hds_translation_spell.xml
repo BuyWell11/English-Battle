@@ -14,7 +14,7 @@
         android:layout_marginStart="179dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="179dp"
-        android:text="@string/lds_task_1"
+        android:text="@string/hds_task_2"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -28,55 +28,30 @@
         android:layout_marginStart="256dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="257dp"
+        android:layout_marginBottom="276dp"
         android:gravity="center"
         android:text=""
         android:textSize="25sp"
-        app:layout_constraintBottom_toTopOf="@+id/gridLayout"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.26" />
+        app:layout_constraintVertical_bias="1.0" />
 
-    <GridLayout
-        android:id="@+id/gridLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="91dp"
-        android:layout_marginEnd="91dp"
-        android:layout_marginBottom="16dp"
-        android:columnCount="2"
+    <EditText
+        android:id="@+id/answer_space"
+        android:layout_width="277dp"
+        android:layout_height="67dp"
+        android:hint="@string/hint"
+        android:imeOptions="actionDone"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <Button
-            android:id="@+id/answer1"
-            android:layout_width="250dp"
-            android:layout_height="50dp"
-            android:layout_margin="12dp"
-            android:background="@drawable/background_shape" />
-
-        <Button
-            android:id="@+id/answer2"
-            android:layout_width="250dp"
-            android:layout_height="50dp"
-            android:layout_margin="12dp"
-            android:background="@drawable/background_shape" />
-
-        <Button
-            android:id="@+id/answer3"
-            android:layout_width="250dp"
-            android:layout_height="50dp"
-            android:layout_margin="12dp"
-            android:background="@drawable/background_shape" />
-
-        <Button
-            android:id="@+id/answer4"
-            android:layout_width="250dp"
-            android:layout_height="50dp"
-            android:layout_margin="12dp"
-            android:background="@drawable/background_shape" />
-    </GridLayout>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.563" />
 
     <TextView
         android:id="@+id/result"
@@ -85,13 +60,25 @@
         android:layout_marginStart="215dp"
         android:layout_marginTop="120dp"
         android:layout_marginEnd="216dp"
+        android:background="@drawable/background_shape"
+        android:gravity="center"
         android:textSize="30sp"
         android:textStyle="bold"
-        android:gravity="center"
-        android:background="@drawable/background_shape"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/DoneBtn"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_margin="12dp"
+        android:background="@drawable/background_shape"
+        android:text="enter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/answer_space" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

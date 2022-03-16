@@ -54,6 +54,11 @@
             android:exported="true"
             android:screenOrientation="landscape"/>
 
+        <activity
+            android:name=".HdsTranslationActivity"
+            android:exported="true"
+            android:screenOrientation="landscape"/>
+
     </application>
 
 </manifest>
