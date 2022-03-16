@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.myapplication.databinding.MainMenuBinding
+import com.example.myapplication.Database
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: MainMenuBinding
@@ -12,6 +13,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = MainMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val db  = Database()
+
         binding.btn1.setOnClickListener{
             onPlayPressed()
         }
