@@ -87,7 +87,7 @@
         android:gravity="center"/>
 
     <TextView
-        android:id="@+id/nonsterhp"
+        android:id="@+id/monsterhp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="HP: 1000/1000"
