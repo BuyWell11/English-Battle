@@ -52,7 +52,15 @@ class FightActivity : AppCompatActivity() {
 
     private fun onMDSpressed()
     {
-
+        val random = (0..1).random()
+        if (random == 0) {
+            val intent = Intent(this, HdsTranslationActivity::class.java)
+            startActivityIfNeeded(intent, MID_DMG_REQUEST_CODE)
+        }
+        else if(random == 1) {
+            val intent = Intent(this, HdsChooseWordActivity::class.java)
+            startActivityIfNeeded(intent, MID_DMG_REQUEST_CODE)
+        }
     }
 
     private fun onHDSpressed()
@@ -60,11 +68,11 @@ class FightActivity : AppCompatActivity() {
         val random = (0..1).random()
         if (random == 0) {
             val intent = Intent(this, HdsTranslationActivity::class.java)
-            startActivity(intent)
+            startActivityIfNeeded(intent, HIGH_DMG_REQUEST_CODE)
         }
         else if(random == 1) {
             val intent = Intent(this, HdsChooseWordActivity::class.java)
-            startActivity(intent)
+            startActivityIfNeeded(intent, HIGH_DMG_REQUEST_CODE)
         }
     }
 
@@ -80,6 +88,7 @@ class FightActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        var temp_bool:Boolean
         var right = data?.getBooleanExtra(LdsPictureActivity.RIGHT, false)
         when(requestCode){
             LOW_DMG_REQUEST_CODE -> {
@@ -91,13 +100,38 @@ class FightActivity : AppCompatActivity() {
                 }
         }
             MID_DMG_REQUEST_CODE ->{
-
+                if(right == true){
+                    state.boss_hp -= 250
+                }
+                else{
+                    state.hp -= 20
+                }
             }
             HIGH_DMG_REQUEST_CODE ->{
-
+                if(right == true){
+                    state.boss_hp -= 400
+                }
+                else{
+                    state.hp -= 20
+                }
             }
         }
         renderState()
+        if(state.hp <= 0){
+            temp_bool = true
+            fight_finish(temp_bool)
+        }
+        else if(state.boss_hp <= 0){
+            temp_bool = false
+            fight_finish(temp_bool)
+        }
+    }
+
+    private fun fight_finish(dead:Boolean){
+        var intent = Intent(this, Win_lossActivity::class.java)
+        intent.putExtra(Win_lossActivity.RESULT, dead)
+        startActivity(intent)
+        finish()
     }
 
     @Parcelize

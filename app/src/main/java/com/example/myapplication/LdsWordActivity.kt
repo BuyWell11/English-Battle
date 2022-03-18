@@ -1,6 +1,7 @@
 package com.example.myapplication
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -36,7 +37,6 @@ class LdsWordActivity : AppCompatActivity() {
             val result: Boolean = IsAnswerTrue(answer, right_answer)
             ShowResult(result)
 
-            ReturnToFight()
         }
 
         binding.answer2.setOnClickListener{
@@ -44,7 +44,6 @@ class LdsWordActivity : AppCompatActivity() {
             val result: Boolean = IsAnswerTrue(answer, right_answer)
             ShowResult(result)
 
-            ReturnToFight()
         }
 
         binding.answer3.setOnClickListener{
@@ -52,7 +51,6 @@ class LdsWordActivity : AppCompatActivity() {
             val result: Boolean = IsAnswerTrue(answer, right_answer)
             ShowResult(result)
 
-            ReturnToFight()
         }
 
         binding.answer4.setOnClickListener{
@@ -60,7 +58,6 @@ class LdsWordActivity : AppCompatActivity() {
             val result: Boolean = IsAnswerTrue(answer, right_answer)
             ShowResult(result)
 
-            ReturnToFight()
         }
 
     }
@@ -82,13 +79,16 @@ class LdsWordActivity : AppCompatActivity() {
         {
             binding.result.text = "You are wrong!"
         }
+        Handler(Looper.getMainLooper()).postDelayed( {
+            val intent = Intent()
+            intent.putExtra(LdsPictureActivity.RIGHT, result)
+            setResult(Activity.RESULT_OK, intent)
+            finish()
+        }, 1000)
     }
 
-    private fun ReturnToFight()
-    {
-        Handler(Looper.getMainLooper()).postDelayed( {
-            //Переход на предыдущий слой
-            super.onBackPressed()
-        }, 1000)
+
+    companion object{
+        @JvmStatic val RIGHT = "RIGHT"
     }
 }

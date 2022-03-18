@@ -35,7 +35,6 @@ class LdsPictureActivity : AppCompatActivity() {
             val result: Boolean = IsAnswerTrue(answer, right_answer)
             ShowResult(result)
 
-            ReturnToFight()
         }
 
         binding.answer2.setOnClickListener{
@@ -43,7 +42,6 @@ class LdsPictureActivity : AppCompatActivity() {
             val result: Boolean = IsAnswerTrue(answer, right_answer)
             ShowResult(result)
 
-            ReturnToFight()
         }
 
         binding.answer3.setOnClickListener{
@@ -51,7 +49,6 @@ class LdsPictureActivity : AppCompatActivity() {
             val result: Boolean = IsAnswerTrue(answer, right_answer)
             ShowResult(result)
 
-            ReturnToFight()
         }
 
         binding.answer4.setOnClickListener{
@@ -59,7 +56,6 @@ class LdsPictureActivity : AppCompatActivity() {
             val result: Boolean = IsAnswerTrue(answer, right_answer)
             ShowResult(result)
 
-            ReturnToFight()
         }
     }
 
@@ -86,15 +82,6 @@ class LdsPictureActivity : AppCompatActivity() {
             setResult(Activity.RESULT_OK, intent)
             finish()
         }, 1000)
-    }
-
-    private fun ReturnToFight()
-    {
-       Handler(Looper.getMainLooper()).postDelayed( {
-            //Переход на предыдущий слой
-            super.onBackPressed()
-        }, 1000)
-
     }
 
     companion object{

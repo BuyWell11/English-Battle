@@ -1,6 +1,7 @@
 package com.example.myapplication
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -32,7 +33,6 @@ class HdsTranslationActivity : AppCompatActivity() {
             val keyword = binding.answerSpace.text.toString()
             val result: Boolean = IsAnswerTrue(keyword, right_answer)
             ShowResult(result)
-            ReturnToFight()
         }
 
     }
@@ -54,13 +54,14 @@ class HdsTranslationActivity : AppCompatActivity() {
         {
             binding.result.text = "You are wrong!"
         }
-    }
-
-    private fun ReturnToFight()
-    {
         Handler(Looper.getMainLooper()).postDelayed( {
-            //Переход на предыдущий слой
-            super.onBackPressed()
+            val intent = Intent()
+            intent.putExtra(LdsPictureActivity.RIGHT, result)
+            setResult(Activity.RESULT_OK, intent)
+            finish()
         }, 1000)
+    }
+    companion object{
+        @JvmStatic val RIGHT = "RIGHT"
     }
 }
