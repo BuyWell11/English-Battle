@@ -54,11 +54,11 @@ class FightActivity : AppCompatActivity() {
     {
         val random = (0..1).random()
         if (random == 0) {
-            val intent = Intent(this, HdsTranslationActivity::class.java)
+            val intent = Intent(this, MdsMakeSentenceActivity::class.java)
             startActivityIfNeeded(intent, MID_DMG_REQUEST_CODE)
         }
         else if(random == 1) {
-            val intent = Intent(this, HdsChooseWordActivity::class.java)
+            val intent = Intent(this, MdsMakeSentenceActivity::class.java)
             startActivityIfNeeded(intent, MID_DMG_REQUEST_CODE)
         }
     }

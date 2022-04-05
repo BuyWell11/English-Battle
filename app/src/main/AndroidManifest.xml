@@ -55,6 +55,12 @@
             android:name=".Win_lossActivity"
             android:exported="true"
             android:screenOrientation="landscape"/>
+
+        <activity
+            android:name=".MdsMakeSentenceActivity"
+            android:exported="true"
+            android:screenOrientation="landscape"/>
+
     </application>
 
 </manifest>
