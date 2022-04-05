@@ -5,12 +5,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import java.util.ArrayList
+import kotlin.collections.mutableListOf
 
-class MdsAdapter(private val tags: ArrayList<String>) : RecyclerView.Adapter<MdsAdapter.MyViewHolder>() {
+class MdsAdapter(ItemList: MutableList<String>) : RecyclerView.Adapter<MdsAdapter.MyViewHolder>() {
+    private var list: MutableList<String> = ItemList
 
-    inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val text: TextView = view.findViewById(R.id.text)
+    inner class MyViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
+        var text: TextView = ItemView.findViewById(R.id.text)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -20,11 +21,11 @@ class MdsAdapter(private val tags: ArrayList<String>) : RecyclerView.Adapter<Mds
     }
 
     override fun getItemCount(): Int {
-        return tags.size
+        return list.size
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.text.text = tags[position]
+        holder.text.text = list[position]
     }
 
 }

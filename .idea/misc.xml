@@ -12,6 +12,8 @@
         <entry key="..\:/Users/Maksim/AndroidStudioProjects/MyApplication/app/src/main/res/layout/loss.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Maksim/AndroidStudioProjects/MyApplication/app/src/main/res/layout/lvl_select.xml" value="0.25" />
         <entry key="..\:/Users/Maksim/AndroidStudioProjects/MyApplication/app/src/main/res/layout/main_menu.xml" value="0.25" />
+        <entry key="..\:/Users/Maksim/AndroidStudioProjects/MyApplication/app/src/main/res/layout/mds_make_sentence_spell.xml" value="0.36102564102564105" />
+        <entry key="..\:/Users/Maksim/AndroidStudioProjects/MyApplication/app/src/main/res/layout/mds_text_space.xml" value="0.36102564102564105" />
         <entry key="..\:/Users/Maksim/AndroidStudioProjects/MyApplication/app/src/main/res/layout/user_select.xml" value="0.33" />
         <entry key="..\:/Users/Maksim/AndroidStudioProjects/MyApplication/app/src/main/res/layout/win.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Maksim/AndroidStudioProjects/MyApplication/app/src/main/res/layout/win_loss_screen.xml" value="0.36666666666666664" />
@@ -23,8 +25,6 @@
         <entry key="..\:/eng_app/android_app/app/src/main/res/layout/lds_word_spell.xml" value="0.24635416666666668" />
         <entry key="..\:/eng_app/android_app/app/src/main/res/layout/lvl_select.xml" value="0.358695652173913" />
         <entry key="..\:/eng_app/android_app/app/src/main/res/layout/main_menu.xml" value="0.245018115942029" />
-        <entry key="..\:/eng_app/android_app/app/src/main/res/layout/mds_make_sentence_spell.xml" value="0.26201269265639165" />
-        <entry key="..\:/eng_app/android_app/app/src/main/res/layout/mds_text_space.xml" value="0.2" />
       </map>
     </option>
   </component>
