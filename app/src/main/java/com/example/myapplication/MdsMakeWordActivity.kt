@@ -14,7 +14,7 @@ import com.example.myapplication.databinding.MdsMakeSentenceSpellBinding
 import java.util.*
 import kotlin.collections.mutableListOf
 
-class MdsMakeSentenceActivity : AppCompatActivity() {
+class MdsMakeWordActivity : AppCompatActivity() {
     lateinit var binding: MdsMakeSentenceSpellBinding
 
     private var list = mutableListOf<String>()
@@ -22,10 +22,13 @@ class MdsMakeSentenceActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
 
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = MdsMakeSentenceSpellBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.task.text = "Make word using these letters"
 
         recyclerView = findViewById(R.id.recView)
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -34,10 +37,11 @@ class MdsMakeSentenceActivity : AppCompatActivity() {
         linearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
         recyclerView.layoutManager = linearLayoutManager
 
-        list.add("have")
-        list.add("cat")
-        list.add("I")
-        list.add("a")
+        list.add("w")
+        list.add("l")
+        list.add("o")
+        list.add("r")
+        list.add("d")
 
         adapter = MdsAdapter(list)
         recyclerView.adapter = adapter
@@ -45,7 +49,7 @@ class MdsMakeSentenceActivity : AppCompatActivity() {
         val itemTouchHelper = ItemTouchHelper(simpleCallback)
         itemTouchHelper.attachToRecyclerView(recyclerView)
 
-        val right_answer = "Ihaveacat"
+        val right_answer = "world"
 
         binding.enterBtn.setOnClickListener{
             val keyword : String = MakeAnswer()

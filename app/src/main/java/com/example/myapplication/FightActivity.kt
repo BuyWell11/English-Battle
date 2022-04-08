@@ -52,13 +52,13 @@ class FightActivity : AppCompatActivity() {
 
     private fun onMDSpressed()
     {
-        val random = (0..1).random()
-        if (random == 0) {
+        val random = (0..100).random()
+        if (random < 50) {
             val intent = Intent(this, MdsMakeSentenceActivity::class.java)
             startActivityIfNeeded(intent, MID_DMG_REQUEST_CODE)
         }
-        else if(random == 1) {
-            val intent = Intent(this, MdsMakeSentenceActivity::class.java)
+        else if(random > 50) {
+            val intent = Intent(this, MdsMakeWordActivity::class.java)
             startActivityIfNeeded(intent, MID_DMG_REQUEST_CODE)
         }
     }
