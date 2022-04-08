@@ -5,11 +5,12 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
+import java.util.concurrent.Callable;
 
 public class Database {
 
     private Connection connection;
-
+    private Statement statement;
     private final String host = "217.25.230.151";
 
     private final String database = "niggerfaggot";
@@ -19,10 +20,10 @@ public class Database {
     private String url = "jdbc:postgresql://%s:%d/%s";
     private boolean status;
 
-    public Database()
-    {
+    public Database() throws SQLException {
         this.url = String.format(this.url, this.host, this.port, this.database);
         connect();
+        statement = connection.createStatement();
         //this.disconnect();
         System.out.println("connection status:" + status);
     }
@@ -76,20 +77,14 @@ public class Database {
         return c;
     }
 
-    /*public ResultSet GetTaskLDS()
-    {
+    public ResultSet GetTaskLDS() throws SQLException {
         ResultSet rs = null;
-
-        try (Connection connection = DriverManager.getConnection(url);
-             Statement statement = connection.createStatement();){
-
-            String selectSql = "SELECT skill_task FROM lds_word WHERE skill_id = 1";
-            rs = statement.executeQuery(selectSql);
-        } catch (SQLException e) {
-            e.printStackTrace();
+        String selectSql = "SELECT * FROM lds_word";
+        rs = statement.executeQuery(selectSql);
+        while (rs.next()){
+            System.out.print(rs);
         }
-
         return rs;
-    }*/
+    }
 
 }

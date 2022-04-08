@@ -2,10 +2,8 @@ package com.example.myapplication
 
 import android.app.Activity
 import android.content.Intent
+import android.os.*
 import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import android.os.Parcelable
-import android.os.PersistableBundle
 import com.example.myapplication.databinding.FightBinding
 import kotlinx.android.parcel.Parcelize
 
@@ -128,10 +126,12 @@ class FightActivity : AppCompatActivity() {
     }
 
     private fun fight_finish(dead:Boolean){
-        var intent = Intent(this, Win_lossActivity::class.java)
-        intent.putExtra(Win_lossActivity.RESULT, dead)
-        startActivity(intent)
-        finish()
+        Handler(Looper.getMainLooper()).postDelayed( {
+            var intent = Intent(this, Win_lossActivity::class.java)
+            intent.putExtra(Win_lossActivity.RESULT, dead)
+            startActivity(intent)
+            finish()
+        }, 2000)
     }
 
     @Parcelize

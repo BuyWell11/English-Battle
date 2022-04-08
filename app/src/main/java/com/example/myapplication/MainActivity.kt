@@ -4,7 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.myapplication.databinding.MainMenuBinding
-import com.example.myapplication.Database
+import java.sql.ResultSet
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: MainMenuBinding
@@ -15,6 +15,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val db  = Database()
+        var rs: ResultSet
+        object : Thread() {
+            override fun run() {
+                rs = db.GetTaskLDS()
+            }
+        }.start()
+        val a = 1
+
 
         binding.btn1.setOnClickListener{
             onPlayPressed()
@@ -40,4 +48,5 @@ class MainActivity : AppCompatActivity() {
     private fun onExitPressed(){
         finish()
     }
+
 }
