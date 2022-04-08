@@ -1,6 +1,11 @@
 package com.example.myapplication
 
+import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,17 +33,25 @@ class MdsMakeSentenceActivity : AppCompatActivity() {
         val linearLayoutManager = LinearLayoutManager(applicationContext)
         linearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
         recyclerView.layoutManager = linearLayoutManager
-
-        val items = fetchData()
-        list.add("suka  ")
-        list.add("blyat ")
-        list.add("nahui ")
+        
+        list.add("have ")
+        list.add("cat ")
+        list.add("I ")
+        list.add("a ")
 
         adapter = MdsAdapter(list)
         recyclerView.adapter = adapter
 
         val itemTouchHelper = ItemTouchHelper(simpleCallback)
         itemTouchHelper.attachToRecyclerView(recyclerView)
+
+        val right_answer = "I have a cat "
+
+        binding.enterBtn.setOnClickListener{
+            val keyword : String = MakeAnswer()
+            val result: Boolean = IsAnswerTrue(keyword, right_answer)
+            ShowResult(result)
+        }
     }
 
     private val simpleCallback = object : ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP or
@@ -52,7 +65,7 @@ class MdsMakeSentenceActivity : AppCompatActivity() {
             val fromPosition = viewHolder.adapterPosition
             val toPosition = target.adapterPosition
 
-            Collections.swap(list, fromPosition, toPosition)
+            swap(list, fromPosition, toPosition)
 
             recyclerView.adapter?.notifyItemMoved(fromPosition, toPosition)
 
@@ -64,6 +77,12 @@ class MdsMakeSentenceActivity : AppCompatActivity() {
         }
     }
 
+    fun <T> swap(list: MutableList<T>, i: Int, j: Int) {
+        val t = list[i]
+        list[i] = list[j]
+        list[j] = t
+    }
+
     fun fetchData() : ArrayList<String>
     {
         val list = ArrayList<String>()
@@ -72,5 +91,41 @@ class MdsMakeSentenceActivity : AppCompatActivity() {
             list.add("word " + i)
         }
         return list
+    }
+
+    private fun MakeAnswer() : String
+    {
+        val user_answer = StringBuilder()
+        for (i in 0..list.size-1)
+        {
+            user_answer.append(list[i])
+        }
+
+        return user_answer.toString()
+    }
+
+    private fun IsAnswerTrue(user_ans:String, right_ans:String): Boolean
+    {
+        return user_ans == right_ans
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun ShowResult(result:Boolean)
+    {
+        binding.result.visibility = android.view.View.VISIBLE
+        if(result)
+        {
+            binding.result.text = "You are right!"
+        }
+        else
+        {
+            binding.result.text = "You are wrong!"
+        }
+        Handler(Looper.getMainLooper()).postDelayed( {
+            val intent = Intent()
+            intent.putExtra(LdsPictureActivity.RIGHT, result)
+            setResult(Activity.RESULT_OK, intent)
+            finish()
+        }, 1000)
     }
 }

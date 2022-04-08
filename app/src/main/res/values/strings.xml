@@ -7,4 +7,6 @@
     <string name="hds_task_1">Choose the correct word.</string>
     <string name="hds_task_2">Translate this word.</string>
     <string name="hint">Enter word here</string>
+    <string name="check">Check your answer"</string>
+    <string name="mds_task_1">Make sentence using these words.</string>
 </resources>
