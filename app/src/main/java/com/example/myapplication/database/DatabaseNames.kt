@@ -4,7 +4,7 @@ import android.provider.BaseColumns
 
 object DatabaseNames : BaseColumns {
     const val DATABASE_NAME = "eng_app.db"
-    const val DATABASE_VERSION = 11
+    const val DATABASE_VERSION = 12
 
 
     //Table "users"
@@ -33,9 +33,9 @@ object DatabaseNames : BaseColumns {
     const val HISTORY_COLUMN_ID = "history_id"
     const val HISTORY_COLUMN_LDS_PICTURE_HISTORY = "lds_picture_history"
     const val HISTORY_COLUMN_LDS_WORD_HISTORY = "lds_word_history"
-    const val HISTORY_COLUMN_MDS_SENTENCE_HISTORY = "mds_sentence_history"
-    const val HISTORY_COLUMN_MDS_WORD_HISTORY = "mds_word_history"
-    const val HISTORY_COLUMN_HDS_WORD_HISTORY = "hds_word_history"
+    const val HISTORY_COLUMN_MDS_SENTENCE_HISTORY = "mds_make_sentence_history"
+    const val HISTORY_COLUMN_MDS_WORD_HISTORY = "mds_make_word_history"
+    const val HISTORY_COLUMN_HDS_WORD_HISTORY = "hds_choose_word_history"
     const val HISTORY_COLUMN_HDS_TRANSLATION_HISTORY = "hds_translation_history"
     const val HISTORY_COLUMN_TOTAL_COMPLETED_LVLS = "total_completed_lvls"
     const val HISTORY_COLUMN_CURRENT_LEVEL = "current_level"
