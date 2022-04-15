@@ -23,8 +23,8 @@
 
     <ImageView
         android:id="@+id/image_task"
-        android:layout_width="201dp"
-        android:layout_height="142dp"
+        android:layout_width="245dp"
+        android:layout_height="119dp"
         app:layout_constraintBottom_toTopOf="@+id/gridLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -7,28 +7,34 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
+import com.example.myapplication.database.DatabaseManager
 import com.example.myapplication.databinding.LdsPictureSpellBinding
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.lds_picture_spell.*
 
 
 class LdsPictureActivity : AppCompatActivity() {
     lateinit var binding: LdsPictureSpellBinding
+
+    val dbManager = DatabaseManager(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = LdsPictureSpellBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val answer_options: Array<String> = arrayOf("chel", "monster", "wizard", "loh")
-        val right_answer:String = "wizard"
+        dbManager.openDB()
+        val datalist = dbManager.GetLdsPictureInfo()
 
-        //Выводит картинку, которую нужно перевести
-        binding.imageTask.setImageResource(R.drawable.wizard)
+        val right_answer:String = datalist[1]
+
+        Picasso.get().load(datalist[0]).into(image_task)
 
         //Подписывает кнопки с вариантами ответов
-        binding.answer1.text = answer_options[0]
-        binding.answer2.text = answer_options[1]
-        binding.answer3.text = answer_options[2]
-        binding.answer4.text = answer_options[3]
+        binding.answer1.text = datalist[2]
+        binding.answer2.text = datalist[3]
+        binding.answer3.text = datalist[4]
+        binding.answer4.text = datalist[5]
 
         binding.answer1.setOnClickListener{
             val answer: String = binding.answer1.text as String
@@ -86,5 +92,10 @@ class LdsPictureActivity : AppCompatActivity() {
 
     companion object{
         @JvmStatic val RIGHT = "RIGHT"
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        dbManager.closeDB()
     }
 }

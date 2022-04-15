@@ -9,6 +9,7 @@ import android.os.Looper
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import com.example.myapplication.database.DatabaseManager
 import com.example.myapplication.databinding.HdsTranslationSpellBinding
 import kotlin.properties.Delegates
 
@@ -17,17 +18,20 @@ class HdsTranslationActivity : AppCompatActivity() {
     lateinit var binding: HdsTranslationSpellBinding
 
     private var result: Boolean = false
+    val dbManager = DatabaseManager(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = HdsTranslationSpellBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val task: String = "Обмен"
-        val right_answer: String = "exchange"
+        dbManager.openDB()
+        val datalist = dbManager.GetHdsTranslationInfo()
+
+        val right_answer: String = datalist[1]
 
         //Выводит слово, которое нужно перевести
-        binding.task.text = task
+        binding.task.text = datalist[0]
 
         binding.DoneBtn.setOnClickListener{
             val keyword = binding.answerSpace.text.toString()
@@ -63,5 +67,10 @@ class HdsTranslationActivity : AppCompatActivity() {
     }
     companion object{
         @JvmStatic val RIGHT = "RIGHT"
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        dbManager.closeDB()
     }
 }
