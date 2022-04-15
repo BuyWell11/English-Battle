@@ -43,16 +43,7 @@ class DatabaseManager(val context : Context) {
             temp = cursor.getString(cursor.getColumnIndex(DatabaseNames.LDS_WORD_COLUMN_RIGHT_ANSWER))
             dataList.add(temp.toString())
 
-            temp = cursor.getString(cursor.getColumnIndex(DatabaseNames.LDS_WORD_COLUMN_ANSWER1))
-            dataList.add(temp.toString())
-
-            temp = cursor.getString(cursor.getColumnIndex(DatabaseNames.LDS_WORD_COLUMN_ANSWER2))
-            dataList.add(temp.toString())
-
-            temp = cursor.getString(cursor.getColumnIndex(DatabaseNames.LDS_WORD_COLUMN_ANSWER3))
-            dataList.add(temp.toString())
-
-            temp = cursor.getString(cursor.getColumnIndex(DatabaseNames.LDS_WORD_COLUMN_ANSWER4))
+            temp = cursor.getString(cursor.getColumnIndex(DatabaseNames.LDS_WORD_COLUMN_ANSWERS))
             dataList.add(temp.toString())
         }
 
@@ -83,16 +74,66 @@ class DatabaseManager(val context : Context) {
             temp = cursor.getString(cursor.getColumnIndex(DatabaseNames.LDS_PICTURE_COLUMN_RIGHT_ANSWER))
             dataList.add(temp.toString())
 
-            temp = cursor.getString(cursor.getColumnIndex(DatabaseNames.LDS_PICTURE_COLUMN_ANSWER1))
+            temp = cursor.getString(cursor.getColumnIndex(DatabaseNames.LDS_PICTURE_COLUMN_ANSWERS))
+            dataList.add(temp.toString())
+        }
+
+        cursor.close()
+
+        return dataList
+    }
+
+    @SuppressLint("Range")
+    fun GetMdsMakeSentenceInfo() : ArrayList<String>
+    {
+        val dataList = ArrayList<String>()
+        val cursor = db?.query(
+            DatabaseNames.MDS_MAKE_SENTENCE_TABLE_NAME,
+            null,
+            "${DatabaseNames.MDS_MAKE_SENTENCE_COLUMN_ID} = 1",
+            null,
+            null,
+            null,
+            null
+        )
+
+        while(cursor?.moveToNext()!!)
+        {
+            var temp = cursor.getString(cursor.getColumnIndex(DatabaseNames.MDS_MAKE_SENTENCE_COLUMN_WORD_LIST))
             dataList.add(temp.toString())
 
-            temp = cursor.getString(cursor.getColumnIndex(DatabaseNames.LDS_PICTURE_COLUMN_ANSWER2))
+            temp = cursor.getString(cursor.getColumnIndex(DatabaseNames.MDS_MAKE_SENTENCE_COLUMN_RIGHT_ANSWER))
+            dataList.add(temp.toString())
+        }
+
+        cursor.close()
+
+        return dataList
+    }
+
+    @SuppressLint("Range")
+    fun GetMdsMakeWordInfo() : ArrayList<String>
+    {
+        val dataList = ArrayList<String>()
+        val cursor = db?.query(
+            DatabaseNames.MDS_MAKE_WORD_TABLE_NAME,
+            null,
+            "${DatabaseNames.MDS_MAKE_WORD_COLUMN_ID} = 1",
+            null,
+            null,
+            null,
+            null
+        )
+
+        while(cursor?.moveToNext()!!)
+        {
+            var temp = cursor.getString(cursor.getColumnIndex(DatabaseNames.MDS_MAKE_WORD_COLUMN_SKILL_TASK))
             dataList.add(temp.toString())
 
-            temp = cursor.getString(cursor.getColumnIndex(DatabaseNames.LDS_PICTURE_COLUMN_ANSWER3))
+            temp = cursor.getString(cursor.getColumnIndex(DatabaseNames.MDS_MAKE_WORD_COLUMN_LETTER_LIST))
             dataList.add(temp.toString())
 
-            temp = cursor.getString(cursor.getColumnIndex(DatabaseNames.LDS_PICTURE_COLUMN_ANSWER4))
+            temp = cursor.getString(cursor.getColumnIndex(DatabaseNames.MDS_MAKE_WORD_COLUMN_RIGHT_ANSWER))
             dataList.add(temp.toString())
         }
 
@@ -123,16 +164,7 @@ class DatabaseManager(val context : Context) {
             temp = cursor.getString(cursor.getColumnIndex(DatabaseNames.HDS_CHOOSE_WORD_COLUMN_RIGHT_ANSWER))
             dataList.add(temp.toString())
 
-            temp = cursor.getString(cursor.getColumnIndex(DatabaseNames.HDS_CHOOSE_WORD_COLUMN_ANSWER1))
-            dataList.add(temp.toString())
-
-            temp = cursor.getString(cursor.getColumnIndex(DatabaseNames.HDS_CHOOSE_WORD_COLUMN_ANSWER2))
-            dataList.add(temp.toString())
-
-            temp = cursor.getString(cursor.getColumnIndex(DatabaseNames.HDS_CHOOSE_WORD_COLUMN_ANSWER3))
-            dataList.add(temp.toString())
-
-            temp = cursor.getString(cursor.getColumnIndex(DatabaseNames.HDS_CHOOSE_WORD_COLUMN_ANSWER4))
+            temp = cursor.getString(cursor.getColumnIndex(DatabaseNames.HDS_CHOOSE_WORD_COLUMN_ANSWERS))
             dataList.add(temp.toString())
         }
 

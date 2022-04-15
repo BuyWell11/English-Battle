@@ -20,6 +20,14 @@ class DatabaseHelper(context : Context) : SQLiteOpenHelper(context, DatabaseName
         db?.execSQL(DatabaseNames.LDS_PICTURE_CREATE_TABLE)
         db?.execSQL(DatabaseNames.LDS_PICTURE_INSERT)
 
+        //Table mds_make_sentence
+        db?.execSQL(DatabaseNames.MDS_MAKE_SENTENCE_CREATE_TABLE)
+        db?.execSQL(DatabaseNames.MDS_MAKE_SENTENCE_INSERT)
+
+        //Table mds_make_word
+        db?.execSQL(DatabaseNames.MDS_MAKE_WORD_CREATE_TABLE)
+        db?.execSQL(DatabaseNames.MDS_MAKE_WORD_INSERT)
+
         //Table hds_choose_word
         db?.execSQL(DatabaseNames.HDS_CHOOSE_WORD_CREATE_TABLE)
         db?.execSQL(DatabaseNames.HDS_CHOOSE_WORD_INSERT)
@@ -34,6 +42,8 @@ class DatabaseHelper(context : Context) : SQLiteOpenHelper(context, DatabaseName
         db?.execSQL(DatabaseNames.HISTORY_DELETE_TABLE)
         db?.execSQL(DatabaseNames.LDS_WORD_DELETE_TABLE)
         db?.execSQL(DatabaseNames.LDS_PICTURE_DELETE_TABLE)
+        db?.execSQL(DatabaseNames.MDS_MAKE_SENTENCE_DELETE_TABLE)
+        db?.execSQL(DatabaseNames.MDS_MAKE_WORD_DELETE_TABLE)
         db?.execSQL(DatabaseNames.HDS_CHOOSE_WORD_DELETE_TABLE)
         db?.execSQL(DatabaseNames.HDS_TRANSLATION_DELETE_TABLE)
 

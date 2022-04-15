@@ -30,10 +30,12 @@ class HdsChooseWordActivity : AppCompatActivity() {
         binding.task.text = datalist[0]
 
         //Подписывает кнопки с вариантами ответов
-        binding.answer1.text = datalist[2]
-        binding.answer2.text = datalist[3]
-        binding.answer3.text = datalist[4]
-        binding.answer4.text = datalist[5]
+        val answers = datalist[2].split(" ").toMutableList()
+
+        binding.answer1.text = answers[0]
+        binding.answer2.text = answers[1]
+        binding.answer3.text = answers[2]
+        binding.answer4.text = answers[3]
 
         binding.answer1.setOnClickListener{
             val answer: String = binding.answer1.text as String

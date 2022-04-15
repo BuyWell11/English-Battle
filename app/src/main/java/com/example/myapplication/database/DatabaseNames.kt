@@ -4,7 +4,7 @@ import android.provider.BaseColumns
 
 object DatabaseNames : BaseColumns {
     const val DATABASE_NAME = "eng_app.db"
-    const val DATABASE_VERSION = 7
+    const val DATABASE_VERSION = 11
 
 
     //Table "users"
@@ -60,25 +60,19 @@ object DatabaseNames : BaseColumns {
     const val LDS_WORD_COLUMN_ID = "skill_id"
     const val LDS_WORD_COLUMN_TASK = "skill_task"
     const val LDS_WORD_COLUMN_RIGHT_ANSWER = "right_answer"
-    const val LDS_WORD_COLUMN_ANSWER1 = "answer_option_one"
-    const val LDS_WORD_COLUMN_ANSWER2 = "answer_option_two"
-    const val LDS_WORD_COLUMN_ANSWER3 = "answer_option_three"
-    const val LDS_WORD_COLUMN_ANSWER4 = "answer_option_four"
+    const val LDS_WORD_COLUMN_ANSWERS = "answer_options"
 
     const val LDS_WORD_CREATE_TABLE =
         "CREATE TABLE IF NOT EXISTS $LDS_WORD_TABLE_NAME(" +
                 "$LDS_WORD_COLUMN_ID INTEGER PRIMARY KEY," +
                 "$LDS_WORD_COLUMN_TASK TEXT NOT NULL," +
                 "$LDS_WORD_COLUMN_RIGHT_ANSWER TEXT NOT NULL," +
-                "$LDS_WORD_COLUMN_ANSWER1 TEXT NOT NULL," +
-                "$LDS_WORD_COLUMN_ANSWER2 TEXT NOT NULL," +
-                "$LDS_WORD_COLUMN_ANSWER3 TEXT NOT NULL," +
-                "$LDS_WORD_COLUMN_ANSWER4 TEXT NOT NULL);"
+                "$LDS_WORD_COLUMN_ANSWERS TEXT NOT NULL);"
 
     const val LDS_WORD_DELETE_TABLE = "DROP TABLE IF EXISTS $LDS_WORD_TABLE_NAME ;"
     const val LDS_WORD_INSERT = "INSERT INTO $LDS_WORD_TABLE_NAME ($LDS_WORD_COLUMN_ID , $LDS_WORD_COLUMN_TASK ," +
-            "$LDS_WORD_COLUMN_RIGHT_ANSWER , $LDS_WORD_COLUMN_ANSWER1 , $LDS_WORD_COLUMN_ANSWER2 , $LDS_WORD_COLUMN_ANSWER3 , $LDS_WORD_COLUMN_ANSWER4 )" +
-            "VALUES(1, 'Собака', 'dog', 'cat', 'dog', 'rat', 'house');"
+            "$LDS_WORD_COLUMN_RIGHT_ANSWER , $LDS_WORD_COLUMN_ANSWERS )" +
+            "VALUES(1, 'Собака', 'dog', 'cat dog rat house');"
 
 
     //Table "lds_picture"
@@ -86,25 +80,57 @@ object DatabaseNames : BaseColumns {
     const val LDS_PICTURE_COLUMN_ID = "skill_id"
     const val LDS_PICTURE_COLUMN_TASK = "task_picture"
     const val LDS_PICTURE_COLUMN_RIGHT_ANSWER = "right_answer"
-    const val LDS_PICTURE_COLUMN_ANSWER1 = "answer_option_one"
-    const val LDS_PICTURE_COLUMN_ANSWER2 = "answer_option_two"
-    const val LDS_PICTURE_COLUMN_ANSWER3 = "answer_option_three"
-    const val LDS_PICTURE_COLUMN_ANSWER4 = "answer_option_four"
+    const val LDS_PICTURE_COLUMN_ANSWERS = "answer_options"
 
     const val LDS_PICTURE_CREATE_TABLE =
         "CREATE TABLE IF NOT EXISTS $LDS_PICTURE_TABLE_NAME(" +
                 "$LDS_PICTURE_COLUMN_ID INTEGER PRIMARY KEY," +
                 "$LDS_PICTURE_COLUMN_TASK TEXT NOT NULL," +
                 "$LDS_PICTURE_COLUMN_RIGHT_ANSWER TEXT NOT NULL," +
-                "$LDS_PICTURE_COLUMN_ANSWER1 TEXT NOT NULL," +
-                "$LDS_PICTURE_COLUMN_ANSWER2 TEXT NOT NULL," +
-                "$LDS_PICTURE_COLUMN_ANSWER3 TEXT NOT NULL," +
-                "$LDS_PICTURE_COLUMN_ANSWER4 TEXT NOT NULL);"
+                "$LDS_PICTURE_COLUMN_ANSWERS TEXT NOT NULL);"
 
     const val LDS_PICTURE_DELETE_TABLE = "DROP TABLE IF EXISTS $LDS_PICTURE_TABLE_NAME ;"
     const val LDS_PICTURE_INSERT = "INSERT INTO $LDS_PICTURE_TABLE_NAME ($LDS_PICTURE_COLUMN_ID , $LDS_PICTURE_COLUMN_TASK ," +
-            "$LDS_PICTURE_COLUMN_RIGHT_ANSWER , $LDS_PICTURE_COLUMN_ANSWER1 , $LDS_PICTURE_COLUMN_ANSWER2 , $LDS_PICTURE_COLUMN_ANSWER3 , $LDS_PICTURE_COLUMN_ANSWER4 )" +
-            "VALUES(1, 'https://clipart-best.com/img/table/table-clip-art-4.png', 'table', 'monster', 'table', 'sky', 'city');"
+            "$LDS_PICTURE_COLUMN_RIGHT_ANSWER , $LDS_PICTURE_COLUMN_ANSWERS )" +
+            "VALUES(1, 'https://clipart-best.com/img/table/table-clip-art-4.png', 'table', 'monster table sky city');"
+
+
+    //Table "mds_make_sentence"
+    const val MDS_MAKE_SENTENCE_TABLE_NAME = "mds_make_sentence"
+    const val MDS_MAKE_SENTENCE_COLUMN_ID = "skill_id"
+    const val MDS_MAKE_SENTENCE_COLUMN_WORD_LIST = "word_list"
+    const val MDS_MAKE_SENTENCE_COLUMN_RIGHT_ANSWER = "right_answer"
+
+    const val MDS_MAKE_SENTENCE_CREATE_TABLE =
+        "CREATE TABLE IF NOT EXISTS $MDS_MAKE_SENTENCE_TABLE_NAME(" +
+                "$MDS_MAKE_SENTENCE_COLUMN_ID INTEGER PRIMARY KEY," +
+                "$MDS_MAKE_SENTENCE_COLUMN_WORD_LIST TEXT NOT NULL," +
+                "$MDS_MAKE_SENTENCE_COLUMN_RIGHT_ANSWER TEXT NOT NULL);"
+
+    const val MDS_MAKE_SENTENCE_DELETE_TABLE = "DROP TABLE IF EXISTS $MDS_MAKE_SENTENCE_TABLE_NAME ;"
+    const val MDS_MAKE_SENTENCE_INSERT = "INSERT INTO $MDS_MAKE_SENTENCE_TABLE_NAME ($MDS_MAKE_SENTENCE_COLUMN_ID , $MDS_MAKE_SENTENCE_COLUMN_WORD_LIST ," +
+            "$MDS_MAKE_SENTENCE_COLUMN_RIGHT_ANSWER )" +
+            "VALUES(1, 'friend doctor is my a', 'myfriendisadoctor');"
+
+
+    //Table "mds_make_word"
+    const val MDS_MAKE_WORD_TABLE_NAME = "mds_make_word"
+    const val MDS_MAKE_WORD_COLUMN_ID = "skill_id"
+    const val MDS_MAKE_WORD_COLUMN_SKILL_TASK = "skill_task"
+    const val MDS_MAKE_WORD_COLUMN_LETTER_LIST = "letter_list"
+    const val MDS_MAKE_WORD_COLUMN_RIGHT_ANSWER = "right_answer"
+
+    const val MDS_MAKE_WORD_CREATE_TABLE =
+        "CREATE TABLE IF NOT EXISTS $MDS_MAKE_WORD_TABLE_NAME(" +
+                "$MDS_MAKE_WORD_COLUMN_ID INTEGER PRIMARY KEY," +
+                "$MDS_MAKE_WORD_COLUMN_SKILL_TASK TEXT NOT NULL," +
+                "$MDS_MAKE_WORD_COLUMN_LETTER_LIST TEXT NOT NULL," +
+                "$MDS_MAKE_WORD_COLUMN_RIGHT_ANSWER TEXT NOT NULL);"
+
+    const val MDS_MAKE_WORD_DELETE_TABLE = "DROP TABLE IF EXISTS $MDS_MAKE_WORD_TABLE_NAME ;"
+    const val MDS_MAKE_WORD_INSERT = "INSERT INTO $MDS_MAKE_WORD_TABLE_NAME ($MDS_MAKE_WORD_COLUMN_ID , $MDS_MAKE_WORD_COLUMN_SKILL_TASK ," +
+            "$MDS_MAKE_WORD_COLUMN_LETTER_LIST, $MDS_MAKE_WORD_COLUMN_RIGHT_ANSWER )" +
+            "VALUES(1, 'Выбор', 'c o e h c i', 'choice');"
 
 
     //Table "hds_choose_word"
@@ -112,25 +138,19 @@ object DatabaseNames : BaseColumns {
     const val HDS_CHOOSE_WORD_COLUMN_ID = "skill_id"
     const val HDS_CHOOSE_WORD_COLUMN_TASK = "skill_task"
     const val HDS_CHOOSE_WORD_COLUMN_RIGHT_ANSWER = "right_answer"
-    const val HDS_CHOOSE_WORD_COLUMN_ANSWER1 = "answer_option_one"
-    const val HDS_CHOOSE_WORD_COLUMN_ANSWER2 = "answer_option_two"
-    const val HDS_CHOOSE_WORD_COLUMN_ANSWER3 = "answer_option_three"
-    const val HDS_CHOOSE_WORD_COLUMN_ANSWER4 = "answer_option_four"
+    const val HDS_CHOOSE_WORD_COLUMN_ANSWERS = "answer_options"
 
     const val HDS_CHOOSE_WORD_CREATE_TABLE =
         "CREATE TABLE IF NOT EXISTS $HDS_CHOOSE_WORD_TABLE_NAME(" +
                 "$HDS_CHOOSE_WORD_COLUMN_ID INTEGER PRIMARY KEY," +
                 "$HDS_CHOOSE_WORD_COLUMN_TASK TEXT NOT NULL," +
                 "$HDS_CHOOSE_WORD_COLUMN_RIGHT_ANSWER TEXT NOT NULL," +
-                "$HDS_CHOOSE_WORD_COLUMN_ANSWER1 TEXT NOT NULL," +
-                "$HDS_CHOOSE_WORD_COLUMN_ANSWER2 TEXT NOT NULL," +
-                "$HDS_CHOOSE_WORD_COLUMN_ANSWER3 TEXT NOT NULL," +
-                "$HDS_CHOOSE_WORD_COLUMN_ANSWER4 TEXT NOT NULL);"
+                "$HDS_CHOOSE_WORD_COLUMN_ANSWERS TEXT NOT NULL);"
 
     const val HDS_CHOOSE_WORD_DELETE_TABLE = "DROP TABLE IF EXISTS $HDS_CHOOSE_WORD_TABLE_NAME ;"
     const val HDS_CHOOSE_WORD_INSERT = "INSERT INTO $HDS_CHOOSE_WORD_TABLE_NAME ($HDS_CHOOSE_WORD_COLUMN_ID , $HDS_CHOOSE_WORD_COLUMN_TASK ," +
-            "$HDS_CHOOSE_WORD_COLUMN_RIGHT_ANSWER , $HDS_CHOOSE_WORD_COLUMN_ANSWER1 , $HDS_CHOOSE_WORD_COLUMN_ANSWER2 , $HDS_CHOOSE_WORD_COLUMN_ANSWER3 , $HDS_CHOOSE_WORD_COLUMN_ANSWER4 )" +
-            "VALUES(1, 'Have you ever been __ London?', 'to', 'in', 'from', 'at', 'to');"
+            "$HDS_CHOOSE_WORD_COLUMN_RIGHT_ANSWER , $HDS_CHOOSE_WORD_COLUMN_ANSWERS )" +
+            "VALUES(1, 'Have you ever been __ London?', 'to', 'in from at to');"
 
 
     //Table "hds_translation"
