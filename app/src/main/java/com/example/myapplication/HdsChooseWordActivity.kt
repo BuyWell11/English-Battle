@@ -67,6 +67,10 @@ class HdsChooseWordActivity : AppCompatActivity() {
 
     }
 
+    override fun onBackPressed() {
+
+    }
+
     private fun IsAnswerTrue(user_ans:String, right_ans:String): Boolean
     {
         return user_ans == right_ans

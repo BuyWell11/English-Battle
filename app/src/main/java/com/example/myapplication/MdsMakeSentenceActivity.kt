@@ -57,6 +57,10 @@ class MdsMakeSentenceActivity : AppCompatActivity() {
         }
     }
 
+    override fun onBackPressed() {
+
+    }
+
     private val simpleCallback = object : ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP or
             ItemTouchHelper.DOWN or ItemTouchHelper.START or ItemTouchHelper.END, 0)
     {
