@@ -14,11 +14,18 @@ class DatabaseManager(val context : Context) {
         db = dbHelper.writableDatabase
     }
 
-    fun insertDB(insert_data1 : String, insert_data2 : String)
+    fun insertDB(user_id : Integer, user_name : String, user_password : String, user_email : String, user_avatar : String, user_history : Integer)
     {
         val values = ContentValues().apply {
-
+            put(DatabaseNames.USER_COLUMN_ID, user_id.toString())
+            put(DatabaseNames.USER_COLUMN_NAME, user_name)
+            put(DatabaseNames.USER_COLUMN_PASSWORD, user_password)
+            put(DatabaseNames.USER_COLUMN_EMAIL, user_email)
+            put(DatabaseNames.USER_COLUMN_AVATAR, user_avatar)
+            put(DatabaseNames.USER_COLUMN_HISTORY, user_history.toString())
         }
+
+        db?.insert(DatabaseNames.USER_TABLE_NAME, null, values)
     }
 
     @SuppressLint("Range")
