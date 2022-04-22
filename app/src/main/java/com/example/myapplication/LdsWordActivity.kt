@@ -9,28 +9,34 @@ import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.databinding.LdsWordSpellBinding
 import com.example.myapplication.Database
+import com.example.myapplication.database.DatabaseManager
 
 
 class LdsWordActivity : AppCompatActivity() {
     lateinit var binding : LdsWordSpellBinding
+
+    val dbManager = DatabaseManager(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = LdsWordSpellBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val answer_options: Array<String> = arrayOf("duck", "cat", "dog", "dragon")
-        val task: String = "Кот"
-        val right_answer:String = "cat"
+        dbManager.openDB()
+        val datalist = dbManager.GetLdsWordInfo()
+
+        val right_answer:String = datalist[1]
 
         //Выводит слово, которое нужно перевести
-        binding.task.text = task
+        binding.task.text = datalist[0]
 
         //Подписывает кнопки с вариантами ответов
-        binding.answer1.text = answer_options[0]
-        binding.answer2.text = answer_options[1]
-        binding.answer3.text = answer_options[2]
-        binding.answer4.text = answer_options[3]
+        val answers = datalist[2].split(" ").toMutableList()
+
+        binding.answer1.text = answers[0]
+        binding.answer2.text = answers[1]
+        binding.answer3.text = answers[2]
+        binding.answer4.text = answers[3]
 
         binding.answer1.setOnClickListener{
             val answer: String = binding.answer1.text as String
@@ -62,6 +68,10 @@ class LdsWordActivity : AppCompatActivity() {
 
     }
 
+    override fun onBackPressed() {
+
+    }
+
     private fun IsAnswerTrue(user_ans:String, right_ans:String): Boolean
     {
         return user_ans == right_ans
@@ -90,5 +100,10 @@ class LdsWordActivity : AppCompatActivity() {
 
     companion object{
         @JvmStatic val RIGHT = "RIGHT"
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        dbManager.closeDB()
     }
 }

@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.database.DatabaseManager
 import com.example.myapplication.databinding.MdsMakeSentenceSpellBinding
 import java.util.*
 import kotlin.collections.mutableListOf
@@ -20,6 +21,8 @@ class MdsMakeSentenceActivity : AppCompatActivity() {
     private var list = mutableListOf<String>()
     private lateinit var adapter : MdsAdapter
     private lateinit var recyclerView: RecyclerView
+
+    val dbManager = DatabaseManager(this)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,10 +37,10 @@ class MdsMakeSentenceActivity : AppCompatActivity() {
         linearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
         recyclerView.layoutManager = linearLayoutManager
 
-        list.add("have")
-        list.add("cat")
-        list.add("I")
-        list.add("a")
+        dbManager.openDB()
+        val datalist = dbManager.GetMdsMakeSentenceInfo()
+
+        list = datalist[0].split(" ").toMutableList()
 
         adapter = MdsAdapter(list)
         recyclerView.adapter = adapter
@@ -45,13 +48,17 @@ class MdsMakeSentenceActivity : AppCompatActivity() {
         val itemTouchHelper = ItemTouchHelper(simpleCallback)
         itemTouchHelper.attachToRecyclerView(recyclerView)
 
-        val right_answer = "Ihaveacat"
+        val right_answer = datalist[1]
 
         binding.enterBtn.setOnClickListener{
             val keyword : String = MakeAnswer()
             val result: Boolean = IsAnswerTrue(keyword, right_answer)
             ShowResult(result)
         }
+    }
+
+    override fun onBackPressed() {
+
     }
 
     private val simpleCallback = object : ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP or
@@ -127,5 +134,10 @@ class MdsMakeSentenceActivity : AppCompatActivity() {
             setResult(Activity.RESULT_OK, intent)
             finish()
         }, 1000)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        dbManager.closeDB()
     }
 }

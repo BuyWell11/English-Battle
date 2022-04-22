@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.database.DatabaseManager
 import com.example.myapplication.databinding.MdsMakeSentenceSpellBinding
 import java.util.*
 import kotlin.collections.mutableListOf
@@ -21,14 +22,13 @@ class MdsMakeWordActivity : AppCompatActivity() {
     private lateinit var adapter : MdsAdapter
     private lateinit var recyclerView: RecyclerView
 
+    val dbManager = DatabaseManager(this)
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = MdsMakeSentenceSpellBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        binding.task.text = "Make word using these letters"
 
         recyclerView = findViewById(R.id.recView)
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -37,11 +37,12 @@ class MdsMakeWordActivity : AppCompatActivity() {
         linearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
         recyclerView.layoutManager = linearLayoutManager
 
-        list.add("w")
-        list.add("l")
-        list.add("o")
-        list.add("r")
-        list.add("d")
+        dbManager.openDB()
+        val datalist = dbManager.GetMdsMakeWordInfo()
+
+        binding.task.text = "Make word '${datalist[0]}' using these letters:"
+
+        list = datalist[1].split(" ").toMutableList()
 
         adapter = MdsAdapter(list)
         recyclerView.adapter = adapter
@@ -49,13 +50,17 @@ class MdsMakeWordActivity : AppCompatActivity() {
         val itemTouchHelper = ItemTouchHelper(simpleCallback)
         itemTouchHelper.attachToRecyclerView(recyclerView)
 
-        val right_answer = "world"
+        val right_answer = datalist[2]
 
         binding.enterBtn.setOnClickListener{
             val keyword : String = MakeAnswer()
             val result: Boolean = IsAnswerTrue(keyword, right_answer)
             ShowResult(result)
         }
+    }
+
+    override fun onBackPressed() {
+
     }
 
     private val simpleCallback = object : ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP or
@@ -131,5 +136,10 @@ class MdsMakeWordActivity : AppCompatActivity() {
             setResult(Activity.RESULT_OK, intent)
             finish()
         }, 1000)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        dbManager.closeDB()
     }
 }
