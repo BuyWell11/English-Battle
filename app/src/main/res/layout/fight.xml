@@ -52,28 +52,27 @@
 
     </LinearLayout>
 
-    <ImageView
+    <pl.droidsonroids.gif.GifImageView
         android:id="@+id/wizard"
         android:layout_width="136dp"
         android:layout_height="198dp"
-        android:src="@drawable/wizard"
+        android:src="@drawable/wiz"
         app:layout_constraintBottom_toTopOf="@id/linear"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="89dp" />
 
-    <ImageView
+    <pl.droidsonroids.gif.GifImageView
         android:id="@+id/monster"
-        android:layout_width="205dp"
-        android:layout_height="206dp"
+        android:layout_width="169dp"
+        android:layout_height="180dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginStart="100dp"
-        android:src="@drawable/monster"
-        app:layout_constraintEnd_toEndOf="@id/linear"
+        android:src="@drawable/slime"
         app:layout_constraintBottom_toTopOf="@id/linear"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="491dp"/>
+        app:layout_constraintEnd_toEndOf="@id/linear"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/wizhp"

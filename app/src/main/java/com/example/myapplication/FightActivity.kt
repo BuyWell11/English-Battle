@@ -3,9 +3,11 @@ package com.example.myapplication
 import android.app.Activity
 import android.content.Intent
 import android.os.*
+import android.widget.MediaController
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.databinding.FightBinding
 import kotlinx.android.parcel.Parcelize
+import pl.droidsonroids.gif.GifImageView
 
 class FightActivity : AppCompatActivity() {
     lateinit var binding:FightBinding
@@ -13,6 +15,7 @@ class FightActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        MediaController(this)
         binding = FightBinding.inflate(layoutInflater)
         setContentView(binding.root)
 

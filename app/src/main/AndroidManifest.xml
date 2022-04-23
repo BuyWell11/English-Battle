@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity
-            android:name=".MainActivity"
+            android:name=".LogInActivity"
             android:exported="true"
             android:screenOrientation="landscape">
             <intent-filter>
@@ -26,11 +26,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SignUpActivity"
+            android:name=".MainActivity"
             android:exported="true"
-            android:screenOrientation="landscape"  />
+            android:screenOrientation="landscape"/>
         <activity
-            android:name=".LogInActivity"
+            android:name=".SignUpActivity"
             android:exported="true"
             android:screenOrientation="landscape"  />
         <activity
