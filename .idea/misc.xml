@@ -6,14 +6,18 @@
         <entry key="..\:/Users/Maksim/AndroidStudioProjects/MyApplication/app/src/main/res/drawable/background_shape.xml" value="0.306" />
         <entry key="..\:/Users/Maksim/AndroidStudioProjects/MyApplication/app/src/main/res/drawable/line.xml" value="0.306" />
         <entry key="..\:/Users/Maksim/AndroidStudioProjects/MyApplication/app/src/main/res/drawable/round.xml" value="0.306" />
+        <entry key="..\:/Users/Maksim/AndroidStudioProjects/MyApplication/app/src/main/res/layout/activity_log_in.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Maksim/AndroidStudioProjects/MyApplication/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/Maksim/AndroidStudioProjects/MyApplication/app/src/main/res/layout/fight.xml" value="0.25" />
         <entry key="..\:/Users/Maksim/AndroidStudioProjects/MyApplication/app/src/main/res/layout/lds_picture_spell.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Maksim/AndroidStudioProjects/MyApplication/app/src/main/res/layout/lds_word_spell.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Maksim/AndroidStudioProjects/MyApplication/app/src/main/res/layout/log_in.xml" value="0.33" />
         <entry key="..\:/Users/Maksim/AndroidStudioProjects/MyApplication/app/src/main/res/layout/loss.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Maksim/AndroidStudioProjects/MyApplication/app/src/main/res/layout/lvl_select.xml" value="0.25" />
         <entry key="..\:/Users/Maksim/AndroidStudioProjects/MyApplication/app/src/main/res/layout/main_menu.xml" value="0.25" />
         <entry key="..\:/Users/Maksim/AndroidStudioProjects/MyApplication/app/src/main/res/layout/mds_make_sentence_spell.xml" value="0.36102564102564105" />
         <entry key="..\:/Users/Maksim/AndroidStudioProjects/MyApplication/app/src/main/res/layout/mds_text_space.xml" value="0.36102564102564105" />
+        <entry key="..\:/Users/Maksim/AndroidStudioProjects/MyApplication/app/src/main/res/layout/sign_up.xml" value="0.33" />
         <entry key="..\:/Users/Maksim/AndroidStudioProjects/MyApplication/app/src/main/res/layout/user_select.xml" value="0.33" />
         <entry key="..\:/Users/Maksim/AndroidStudioProjects/MyApplication/app/src/main/res/layout/win.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Maksim/AndroidStudioProjects/MyApplication/app/src/main/res/layout/win_loss_screen.xml" value="0.36666666666666664" />
