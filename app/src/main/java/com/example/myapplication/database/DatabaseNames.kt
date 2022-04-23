@@ -4,7 +4,7 @@ import android.provider.BaseColumns
 
 object DatabaseNames : BaseColumns {
     const val DATABASE_NAME = "eng_app.db"
-    const val DATABASE_VERSION = 12
+    const val DATABASE_VERSION = 13
 
 
     //Table "users"
@@ -13,46 +13,15 @@ object DatabaseNames : BaseColumns {
     const val USER_COLUMN_NAME = "user_name"
     const val USER_COLUMN_PASSWORD = "user_password"
     const val USER_COLUMN_EMAIL = "user_email"
-    const val USER_COLUMN_AVATAR = "user_avatar"
-    const val USER_COLUMN_HISTORY = "user_history_id"
 
     const val USER_CREATE_TABLE =
         "CREATE TABLE IF NOT EXISTS $USER_TABLE_NAME(" +
                 "$USER_COLUMN_ID INTEGER PRIMARY KEY," +
                 "$USER_COLUMN_NAME TEXT NOT NULL," +
                 "$USER_COLUMN_PASSWORD TEXT NOT NULL," +
-                "$USER_COLUMN_EMAIL TEXT NOT NULL," +
-                "$USER_COLUMN_AVATAR TEXT NOT NULL," +
-                "$USER_COLUMN_HISTORY INTEGER NOT NULL);"
+                "$USER_COLUMN_EMAIL TEXT NOT NULL);"
 
     const val USER_DELETE_TABLE = "DROP TABLE IF EXISTS $USER_TABLE_NAME ;"
-
-
-    //Table "history"
-    const val HISTORY_TABLE_NAME = "history"
-    const val HISTORY_COLUMN_ID = "history_id"
-    const val HISTORY_COLUMN_LDS_PICTURE_HISTORY = "lds_picture_history"
-    const val HISTORY_COLUMN_LDS_WORD_HISTORY = "lds_word_history"
-    const val HISTORY_COLUMN_MDS_SENTENCE_HISTORY = "mds_make_sentence_history"
-    const val HISTORY_COLUMN_MDS_WORD_HISTORY = "mds_make_word_history"
-    const val HISTORY_COLUMN_HDS_WORD_HISTORY = "hds_choose_word_history"
-    const val HISTORY_COLUMN_HDS_TRANSLATION_HISTORY = "hds_translation_history"
-    const val HISTORY_COLUMN_TOTAL_COMPLETED_LVLS = "total_completed_lvls"
-    const val HISTORY_COLUMN_CURRENT_LEVEL = "current_level"
-
-    const val HISTORY_CREATE_TABLE =
-        "CREATE TABLE IF NOT EXISTS $HISTORY_TABLE_NAME(" +
-                "$HISTORY_COLUMN_ID INTEGER PRIMARY KEY," +
-                "$HISTORY_COLUMN_LDS_PICTURE_HISTORY INTEGER DEFAULT 1," +
-                "$HISTORY_COLUMN_LDS_WORD_HISTORY INTEGER DEFAULT 1," +
-                "$HISTORY_COLUMN_MDS_SENTENCE_HISTORY INTEGER DEFAULT 1," +
-                "$HISTORY_COLUMN_MDS_WORD_HISTORY INTEGER DEFAULT 1," +
-                "$HISTORY_COLUMN_HDS_WORD_HISTORY INTEGER DEFAULT 1," +
-                "$HISTORY_COLUMN_HDS_TRANSLATION_HISTORY INTEGER DEFAULT 1," +
-                "$HISTORY_COLUMN_TOTAL_COMPLETED_LVLS INTEGER," +
-                "$HISTORY_COLUMN_CURRENT_LEVEL INTEGER DEFAULT 1);"
-
-    const val HISTORY_DELETE_TABLE = "DROP TABLE IF EXISTS $HISTORY_COLUMN_ID ;"
 
 
     //Table "lds_word"
@@ -169,4 +138,36 @@ object DatabaseNames : BaseColumns {
     const val HDS_TRANSLATION_INSERT = "INSERT INTO $HDS_TRANSLATION_TABLE_NAME ($HDS_TRANSLATION_COLUMN_ID , $HDS_TRANSLATION_COLUMN_TASK ," +
             "$HDS_TRANSLATION_COLUMN_RIGHT_ANSWER )" +
             "VALUES(1, 'Аномальный', 'abnormal');"
+
+
+    //Table "history"
+    const val HISTORY_TABLE_NAME = "history"
+    const val HISTORY_COLUMN_ID = "history_id"
+    const val HISTORY_COLUMN_LDS_PICTURE_HISTORY = "lds_picture_history"
+    const val HISTORY_COLUMN_LDS_WORD_HISTORY = "lds_word_history"
+    const val HISTORY_COLUMN_MDS_SENTENCE_HISTORY = "mds_make_sentence_history"
+    const val HISTORY_COLUMN_MDS_WORD_HISTORY = "mds_make_word_history"
+    const val HISTORY_COLUMN_HDS_WORD_HISTORY = "hds_choose_word_history"
+    const val HISTORY_COLUMN_HDS_TRANSLATION_HISTORY = "hds_translation_history"
+    const val HISTORY_COLUMN_CURRENT_LEVEL = "current_level"
+
+    const val HISTORY_CREATE_TABLE =
+        "CREATE TABLE IF NOT EXISTS $HISTORY_TABLE_NAME(" +
+                "$HISTORY_COLUMN_ID INTEGER PRIMARY KEY," +
+                "$HISTORY_COLUMN_LDS_PICTURE_HISTORY INTEGER DEFAULT 1," +
+                "$HISTORY_COLUMN_LDS_WORD_HISTORY INTEGER DEFAULT 1," +
+                "$HISTORY_COLUMN_MDS_SENTENCE_HISTORY INTEGER DEFAULT 1," +
+                "$HISTORY_COLUMN_MDS_WORD_HISTORY INTEGER DEFAULT 1," +
+                "$HISTORY_COLUMN_HDS_WORD_HISTORY INTEGER DEFAULT 1," +
+                "$HISTORY_COLUMN_HDS_TRANSLATION_HISTORY INTEGER DEFAULT 1," +
+                "$HISTORY_COLUMN_CURRENT_LEVEL INTEGER DEFAULT 1," +
+                "FOREIGN KEY ($HISTORY_COLUMN_ID) REFERENCES $USER_TABLE_NAME($USER_COLUMN_ID)," +
+                "FOREIGN KEY ($HISTORY_COLUMN_LDS_PICTURE_HISTORY) REFERENCES $LDS_PICTURE_TABLE_NAME($LDS_PICTURE_COLUMN_ID)," +
+                "FOREIGN KEY ($HISTORY_COLUMN_LDS_WORD_HISTORY) REFERENCES $LDS_WORD_TABLE_NAME($LDS_WORD_COLUMN_ID)," +
+                "FOREIGN KEY ($HISTORY_COLUMN_MDS_SENTENCE_HISTORY) REFERENCES $MDS_MAKE_SENTENCE_TABLE_NAME($MDS_MAKE_SENTENCE_COLUMN_ID)," +
+                "FOREIGN KEY ($HISTORY_COLUMN_MDS_WORD_HISTORY) REFERENCES $MDS_MAKE_WORD_TABLE_NAME($MDS_MAKE_WORD_COLUMN_ID)," +
+                "FOREIGN KEY ($HISTORY_COLUMN_HDS_WORD_HISTORY) REFERENCES $HDS_CHOOSE_WORD_TABLE_NAME($HDS_CHOOSE_WORD_COLUMN_ID)," +
+                "FOREIGN KEY ($HISTORY_COLUMN_HDS_TRANSLATION_HISTORY) REFERENCES $HDS_TRANSLATION_TABLE_NAME($HDS_TRANSLATION_COLUMN_ID));"
+
+    const val HISTORY_DELETE_TABLE = "DROP TABLE IF EXISTS $HISTORY_COLUMN_ID ;"
 }

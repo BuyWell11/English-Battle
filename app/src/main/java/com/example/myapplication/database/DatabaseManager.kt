@@ -3,6 +3,7 @@ package com.example.myapplication.database
 import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 
 class DatabaseManager(val context : Context) {
@@ -14,18 +15,36 @@ class DatabaseManager(val context : Context) {
         db = dbHelper.writableDatabase
     }
 
-    fun insertDB(user_id : Integer, user_name : String, user_password : String, user_email : String, user_avatar : String, user_history : Integer)
+    fun insertIntoUsersTable(user_name : String, user_password : String, user_email : String)
     {
         val values = ContentValues().apply {
-            put(DatabaseNames.USER_COLUMN_ID, user_id.toString())
             put(DatabaseNames.USER_COLUMN_NAME, user_name)
             put(DatabaseNames.USER_COLUMN_PASSWORD, user_password)
             put(DatabaseNames.USER_COLUMN_EMAIL, user_email)
-            put(DatabaseNames.USER_COLUMN_AVATAR, user_avatar)
-            put(DatabaseNames.USER_COLUMN_HISTORY, user_history.toString())
         }
 
         db?.insert(DatabaseNames.USER_TABLE_NAME, null, values)
+    }
+
+    @SuppressLint("Range")
+    fun isUserExist(user_email : String, user_password : String): Boolean {
+        val request = "SELECT EXISTS(SELECT * FROM $DatabaseNames.USER_TABLE_NAME WHERE $DatabaseNames.USER_COLUMN_EMAIL = $user_email)"
+
+        val cursor : Cursor? = db?.rawQuery(request, null)
+        cursor?.moveToFirst()
+
+        if (cursor?.getInt(0) == 1)
+        {
+            val pass = cursor.getString(cursor.getColumnIndex(DatabaseNames.USER_COLUMN_PASSWORD))
+            if (pass == user_password)
+            {
+                cursor.close()
+                return true
+            }
+        }
+
+        cursor?.close()
+        return false
     }
 
     @SuppressLint("Range")
