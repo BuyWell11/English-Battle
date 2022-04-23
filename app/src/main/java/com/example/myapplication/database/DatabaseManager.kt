@@ -28,22 +28,29 @@ class DatabaseManager(val context : Context) {
 
     @SuppressLint("Range")
     fun isUserExist(user_email : String, user_password : String): Boolean {
-        val request = "SELECT EXISTS(SELECT * FROM $DatabaseNames.USER_TABLE_NAME WHERE $DatabaseNames.USER_COLUMN_EMAIL = $user_email)"
+        val cursor = db?.query(
+            DatabaseNames.USER_TABLE_NAME,
+            null,
+            "${DatabaseNames.USER_COLUMN_EMAIL} = ?",
+            arrayOf(user_email),
+            null,
+            null,
+            null
+        )
 
-        val cursor : Cursor? = db?.rawQuery(request, null)
-        cursor?.moveToFirst()
-
-        if (cursor?.getInt(0) == 1)
+        val dataList = ArrayList<String>()
+        while (cursor?.moveToNext()!!)
         {
-            val pass = cursor.getString(cursor.getColumnIndex(DatabaseNames.USER_COLUMN_PASSWORD))
-            if (pass == user_password)
-            {
-                cursor.close()
-                return true
-            }
+            var temp = cursor.getString(cursor.getColumnIndex(DatabaseNames.USER_COLUMN_PASSWORD))
+            dataList.add(temp.toString())
         }
 
-        cursor?.close()
+        if (dataList[0] == user_password) {
+            cursor.close()
+            return true
+        }
+
+        cursor.close()
         return false
     }
 
