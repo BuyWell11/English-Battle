@@ -41,7 +41,7 @@ class DatabaseManager(val context : Context) {
         val dataList = ArrayList<String>()
         while (cursor?.moveToNext()!!)
         {
-            var temp = cursor.getString(cursor.getColumnIndex(DatabaseNames.USER_COLUMN_PASSWORD))
+            val temp = cursor.getString(cursor.getColumnIndex(DatabaseNames.USER_COLUMN_PASSWORD))
             dataList.add(temp.toString())
         }
 
