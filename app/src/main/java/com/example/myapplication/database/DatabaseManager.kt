@@ -3,7 +3,6 @@ package com.example.myapplication.database
 import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
-import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 
 class DatabaseManager(val context : Context) {

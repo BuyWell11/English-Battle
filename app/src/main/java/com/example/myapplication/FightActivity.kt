@@ -95,6 +95,7 @@ class FightActivity : AppCompatActivity() {
             LOW_DMG_REQUEST_CODE -> {
                 if(right == true){
                     state.boss_hp -= 100
+                    binding.monster.setImageResource(R.drawable.slime_takedmg)
                 }
                 else{
                     state.hp -= 20
@@ -103,6 +104,7 @@ class FightActivity : AppCompatActivity() {
             MID_DMG_REQUEST_CODE ->{
                 if(right == true){
                     state.boss_hp -= 250
+                    binding.monster.setImageResource(R.drawable.slime_takedmg)
                 }
                 else{
                     state.hp -= 20
@@ -111,12 +113,14 @@ class FightActivity : AppCompatActivity() {
             HIGH_DMG_REQUEST_CODE ->{
                 if(right == true){
                     state.boss_hp -= 400
+                    binding.monster.setImageResource(R.drawable.slime_takedmg)
                 }
                 else{
                     state.hp -= 20
                 }
             }
         }
+        binding.monster.setImageResource(R.drawable.slime)
         renderState()
         if(state.hp <= 0){
             temp_bool = true
@@ -129,6 +133,12 @@ class FightActivity : AppCompatActivity() {
     }
 
     private fun fight_finish(dead:Boolean){
+        if (dead){
+            binding.monster.setImageResource(R.drawable.slime)
+        }
+        else{
+            binding.monster.setImageResource(R.drawable.slime_dead)
+        }
         Handler(Looper.getMainLooper()).postDelayed( {
             var intent = Intent(this, Win_lossActivity::class.java)
             intent.putExtra(Win_lossActivity.RESULT, dead)
