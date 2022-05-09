@@ -1,22 +1,27 @@
 package com.example.myapplication
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.databinding.MainMenuBinding
 import okhttp3.*
 import java.io.IOException
-import java.sql.ResultSet
+import android.content.SharedPreferences
+
 
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: MainMenuBinding
     private val client = OkHttpClient()
+    lateinit var sharedPref: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = MainMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        sharedPref = getSharedPreferences("PREFERENCE", Context.MODE_PRIVATE)
 
         //val db  = Database()
         run("http://217.25.230.151:3000")
@@ -55,7 +60,11 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    @SuppressLint("CommitPrefEdits")
     private fun onExitPressed(){
+        val editor = sharedPref.edit()
+        editor.clear()
+        editor.apply()
         finish()
     }
 

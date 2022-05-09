@@ -3,7 +3,6 @@ package com.example.myapplication.database
 import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
-import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 
 class DatabaseManager(val context : Context) {
@@ -41,7 +40,7 @@ class DatabaseManager(val context : Context) {
         val dataList = ArrayList<String>()
         while (cursor?.moveToNext()!!)
         {
-            var temp = cursor.getString(cursor.getColumnIndex(DatabaseNames.USER_COLUMN_PASSWORD))
+            val temp = cursor.getString(cursor.getColumnIndex(DatabaseNames.USER_COLUMN_PASSWORD))
             dataList.add(temp.toString())
         }
 
