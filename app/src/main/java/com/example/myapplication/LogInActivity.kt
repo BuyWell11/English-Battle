@@ -65,7 +65,7 @@ class LogInActivity : AppCompatActivity() {
         val temp_log = sharedPref.getString("Login", "").toString()
         val temp_pass = sharedPref.getString("Password", "").toString()
 
-        if (temp_log != "" && temp_pass != "" && dbManager.isUserExist(temp_log, temp_pass)){
+        if (dbManager.isUserExist(temp_log, temp_pass)){
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }

@@ -44,7 +44,7 @@ class DatabaseManager(val context : Context) {
             dataList.add(temp.toString())
         }
 
-        if (dataList[0] == user_password) {
+        if (dataList.size != 0 && dataList[0] == user_password) {
             cursor.close()
             return true
         }

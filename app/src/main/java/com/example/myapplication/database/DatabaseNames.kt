@@ -4,7 +4,7 @@ import android.provider.BaseColumns
 
 object DatabaseNames : BaseColumns {
     const val DATABASE_NAME = "eng_app.db"
-    const val DATABASE_VERSION = 15
+    const val DATABASE_VERSION = 18
 
 
     //Table "users"
