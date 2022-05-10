@@ -30,16 +30,31 @@ class DatabaseManager(val context : Context) {
             6 -> columnName = DatabaseNames.HISTORY_COLUMN_HDS_TRANSLATION_HISTORY
         }
 
-        val values = ContentValues().apply {
-            put(columnName, currentTask + 1)
-        }
+        if (isTaskExist(currentTask+1, task_type)) {
+            val values = ContentValues().apply {
+                put(columnName, currentTask + 1)
+            }
 
-        val count = db?.update(
-            DatabaseNames.HISTORY_TABLE_NAME,
-            values,
-            "${DatabaseNames.HISTORY_COLUMN_ID} LIKE ?",
-            arrayOf(currentUserID.toString()),
-        )
+            val count = db?.update(
+                DatabaseNames.HISTORY_TABLE_NAME,
+                values,
+                "${DatabaseNames.HISTORY_COLUMN_ID} = ?",
+                arrayOf(currentUserID.toString()),
+            )
+        }
+        else
+        {
+            val values = ContentValues().apply {
+                put(columnName, 1)
+            }
+
+            val count = db?.update(
+                DatabaseNames.HISTORY_TABLE_NAME,
+                values,
+                "${DatabaseNames.HISTORY_COLUMN_ID} = ?",
+                arrayOf(currentUserID.toString()),
+            )
+        }
     }
 
     fun insertIntoUsersTable(user_name : String, user_password : String, user_email : String)
@@ -60,6 +75,66 @@ class DatabaseManager(val context : Context) {
         }
 
         db?.insert(DatabaseNames.HISTORY_TABLE_NAME, null, values)
+    }
+
+    @SuppressLint("Range")
+    fun isTaskExist(currentTask : Int, taskType: Int) : Boolean
+    {
+        var tableName : String? = null
+        var taskID : String? = null
+
+        when(taskType)
+        {
+            1 -> {
+                tableName = DatabaseNames.LDS_WORD_TABLE_NAME
+                taskID = DatabaseNames.LDS_WORD_COLUMN_ID
+            }
+            2 -> {
+                tableName = DatabaseNames.LDS_PICTURE_TABLE_NAME
+                taskID = DatabaseNames.LDS_PICTURE_COLUMN_ID
+            }
+            3 -> {
+                tableName = DatabaseNames.MDS_MAKE_WORD_TABLE_NAME
+                taskID = DatabaseNames.MDS_MAKE_WORD_COLUMN_ID
+            }
+            4 -> {
+                tableName = DatabaseNames.MDS_MAKE_SENTENCE_TABLE_NAME
+                taskID = DatabaseNames.MDS_MAKE_SENTENCE_COLUMN_ID
+            }
+            5 -> {
+                tableName = DatabaseNames.HDS_CHOOSE_WORD_TABLE_NAME
+                taskID = DatabaseNames.HDS_CHOOSE_WORD_COLUMN_ID
+            }
+            6 -> {
+                tableName = DatabaseNames.HDS_TRANSLATION_TABLE_NAME
+                taskID = DatabaseNames.HDS_TRANSLATION_COLUMN_ID
+            }
+        }
+
+        val cursor = db?.query(
+            tableName,
+            null,
+            "${taskID} = ?",
+            arrayOf(currentTask.toString()),
+            null,
+            null,
+            null
+        )
+
+        val dataList = ArrayList<String>()
+        while (cursor?.moveToNext()!!)
+        {
+            val temp = cursor.getString(cursor.getColumnIndex(taskID))
+            dataList.add(temp.toString())
+        }
+
+        if (dataList.size != 0) {
+            cursor.close()
+            return true
+        }
+
+        cursor.close()
+        return false
     }
 
     @SuppressLint("Range")
