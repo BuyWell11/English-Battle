@@ -5,11 +5,11 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 
+var currentUserID : Int = -1
+
 class DatabaseManager(val context : Context) {
     val dbHelper = DatabaseHelper(context)
     var db : SQLiteDatabase? = null
-
-    var currentUserID : Int = 1
 
     fun openDB()
     {
