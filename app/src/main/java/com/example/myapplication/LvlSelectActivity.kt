@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.example.myapplication.databinding.LvlSelectBinding
+import kotlinx.android.parcel.Parcelize
 
 class LvlSelectActivity : AppCompatActivity() {
     lateinit var binding: LvlSelectBinding
@@ -25,17 +26,8 @@ class LvlSelectActivity : AppCompatActivity() {
     }
 
     private fun onLvl(lvl: View) {
-        when(lvl.id){
-            binding.btn1.id -> {
-                val intent = Intent(this, FightActivity::class.java)
-                startActivity(intent)
-            }
-            binding.btn2.id -> {
-
-            }
-            binding.btn3.id -> {
-
-            }
-        }
+        val intent = Intent(this, FightActivity::class.java)
+        intent.putExtra(FightActivity.ENEMY_PICS, lvl.id)
+        startActivity(intent)
     }
 }

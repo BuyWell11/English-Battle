@@ -3,20 +3,25 @@ package com.example.myapplication
 import android.app.Activity
 import android.content.Intent
 import android.os.*
+import android.view.View
 import android.widget.MediaController
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.databinding.FightBinding
-import kotlinx.android.parcel.Parcelize
-import pl.droidsonroids.gif.GifImageView
 
-class FightActivity : AppCompatActivity() {
+import kotlinx.android.parcel.Parcelize
+
+open class FightActivity : AppCompatActivity() {
     lateinit var binding:FightBinding
     lateinit var state: State
+    lateinit var anim: Anim
+    var anim_map = MapOfAnim
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         MediaController(this)
         binding = FightBinding.inflate(layoutInflater)
+        get_anim(savedInstanceState?.getParcelable(ENEMY_PICS) ?: 0)
+        binding.monster.setImageResource(anim.stand)
         setContentView(binding.root)
 
         binding.lowdmg.setOnClickListener{
@@ -35,6 +40,7 @@ class FightActivity : AppCompatActivity() {
             hp = 100,
             boss_hp = 1000
         )
+
     }
 
     private fun onLDSpressed()
@@ -80,6 +86,7 @@ class FightActivity : AppCompatActivity() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putParcelable(KEY_STATE, state)
+        outState.putParcelable(ENEMY_PICS, anim)
     }
 
     private fun renderState() = with(binding) {
@@ -147,14 +154,27 @@ class FightActivity : AppCompatActivity() {
         }, 2000)
     }
 
+    private fun get_anim(enemy : Int){
+        anim = anim_map[enemy]!!
+    }
+
     @Parcelize
     class State(
         var hp: Int,
         var boss_hp: Int
     ) : Parcelable
 
+    @Parcelize
+    class Anim(
+        var stand: Int,
+        var attack: Int,
+        var take_dmg: Int,
+        var dead: Int
+    ) : Parcelable
+
     companion object {
         @JvmStatic private val KEY_STATE = "STATE"
+        @JvmStatic val ENEMY_PICS = "ANIM"
         @JvmStatic private val LOW_DMG_REQUEST_CODE = 1
         @JvmStatic private val MID_DMG_REQUEST_CODE = 2
         @JvmStatic private val HIGH_DMG_REQUEST_CODE = 3
