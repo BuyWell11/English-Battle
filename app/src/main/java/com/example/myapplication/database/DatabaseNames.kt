@@ -4,7 +4,7 @@ import android.provider.BaseColumns
 
 object DatabaseNames : BaseColumns {
     const val DATABASE_NAME = "eng_app.db"
-    const val DATABASE_VERSION = 15
+    const val DATABASE_VERSION = 20
 
 
     //Table "users"
@@ -253,5 +253,5 @@ object DatabaseNames : BaseColumns {
                 "FOREIGN KEY ($HISTORY_COLUMN_HDS_WORD_HISTORY) REFERENCES $HDS_CHOOSE_WORD_TABLE_NAME($HDS_CHOOSE_WORD_COLUMN_ID)," +
                 "FOREIGN KEY ($HISTORY_COLUMN_HDS_TRANSLATION_HISTORY) REFERENCES $HDS_TRANSLATION_TABLE_NAME($HDS_TRANSLATION_COLUMN_ID));"
 
-    const val HISTORY_DELETE_TABLE = "DROP TABLE IF EXISTS $HISTORY_COLUMN_ID ;"
+    const val HISTORY_DELETE_TABLE = "DROP TABLE IF EXISTS $HISTORY_TABLE_NAME ;"
 }
