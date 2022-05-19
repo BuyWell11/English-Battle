@@ -6,6 +6,7 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 
 var currentUserID : Int = -1
+var currentLevel : Int = -1
 
 class DatabaseManager(val context : Context) {
     val dbHelper = DatabaseHelper(context)
@@ -30,31 +31,40 @@ class DatabaseManager(val context : Context) {
             6 -> columnName = DatabaseNames.HISTORY_COLUMN_HDS_TRANSLATION_HISTORY
         }
 
+        val values : ContentValues
+
         if (isTaskExist(currentTask+1, task_type)) {
-            val values = ContentValues().apply {
+            values = ContentValues().apply {
                 put(columnName, currentTask + 1)
             }
-
-            val count = db?.update(
-                DatabaseNames.HISTORY_TABLE_NAME,
-                values,
-                "${DatabaseNames.HISTORY_COLUMN_ID} = ?",
-                arrayOf(currentUserID.toString()),
-            )
         }
         else
         {
-            val values = ContentValues().apply {
+            values = ContentValues().apply {
                 put(columnName, 1)
             }
-
-            val count = db?.update(
-                DatabaseNames.HISTORY_TABLE_NAME,
-                values,
-                "${DatabaseNames.HISTORY_COLUMN_ID} = ?",
-                arrayOf(currentUserID.toString()),
-            )
         }
+
+        val count = db?.update(
+            DatabaseNames.HISTORY_TABLE_NAME,
+            values,
+            "${DatabaseNames.HISTORY_COLUMN_ID} = ?",
+            arrayOf(currentUserID.toString()),
+        )
+    }
+
+    fun updateCurrentLvl()
+    {
+        val values = ContentValues().apply {
+            put(DatabaseNames.HISTORY_COLUMN_CURRENT_LEVEL, currentLevel + 1)
+        }
+
+        val count = db?.update(
+            DatabaseNames.HISTORY_TABLE_NAME,
+            values,
+            "${DatabaseNames.HISTORY_COLUMN_ID} = ?",
+            arrayOf(currentUserID.toString()),
+        )
     }
 
     fun insertIntoUsersTable(user_name : String, user_password : String, user_email : String)
@@ -431,6 +441,8 @@ class DatabaseManager(val context : Context) {
 
             dataList.add(temp.toString())
         }
+
+        currentLevel = dataList[0].toInt();
 
         cursor.close()
         return dataList[0].toInt()
