@@ -409,6 +409,33 @@ class DatabaseManager(val context : Context) {
         return dataList[0].toInt()
     }
 
+    @SuppressLint("Range")
+    fun GetCurrentLvl() : Int
+    {
+        val dataList = ArrayList<String>()
+        val cursor = db?.query(
+            DatabaseNames.HISTORY_TABLE_NAME,
+            null,
+            "${DatabaseNames.HISTORY_COLUMN_ID} = ?",
+            arrayOf(currentUserID.toString()),
+            null,
+            null,
+            null
+        )
+
+        while(cursor?.moveToNext()!!)
+        {
+            var temp : String? = null
+
+            temp = cursor.getString(cursor.getColumnIndex(DatabaseNames.HISTORY_COLUMN_CURRENT_LEVEL))
+
+            dataList.add(temp.toString())
+        }
+
+        cursor.close()
+        return dataList[0].toInt()
+    }
+
     fun closeDB()
     {
         dbHelper.close()
