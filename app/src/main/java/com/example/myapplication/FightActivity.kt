@@ -20,7 +20,7 @@ open class FightActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         MediaController(this)
         binding = FightBinding.inflate(layoutInflater)
-        get_anim(savedInstanceState?.getParcelable(ENEMY_PICS) ?: 0)
+        get_anim(intent.getIntExtra(ENEMY_PICS, 0))
         binding.monster.setImageResource(anim.stand)
         setContentView(binding.root)
 
@@ -86,7 +86,6 @@ open class FightActivity : AppCompatActivity() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putParcelable(KEY_STATE, state)
-        outState.putParcelable(ENEMY_PICS, anim)
     }
 
     private fun renderState() = with(binding) {
@@ -102,32 +101,35 @@ open class FightActivity : AppCompatActivity() {
             LOW_DMG_REQUEST_CODE -> {
                 if(right == true){
                     state.boss_hp -= 100
-                    binding.monster.setImageResource(R.drawable.slime_takedmg)
+                    binding.monster.setImageResource(anim.take_dmg)
                 }
                 else{
                     state.hp -= 20
+                    binding.monster.setImageResource(anim.attack)
                 }
         }
             MID_DMG_REQUEST_CODE ->{
                 if(right == true){
                     state.boss_hp -= 250
-                    binding.monster.setImageResource(R.drawable.slime_takedmg)
+                    binding.monster.setImageResource(anim.take_dmg)
                 }
                 else{
                     state.hp -= 20
+                    binding.monster.setImageResource(anim.attack)
                 }
             }
             HIGH_DMG_REQUEST_CODE ->{
                 if(right == true){
                     state.boss_hp -= 400
-                    binding.monster.setImageResource(R.drawable.slime_takedmg)
+                    binding.monster.setImageResource(anim.take_dmg)
                 }
                 else{
                     state.hp -= 20
+                    binding.monster.setImageResource(anim.attack)
                 }
             }
         }
-        binding.monster.setImageResource(R.drawable.slime)
+        binding.monster.setImageResource(anim.stand)
         renderState()
         if(state.hp <= 0){
             temp_bool = true

@@ -15,19 +15,19 @@ class LvlSelectActivity : AppCompatActivity() {
         binding = LvlSelectBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.btn1.setOnClickListener{
-            onLvl(it)
+            onLvl(1)
         }
         binding.btn2.setOnClickListener{
-            onLvl(it)
+            onLvl(2)
         }
         binding.btn3.setOnClickListener{
-            onLvl(it)
+            onLvl(3)
         }
     }
 
-    private fun onLvl(lvl: View) {
+    private fun onLvl(lvl: Int) {
         val intent = Intent(this, FightActivity::class.java)
-        intent.putExtra(FightActivity.ENEMY_PICS, lvl.id)
+        intent.putExtra(FightActivity.ENEMY_PICS, lvl)
         startActivity(intent)
     }
 }
