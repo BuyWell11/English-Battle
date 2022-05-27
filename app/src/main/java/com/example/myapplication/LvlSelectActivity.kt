@@ -4,10 +4,14 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContract
+import androidx.activity.result.contract.ActivityResultContracts
 import com.example.myapplication.database.DatabaseManager
 import com.example.myapplication.databinding.LvlSelectBinding
 import kotlinx.android.parcel.Parcelize
 import kotlinx.android.synthetic.main.lvl_select.*
+
+var currentLvl : Int = -1
 
 class LvlSelectActivity : AppCompatActivity() {
     lateinit var binding: LvlSelectBinding
@@ -17,13 +21,7 @@ class LvlSelectActivity : AppCompatActivity() {
         binding = LvlSelectBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val dbManager = DatabaseManager(this)
-        dbManager.openDB()
-
-        val currentLvl = dbManager.GetCurrentLvl()
-
-        dbManager.closeDB()
-
+        currentLvl = intent.getIntExtra(CURRENT_LEVEL, 0)
         chooseCurrentLvl(currentLvl)
 
         binding.btn1.setOnClickListener{
@@ -37,19 +35,48 @@ class LvlSelectActivity : AppCompatActivity() {
         }
     }
 
+    var getAction = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+        UpdateCurrentLvl()
+        chooseCurrentLvl(currentLvl)
+    }
+
     private fun onLvl(lvl: Int) {
         val intent = Intent(this, FightActivity::class.java)
         intent.putExtra(FightActivity.ENEMY_PICS, lvl)
-        startActivity(intent)
+        getAction.launch(intent)
     }
 
     private fun chooseCurrentLvl(currentLvl : Int)
     {
-        when(currentLvl)
+        when(currentLvl % 3)
         {
-            1 -> btn1.isEnabled = true
-            2 -> btn2.isEnabled = true
-            3 -> btn3.isEnabled = true
+            0 -> {
+                btn1.isEnabled = true
+                btn2.isEnabled = false
+                btn3.isEnabled = false
+            }
+            1 -> {
+                btn1.isEnabled = false
+                btn2.isEnabled = true
+                btn3.isEnabled = false
+            }
+            2 -> {
+                btn1.isEnabled = false
+                btn2.isEnabled = false
+                btn3.isEnabled = true
+            }
         }
+    }
+
+    private fun UpdateCurrentLvl()
+    {
+        val dbManager = DatabaseManager(this)
+        dbManager.openDB()
+        currentLvl = dbManager.GetCurrentLvl()
+        dbManager.closeDB()
+    }
+
+    companion object {
+        @JvmStatic private val CURRENT_LEVEL = "CURRENT_LEVEL"
     }
 }

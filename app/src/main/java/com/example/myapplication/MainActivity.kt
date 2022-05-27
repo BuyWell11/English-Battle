@@ -9,7 +9,7 @@ import com.example.myapplication.databinding.MainMenuBinding
 import okhttp3.*
 import java.io.IOException
 import android.content.SharedPreferences
-
+import com.example.myapplication.database.DatabaseManager
 
 
 class MainActivity : AppCompatActivity() {
@@ -27,9 +27,15 @@ class MainActivity : AppCompatActivity() {
         run("http://217.25.230.151:3000")
         val a = 1
 
+        val dbManager = DatabaseManager(this)
+        dbManager.openDB()
+
+        var currentLvl = dbManager.GetCurrentLvl()
+
+        dbManager.closeDB()
 
         binding.btn1.setOnClickListener{
-            onPlayPressed()
+            onPlayPressed(currentLvl)
         }
         binding.btn2.setOnClickListener{
             onSelectPressed()
@@ -50,8 +56,9 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun onPlayPressed(){
+    private fun onPlayPressed(currentLvl : Int){
         val intent = Intent(this, LvlSelectActivity::class.java)
+        intent.putExtra("CURRENT_LEVEL", currentLvl)
         startActivity(intent)
     }
 

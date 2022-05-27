@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import com.example.myapplication.database.DatabaseManager
 import com.example.myapplication.databinding.WinLossScreenBinding
 import java.lang.IllegalArgumentException
 
@@ -28,6 +29,13 @@ class Win_lossActivity : AppCompatActivity() {
         else
         {
             binding.result.text = "You won!"
+
+            val dbManager = DatabaseManager(this)
+            dbManager.openDB()
+
+            dbManager.updateCurrentLvl()
+
+            dbManager.closeDB()
         }
         Handler(Looper.getMainLooper()).postDelayed( {
             finish()

@@ -143,10 +143,10 @@ open class FightActivity : AppCompatActivity() {
 
     private fun fight_finish(dead:Boolean){
         if (dead){
-            binding.monster.setImageResource(R.drawable.slime)
+            binding.monster.setImageResource(anim.stand)
         }
         else{
-            binding.monster.setImageResource(R.drawable.slime_dead)
+            binding.monster.setImageResource(anim.dead)
         }
         Handler(Looper.getMainLooper()).postDelayed( {
             var intent = Intent(this, Win_lossActivity::class.java)

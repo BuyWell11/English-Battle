@@ -38,6 +38,7 @@ class DatabaseHelper(context : Context) : SQLiteOpenHelper(context, DatabaseName
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
+        db?.execSQL(DatabaseNames.HISTORY_DELETE_TABLE)
         db?.execSQL(DatabaseNames.LDS_WORD_DELETE_TABLE)
         db?.execSQL(DatabaseNames.LDS_PICTURE_DELETE_TABLE)
         db?.execSQL(DatabaseNames.MDS_MAKE_SENTENCE_DELETE_TABLE)
