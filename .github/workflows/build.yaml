@@ -42,4 +42,4 @@ jobs:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: send apk file
-          message_file: suites/6717878001/artifacts/255848454
+          message_file: gradlew
