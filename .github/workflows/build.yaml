@@ -24,10 +24,18 @@ jobs:
       - name: Build the app
         run: bash ./gradlew assembleDebug --stacktrace
 
-      - name: upload artifact
+      - name: Upload artifact
         uses: actions/upload-artifact@v3
 
         with:
           name: app
           path: app/build/outputs/apk/debug/app-debug.apk
           retetion-days: 30
+
+      - name: Send artifact
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: send apk file
+          message_file: app/build/outputs/apk/debug/app-debug.apk
