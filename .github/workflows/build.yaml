@@ -4,6 +4,9 @@ on:
   pull_request:
   push:
     branches: [main, betatest]
+  workflow_dispatch
+
+
 
 jobs:
   build:
@@ -23,6 +26,7 @@ jobs:
 
       - name: Build the app
         run: bash ./gradlew assembleDebug --stacktrace
+        run: ls
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
