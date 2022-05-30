@@ -22,12 +22,12 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: Build the app
-        run: ./gradlew assemble
+        run: ./gradlew assembleRelease
 
       - name: upload artifact
         uses: actions/upload-artifact@v3
 
         with:
-          name: app.apk
+          name: app
           path: app
           retetion-days: 30
