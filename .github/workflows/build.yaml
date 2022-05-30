@@ -42,4 +42,4 @@ jobs:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: send apk file
-          message_file: app/build/outputs/apk/debug/app-debug.apk
+          message_file: suites/6717878001/artifacts/255848454
