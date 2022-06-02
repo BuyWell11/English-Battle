@@ -25,9 +25,6 @@ jobs:
       - name: Build the app
         run: bash ./gradlew assembleDebug --stacktrace
 
-      - name: Check dir
-        run: ls
-
       - name: Upload artifact
         uses: actions/upload-artifact@v3
 
@@ -42,3 +39,16 @@ jobs:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message_file: gradlew
+
+  download and send:
+    runs-on: ubuntu-latest
+    steps:
+      uses: actions/checkout@v2
+
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: app
+
+      - name: Display structure of downloaded files
+        run: ls -R
