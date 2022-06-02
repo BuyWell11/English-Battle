@@ -41,6 +41,7 @@ jobs:
           message_file: gradlew
 
   download-and-send:
+  needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the code
