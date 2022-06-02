@@ -44,6 +44,13 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: app
+          path: my-artifact
 
       - name: Display structure of downloaded files
         run: ls -R
+
+      - name: Install curl
+        run: sudo apt install curl
+
+      - name: Send to tg
+        run: curl -F "document=@my-artifact/app" -F "chat_id=${{ secrets.TELEGRAM_TO }}" https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendDocument
