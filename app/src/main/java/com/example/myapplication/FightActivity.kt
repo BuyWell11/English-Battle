@@ -101,30 +101,43 @@ open class FightActivity : AppCompatActivity() {
             LOW_DMG_REQUEST_CODE -> {
                 if(right == true){
                     state.boss_hp -= 100
-                    binding.monster.setImageResource(anim.take_dmg)
+                    Handler(Looper.getMainLooper()).postDelayed( {
+                        binding.monster.setImageResource(anim.take_dmg)
+                    }, 2000)
                 }
                 else{
                     state.hp -= 20
-                    binding.monster.setImageResource(anim.attack)
+                    Handler(Looper.getMainLooper()).postDelayed( {
+                        binding.monster.setImageResource(anim.take_dmg)
+                    }, 2000)
                 }
         }
             MID_DMG_REQUEST_CODE ->{
                 if(right == true){
                     state.boss_hp -= 250
-                    binding.monster.setImageResource(anim.take_dmg)
+                    Handler(Looper.getMainLooper()).postDelayed( {
+                        binding.monster.setImageResource(anim.take_dmg)
+                    }, 2000)
                 }
                 else{
                     state.hp -= 20
-                    binding.monster.setImageResource(anim.attack)
+                    Handler(Looper.getMainLooper()).postDelayed( {
+                        binding.monster.setImageResource(anim.take_dmg)
+                    }, 2000)
                 }
             }
             HIGH_DMG_REQUEST_CODE ->{
                 if(right == true){
                     state.boss_hp -= 400
-                    binding.monster.setImageResource(anim.take_dmg)
+                    Handler(Looper.getMainLooper()).postDelayed( {
+                        binding.monster.setImageResource(anim.take_dmg)
+                    }, 2000)
                 }
                 else{
                     state.hp -= 20
+                    Handler(Looper.getMainLooper()).postDelayed( {
+                        binding.monster.setImageResource(anim.take_dmg)
+                    }, 2000)
                     binding.monster.setImageResource(anim.attack)
                 }
             }
@@ -143,10 +156,14 @@ open class FightActivity : AppCompatActivity() {
 
     private fun fight_finish(dead:Boolean){
         if (dead){
-            binding.monster.setImageResource(anim.stand)
+            Handler(Looper.getMainLooper()).postDelayed( {
+                binding.monster.setImageResource(anim.stand)
+            }, 2000)
         }
         else{
-            binding.monster.setImageResource(anim.dead)
+            Handler(Looper.getMainLooper()).postDelayed( {
+                binding.monster.setImageResource(anim.dead)
+            }, 2000)
         }
         Handler(Looper.getMainLooper()).postDelayed( {
             var intent = Intent(this, Win_lossActivity::class.java)

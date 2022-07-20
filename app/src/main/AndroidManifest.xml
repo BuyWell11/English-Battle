@@ -16,12 +16,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity
-            android:name=".Fight3Activity"
-            android:exported="false" />
-        <activity
-            android:name=".Fight2Activity"
-            android:exported="false" />
-        <activity
             android:name=".LogInActivity"
             android:exported="true"
             android:screenOrientation="landscape">

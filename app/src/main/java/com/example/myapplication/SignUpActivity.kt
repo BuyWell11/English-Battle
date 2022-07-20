@@ -35,7 +35,8 @@ class SignUpActivity : AppCompatActivity() {
                 binding.error.visibility = android.view.View.VISIBLE
             }
             else{
-                dbManager.insertIntoUsersTable(binding.nickname.text.toString(), binding.password.text.toString(), binding.email.text.toString())
+                dbManager.insertIntoUsersTable(binding.nickname.text.toString(),
+                    binding.password.text.toString(), binding.email.text.toString())
                 val intent = Intent(this, LogInActivity::class.java)
                 startActivity(intent)
             }
