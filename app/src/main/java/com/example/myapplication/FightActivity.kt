@@ -6,6 +6,7 @@ import android.os.*
 import android.view.View
 import android.widget.MediaController
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.postDelayed
 import com.example.myapplication.databinding.FightBinding
 
 import kotlinx.android.parcel.Parcelize
@@ -100,15 +101,23 @@ open class FightActivity : AppCompatActivity() {
         when(requestCode){
             LOW_DMG_REQUEST_CODE -> {
                 if(right == true){
-                    state.boss_hp -= 100
                     Handler(Looper.getMainLooper()).postDelayed( {
                         binding.monster.setImageResource(anim.take_dmg)
+                    }, 500)
+
+                    Handler(Looper.getMainLooper()).postDelayed( {
+                        binding.monster.setImageResource(anim.stand)
                     }, 2000)
+                    state.boss_hp -= 100
                 }
                 else{
                     state.hp -= 20
                     Handler(Looper.getMainLooper()).postDelayed( {
-                        binding.monster.setImageResource(anim.take_dmg)
+                        binding.monster.setImageResource(anim.attack)
+                    }, 500)
+
+                    Handler(Looper.getMainLooper()).postDelayed( {
+                        binding.monster.setImageResource(anim.stand)
                     }, 2000)
                 }
         }
@@ -117,12 +126,20 @@ open class FightActivity : AppCompatActivity() {
                     state.boss_hp -= 250
                     Handler(Looper.getMainLooper()).postDelayed( {
                         binding.monster.setImageResource(anim.take_dmg)
+                    }, 500)
+
+                    Handler(Looper.getMainLooper()).postDelayed( {
+                        binding.monster.setImageResource(anim.stand)
                     }, 2000)
                 }
                 else{
                     state.hp -= 20
                     Handler(Looper.getMainLooper()).postDelayed( {
-                        binding.monster.setImageResource(anim.take_dmg)
+                        binding.monster.setImageResource(anim.attack)
+                    }, 500)
+
+                    Handler(Looper.getMainLooper()).postDelayed( {
+                        binding.monster.setImageResource(anim.stand)
                     }, 2000)
                 }
             }
@@ -131,14 +148,21 @@ open class FightActivity : AppCompatActivity() {
                     state.boss_hp -= 400
                     Handler(Looper.getMainLooper()).postDelayed( {
                         binding.monster.setImageResource(anim.take_dmg)
+                    }, 500)
+
+                    Handler(Looper.getMainLooper()).postDelayed( {
+                        binding.monster.setImageResource(anim.stand)
                     }, 2000)
                 }
                 else{
                     state.hp -= 20
                     Handler(Looper.getMainLooper()).postDelayed( {
-                        binding.monster.setImageResource(anim.take_dmg)
+                        binding.monster.setImageResource(anim.attack)
+                    }, 500)
+
+                    Handler(Looper.getMainLooper()).postDelayed( {
+                        binding.monster.setImageResource(anim.stand)
                     }, 2000)
-                    binding.monster.setImageResource(anim.attack)
                 }
             }
         }
