@@ -6,6 +6,7 @@ import android.os.Parcelable
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.database.DatabaseManager
 import com.example.myapplication.databinding.SignUpBinding
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.parcel.Parcelize
 
 class SignUpActivity : AppCompatActivity() {
@@ -13,12 +14,18 @@ class SignUpActivity : AppCompatActivity() {
     lateinit var state: State
     val dbManager = DatabaseManager(this)
 
+    //FIREBASE
+    lateinit var mAuth : FirebaseAuth
+    //FIREBASE
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = SignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        dbManager.openDB()
+        //FIREBASE
+        mAuth = FirebaseAuth.getInstance()
+        //FIREBASE
 
         state = savedInstanceState?.getParcelable(KEY_STATE) ?: State(
             email = "",
@@ -31,13 +38,16 @@ class SignUpActivity : AppCompatActivity() {
             val pass = binding.password.text.toString()
             val conf_pass = binding.confPassword.text.toString()
             if (!is_same_pass(pass, conf_pass)){
-                binding.error.text = "пароли не совпадают"
+                binding.error.text = "Пароли не совпадают"
                 binding.error.visibility = android.view.View.VISIBLE
             }
             else{
-                dbManager.insertIntoUsersTable(binding.nickname.text.toString(), binding.password.text.toString(), binding.email.text.toString())
-                val intent = Intent(this, LogInActivity::class.java)
-                startActivity(intent)
+                //FIREBASE
+                mAuth.createUserWithEmailAndPassword(binding.email.text.toString(), binding.password.text.toString()).addOnCompleteListener {
+                    val intent = Intent(this, LogInActivity::class.java)
+                    startActivity(intent)
+                }
+                //FIREBASE
             }
         }
     }

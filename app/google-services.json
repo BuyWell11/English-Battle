@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "205316559844",
+    "project_id": "english-battle-8805f",
+    "storage_bucket": "english-battle-8805f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:205316559844:android:9added83ad11e5ae352df1",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "205316559844-q244vhq6877m14c5rreiul0p51tp52i0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCt8hLAT0DMJw6Kud3sOmN8tjEoGINgz7o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "205316559844-q244vhq6877m14c5rreiul0p51tp52i0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

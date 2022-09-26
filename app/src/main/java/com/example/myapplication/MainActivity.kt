@@ -30,7 +30,8 @@ class MainActivity : AppCompatActivity() {
         val dbManager = DatabaseManager(this)
         dbManager.openDB()
 
-        var currentLvl = dbManager.GetCurrentLvl()
+        var currentLvl = 1
+        //var currentLvl = dbManager.GetCurrentLvl()
 
         dbManager.closeDB()
 
