@@ -23,7 +23,7 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: Build the app
-        run: ./gradlew assembleDebug
+        run: ./gradlew assembleDebug --stacktrace
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
