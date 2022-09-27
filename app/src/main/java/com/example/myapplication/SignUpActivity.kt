@@ -3,6 +3,7 @@ package com.example.myapplication
 import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.database.DatabaseManager
 import com.example.myapplication.databinding.SignUpBinding
@@ -38,8 +39,7 @@ class SignUpActivity : AppCompatActivity() {
             val pass = binding.password.text.toString()
             val conf_pass = binding.confPassword.text.toString()
             if (!is_same_pass(pass, conf_pass)){
-                binding.error.text = "Пароли не совпадают"
-                binding.error.visibility = android.view.View.VISIBLE
+                Toast.makeText(this, "Пароли не совпадают", Toast.LENGTH_LONG).show()
             }
             else{
                 //FIREBASE
