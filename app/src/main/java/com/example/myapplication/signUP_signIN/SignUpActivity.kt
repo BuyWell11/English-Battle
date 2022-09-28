@@ -46,11 +46,10 @@ class SignUpActivity : AppCompatActivity() {
             }
             else{
                 //FIREBASE
-                val user : HashMap<String, Any> = hashMapOf()
-                user.put("user_name", binding.nickname.text.toString())
-                user.put("user_email", binding.email.text.toString())
-                user.put("user_avatar", "-")
-                user.put("current_lvl", 1)
+                val user : HashMap<String, Any> = hashMapOf("user_name" to binding.nickname.text.toString(),
+                                                            "user_email" to binding.email.text.toString(),
+                                                            "user_avatar" to "-",
+                                                            "current_lvl" to 1)
 
                 db.collection("User")
                     .add(user)

@@ -1,7 +1,9 @@
 package com.example.myapplication
 
+import android.content.ContentValues
 import android.content.Intent
 import android.os.*
+import android.util.Log
 import android.widget.MediaController
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.databinding.FightBinding
@@ -11,6 +13,8 @@ import com.example.myapplication.tasks_types.lds_tasks.LdsPictureActivity
 import com.example.myapplication.tasks_types.lds_tasks.LdsWordActivity
 import com.example.myapplication.tasks_types.mds_tasks.MdsMakeSentenceActivity
 import com.example.myapplication.tasks_types.mds_tasks.MdsMakeWordActivity
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 import kotlinx.android.parcel.Parcelize
 

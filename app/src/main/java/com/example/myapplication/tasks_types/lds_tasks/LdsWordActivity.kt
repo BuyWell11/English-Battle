@@ -17,41 +17,37 @@ import com.google.firebase.ktx.Firebase
 class LdsWordActivity : AppCompatActivity() {
     lateinit var binding : LdsWordSpellBinding
 
-    val db = Firebase.firestore
+    var db = Firebase.firestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = LdsWordSpellBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        var answerOptionsList : String = String()
         var rightAnswer : String = String()
-        var skillTask : String = String()
 
-        db.collection("LDS_Word")
-            .whereEqualTo("skill_id", 1)
+        db.collection("LDS_word")
+            .whereEqualTo("skill_id", 2)
             .get()
             .addOnSuccessListener{result ->
                 for (document in result)
                 {
-                    answerOptionsList = document.get("answer_options").toString()
+                    binding.task.text = document.get("skill_task").toString()
+
+                    val answers = document.get("answer_options").toString().split(" ").toMutableList()
+                    binding.answer1.text = answers[0]
+                    binding.answer2.text = answers[1]
+                    binding.answer3.text = answers[2]
+                    binding.answer4.text = answers[3]
+
                     rightAnswer = document.get("right_answer").toString()
-                    skillTask = document.get("skill_task").toString()
                 }
             }
             .addOnFailureListener{ result ->
                 Log.d(TAG, "Shto-to poshlo ne tak")
             }
-        //Выводит слово, которое нужно перевести
-        binding.task.text = skillTask
 
-        //Подписывает кнопки с вариантами ответов
-        val answers = answerOptionsList.split(" ").toMutableList()
-
-        binding.answer1.text = answers[0]
-        binding.answer2.text = answers[1]
-        binding.answer3.text = answers[2]
-        binding.answer4.text = answers[3]
+        binding.task.text
 
         binding.answer1.setOnClickListener{
             val answer: String = binding.answer1.text as String

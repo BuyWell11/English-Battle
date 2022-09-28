@@ -6,8 +6,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.databinding.MainMenuBinding
-import okhttp3.*
-import java.io.IOException
 import android.content.SharedPreferences
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -15,7 +13,6 @@ import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: MainMenuBinding
-    private val client = OkHttpClient()
     lateinit var sharedPref: SharedPreferences
 
     var db = Firebase.firestore
@@ -25,9 +22,6 @@ class MainActivity : AppCompatActivity() {
         binding = MainMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
         sharedPref = getSharedPreferences("PREFERENCE", Context.MODE_PRIVATE)
-
-
-        //run(?)
 
         var currentLvl : Int = 0
 
@@ -41,7 +35,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-
         binding.btn1.setOnClickListener{
             onPlayPressed(currentLvl)
         }
@@ -51,17 +44,6 @@ class MainActivity : AppCompatActivity() {
         binding.btn3.setOnClickListener{
             onExitPressed()
         }
-    }
-
-    fun run(url: String) {
-        val request = Request.Builder()
-            .url(url)
-            .build()
-
-        client.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {}
-            override fun onResponse(call: Call, response: Response) = println(response.body()?.string())
-        })
     }
 
     private fun onPlayPressed(currentLvl : Int){

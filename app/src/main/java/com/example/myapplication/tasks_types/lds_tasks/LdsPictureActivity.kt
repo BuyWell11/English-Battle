@@ -9,6 +9,8 @@ import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.database.DatabaseManager
 import com.example.myapplication.databinding.LdsPictureSpellBinding
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.lds_picture_spell.*
 
@@ -16,22 +18,33 @@ import kotlinx.android.synthetic.main.lds_picture_spell.*
 class LdsPictureActivity : AppCompatActivity() {
     lateinit var binding: LdsPictureSpellBinding
 
-    val dbManager = DatabaseManager(this)
+    val db = Firebase.firestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = LdsPictureSpellBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        dbManager.openDB()
-        val datalist = dbManager.GetLdsPictureInfo()
+        var answerOptionsList : String = String()
+        var right_answer : String = String()
+        var skillPicture : String = String()
 
-        val right_answer:String = datalist[1]
+        db.collection("LDS_picture")
+            .whereEqualTo("skill_id", 1)
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result)
+                {
+                    answerOptionsList = document.get("answer_options").toString()
+                    right_answer = document.get("right_answer").toString()
+                    skillPicture = document.get("task_picture").toString()
+                }
+            }
 
-        Picasso.get().load(datalist[0]).into(image_task)
+        Picasso.get().load(skillPicture).into(image_task)
 
         //Подписывает кнопки с вариантами ответов
-        val answers = datalist[2].split(" ").toMutableList()
+        val answers = answerOptionsList.split(" ").toMutableList()
 
         binding.answer1.text = answers[0]
         binding.answer2.text = answers[1]
@@ -98,10 +111,5 @@ class LdsPictureActivity : AppCompatActivity() {
 
     companion object{
         @JvmStatic val RIGHT = "RIGHT"
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        dbManager.closeDB()
     }
 }
