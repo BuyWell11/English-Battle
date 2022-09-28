@@ -2,66 +2,81 @@ package com.example.myapplication.tasks_types.hds_tasks
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.database.DatabaseManager
 import com.example.myapplication.databinding.HdsChooseWordSpellBinding
 import com.example.myapplication.tasks_types.lds_tasks.LdsPictureActivity
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.lds_picture_spell.*
 
 
 class HdsChooseWordActivity : AppCompatActivity() {
     lateinit var binding : HdsChooseWordSpellBinding
 
-    val dbManager = DatabaseManager(this)
+    val db = Firebase.firestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = HdsChooseWordSpellBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        dbManager.openDB()
-        val datalist = dbManager.GetHdsChooseWordInfo()
+        var answerOptionsList : MutableList<String> = mutableListOf()
+        var rightAnswer : String = String()
+        var skillTask : String = String()
 
-        val right_answer:String = datalist[1]
+        db.collection("HDS_choose_word")
+            .whereEqualTo("skill_id", 1)
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result)
+                {
+                    binding.task.text = document.get("skill_task").toString()
 
-        //Выводит фразу, в которую нужно вставить слово
-        binding.task.text = datalist[0]
+                    answerOptionsList = document.get("answer_options").toString().split(" ").toMutableList()
+                    binding.answer1.text = answerOptionsList[0]
+                    binding.answer2.text = answerOptionsList[1]
+                    binding.answer3.text = answerOptionsList[2]
+                    binding.answer4.text = answerOptionsList[3]
 
-        //Подписывает кнопки с вариантами ответов
-        val answers = datalist[2].split(" ").toMutableList()
-
-        binding.answer1.text = answers[0]
-        binding.answer2.text = answers[1]
-        binding.answer3.text = answers[2]
-        binding.answer4.text = answers[3]
+                    rightAnswer = document.get("right_answer").toString()
+                }
+            }
+            .addOnFailureListener{ result ->
+                Log.d(ContentValues.TAG, "Shto-to poshlo ne tak")
+            }
 
         binding.answer1.setOnClickListener{
             val answer: String = binding.answer1.text as String
-            val result: Boolean = IsAnswerTrue(answer, right_answer)
+            val result: Boolean = IsAnswerTrue(answer, rightAnswer)
             ShowResult(result)
 
         }
 
         binding.answer2.setOnClickListener{
             val answer: String = binding.answer2.text as String
-            val result: Boolean = IsAnswerTrue(answer, right_answer)
+            val result: Boolean = IsAnswerTrue(answer, rightAnswer)
             ShowResult(result)
 
         }
 
         binding.answer3.setOnClickListener{
             val answer: String = binding.answer3.text as String
-            val result: Boolean = IsAnswerTrue(answer, right_answer)
+            val result: Boolean = IsAnswerTrue(answer, rightAnswer)
             ShowResult(result)
 
         }
 
         binding.answer4.setOnClickListener{
             val answer: String = binding.answer4.text as String
-            val result: Boolean = IsAnswerTrue(answer, right_answer)
+            val result: Boolean = IsAnswerTrue(answer, rightAnswer)
             ShowResult(result)
 
         }
@@ -98,10 +113,5 @@ class HdsChooseWordActivity : AppCompatActivity() {
     }
     companion object{
         @JvmStatic val RIGHT = "RIGHT"
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        dbManager.closeDB()
     }
 }

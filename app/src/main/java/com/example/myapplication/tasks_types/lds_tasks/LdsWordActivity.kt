@@ -25,17 +25,20 @@ class LdsWordActivity : AppCompatActivity() {
         binding = LdsWordSpellBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        var answerOptionsList : MutableList<String> = mutableListOf()
+        var skillTask : String = String()
         var rightAnswer : String = String()
 
         db.collection("LDS_word")
-            .whereEqualTo("skill_id", 2)
+            .whereEqualTo("skill_id", 1)
             .get()
             .addOnSuccessListener{result ->
                 for (document in result)
                 {
-                    binding.task.text = document.get("skill_task").toString()
+                    skillTask = document.get("skill_task").toString()
+                    binding.task.text = skillTask
 
-                    val answerOptionsList = document.get("answer_options").toString().split(" ").toMutableList()
+                    answerOptionsList = document.get("answer_options").toString().split(" ").toMutableList()
                     binding.answer1.text = answerOptionsList[0]
                     binding.answer2.text = answerOptionsList[1]
                     binding.answer3.text = answerOptionsList[2]

@@ -2,41 +2,53 @@ package com.example.myapplication.tasks_types.hds_tasks
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.database.DatabaseManager
 import com.example.myapplication.databinding.HdsTranslationSpellBinding
 import com.example.myapplication.tasks_types.lds_tasks.LdsPictureActivity
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 
 class HdsTranslationActivity : AppCompatActivity() {
     lateinit var binding: HdsTranslationSpellBinding
 
-    private var result: Boolean = false
-    val dbManager = DatabaseManager(this)
+    val db = Firebase.firestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = HdsTranslationSpellBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        dbManager.openDB()
-        val datalist = dbManager.GetHdsTranslationInfo()
+        var rightAnswer : String = String()
+        var skillTask : String = String()
 
-        val right_answer: String = datalist[1]
+        db.collection("HDS_translation")
+            .whereEqualTo("skill_id", 1)
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result)
+                {
+                    binding.task.text = document.get("skill_task").toString()
 
-        //Выводит слово, которое нужно перевести
-        binding.task.text = datalist[0]
+                    rightAnswer = document.get("right_answer").toString()
+                }
+            }
+            .addOnFailureListener{ result ->
+                Log.d(ContentValues.TAG, "Shto-to poshlo ne tak")
+            }
 
         binding.DoneBtn.setOnClickListener{
             val keyword = binding.answerSpace.text.toString()
-            val result: Boolean = IsAnswerTrue(keyword, right_answer)
+            val result: Boolean = IsAnswerTrue(keyword, rightAnswer)
             ShowResult(result)
         }
-
     }
 
     override fun onBackPressed() {
@@ -69,10 +81,5 @@ class HdsTranslationActivity : AppCompatActivity() {
     }
     companion object{
         @JvmStatic val RIGHT = "RIGHT"
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        dbManager.closeDB()
     }
 }

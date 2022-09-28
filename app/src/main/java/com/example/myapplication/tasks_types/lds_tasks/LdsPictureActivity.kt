@@ -2,10 +2,12 @@ package com.example.myapplication.tasks_types.lds_tasks
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.databinding.LdsPictureSpellBinding
 import com.google.firebase.firestore.ktx.firestore
@@ -26,7 +28,8 @@ class LdsPictureActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         var answerOptionsList : MutableList<String>
-        var right_answer : String = String()
+        var rightAnswer : String = String()
+        var taskPictureURL : String = String()
 
         db.collection("LDS_picture")
             .whereEqualTo("skill_id", 1)
@@ -40,36 +43,40 @@ class LdsPictureActivity : AppCompatActivity() {
                     binding.answer3.text = answerOptionsList[2]
                     binding.answer4.text = answerOptionsList[3]
 
-                    Picasso.get().load(document.get("task_picture").toString()).into(image_task)
+                    taskPictureURL = document.get("task_picture").toString()
+                    Picasso.get().load(taskPictureURL).into(image_task)
 
-                    right_answer = document.get("right_answer").toString()
+                    rightAnswer = document.get("right_answer").toString()
                 }
+            }
+            .addOnFailureListener{ result ->
+                Log.d(ContentValues.TAG, "Shto-to poshlo ne tak")
             }
 
         binding.answer1.setOnClickListener{
             val answer: String = binding.answer1.text as String
-            val result: Boolean = IsAnswerTrue(answer, right_answer)
+            val result: Boolean = IsAnswerTrue(answer, rightAnswer)
             ShowResult(result)
 
         }
 
         binding.answer2.setOnClickListener{
             val answer: String = binding.answer2.text as String
-            val result: Boolean = IsAnswerTrue(answer, right_answer)
+            val result: Boolean = IsAnswerTrue(answer, rightAnswer)
             ShowResult(result)
 
         }
 
         binding.answer3.setOnClickListener{
             val answer: String = binding.answer3.text as String
-            val result: Boolean = IsAnswerTrue(answer, right_answer)
+            val result: Boolean = IsAnswerTrue(answer, rightAnswer)
             ShowResult(result)
 
         }
 
         binding.answer4.setOnClickListener{
             val answer: String = binding.answer4.text as String
-            val result: Boolean = IsAnswerTrue(answer, right_answer)
+            val result: Boolean = IsAnswerTrue(answer, rightAnswer)
             ShowResult(result)
 
         }
