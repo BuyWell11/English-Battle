@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.tasks_types.lds_tasks
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -7,28 +7,28 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
-import com.example.myapplication.databinding.LdsWordSpellBinding
-import com.example.myapplication.Database
 import com.example.myapplication.database.DatabaseManager
+import com.example.myapplication.databinding.LdsPictureSpellBinding
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.lds_picture_spell.*
 
 
-class LdsWordActivity : AppCompatActivity() {
-    lateinit var binding : LdsWordSpellBinding
+class LdsPictureActivity : AppCompatActivity() {
+    lateinit var binding: LdsPictureSpellBinding
 
     val dbManager = DatabaseManager(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = LdsWordSpellBinding.inflate(layoutInflater)
+        binding = LdsPictureSpellBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         dbManager.openDB()
-        val datalist = dbManager.GetLdsWordInfo()
+        val datalist = dbManager.GetLdsPictureInfo()
 
         val right_answer:String = datalist[1]
 
-        //Выводит слово, которое нужно перевести
-        binding.task.text = datalist[0]
+        Picasso.get().load(datalist[0]).into(image_task)
 
         //Подписывает кнопки с вариантами ответов
         val answers = datalist[2].split(" ").toMutableList()
@@ -65,7 +65,6 @@ class LdsWordActivity : AppCompatActivity() {
             ShowResult(result)
 
         }
-
     }
 
     override fun onBackPressed() {
@@ -91,12 +90,11 @@ class LdsWordActivity : AppCompatActivity() {
         }
         Handler(Looper.getMainLooper()).postDelayed( {
             val intent = Intent()
-            intent.putExtra(LdsPictureActivity.RIGHT, result)
+            intent.putExtra(RIGHT, result)
             setResult(Activity.RESULT_OK, intent)
             finish()
         }, 1000)
     }
-
 
     companion object{
         @JvmStatic val RIGHT = "RIGHT"

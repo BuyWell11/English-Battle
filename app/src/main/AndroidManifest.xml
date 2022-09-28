@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity
-            android:name=".LogInActivity"
+            android:name=".signUP_signIN.LogInActivity"
             android:exported="true"
             android:screenOrientation="landscape">
             <intent-filter>
@@ -29,7 +29,7 @@
             android:exported="true"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".SignUpActivity"
+            android:name=".signUP_signIN.SignUpActivity"
             android:exported="true"
             android:screenOrientation="landscape" />
         <activity
@@ -45,19 +45,19 @@
             android:exported="true"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".LdsWordActivity"
+            android:name=".tasks_types.lds_tasks.LdsWordActivity"
             android:exported="true"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".LdsPictureActivity"
+            android:name=".tasks_types.lds_tasks.LdsPictureActivity"
             android:exported="true"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".HdsChooseWordActivity"
+            android:name=".tasks_types.hds_tasks.HdsChooseWordActivity"
             android:exported="true"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".HdsTranslationActivity"
+            android:name=".tasks_types.hds_tasks.HdsTranslationActivity"
             android:exported="true"
             android:screenOrientation="landscape" />
         <activity
@@ -65,11 +65,11 @@
             android:exported="true"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".MdsMakeSentenceActivity"
+            android:name=".tasks_types.mds_tasks.MdsMakeSentenceActivity"
             android:exported="true"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".MdsMakeWordActivity"
+            android:name=".tasks_types.mds_tasks.MdsMakeWordActivity"
             android:exported="true"
             android:screenOrientation="landscape" />
     </application>

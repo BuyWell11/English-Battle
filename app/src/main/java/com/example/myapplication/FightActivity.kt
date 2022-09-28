@@ -1,13 +1,16 @@
 package com.example.myapplication
 
-import android.app.Activity
 import android.content.Intent
 import android.os.*
-import android.view.View
 import android.widget.MediaController
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.os.postDelayed
 import com.example.myapplication.databinding.FightBinding
+import com.example.myapplication.tasks_types.hds_tasks.HdsChooseWordActivity
+import com.example.myapplication.tasks_types.hds_tasks.HdsTranslationActivity
+import com.example.myapplication.tasks_types.lds_tasks.LdsPictureActivity
+import com.example.myapplication.tasks_types.lds_tasks.LdsWordActivity
+import com.example.myapplication.tasks_types.mds_tasks.MdsMakeSentenceActivity
+import com.example.myapplication.tasks_types.mds_tasks.MdsMakeWordActivity
 
 import kotlinx.android.parcel.Parcelize
 
@@ -53,7 +56,7 @@ open class FightActivity : AppCompatActivity() {
         }
         else if(random == 1)
         {
-            val intent = Intent(this, LdsPictureActivity::class.java)
+            val intent = Intent(this, LdsWordActivity::class.java)
             startActivityIfNeeded(intent, LOW_DMG_REQUEST_CODE)
         }
     }

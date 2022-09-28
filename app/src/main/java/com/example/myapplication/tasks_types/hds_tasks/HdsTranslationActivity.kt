@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.tasks_types.hds_tasks
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -6,12 +6,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.view.inputmethod.EditorInfo
-import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.database.DatabaseManager
 import com.example.myapplication.databinding.HdsTranslationSpellBinding
-import kotlin.properties.Delegates
+import com.example.myapplication.tasks_types.lds_tasks.LdsPictureActivity
 
 
 class HdsTranslationActivity : AppCompatActivity() {

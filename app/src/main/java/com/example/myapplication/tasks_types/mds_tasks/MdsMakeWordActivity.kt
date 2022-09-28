@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.tasks_types.mds_tasks
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -10,8 +10,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.R
 import com.example.myapplication.database.DatabaseManager
 import com.example.myapplication.databinding.MdsMakeSentenceSpellBinding
+import com.example.myapplication.tasks_types.lds_tasks.LdsPictureActivity
 import java.util.*
 import kotlin.collections.mutableListOf
 

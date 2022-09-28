@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.tasks_types.hds_tasks
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -8,27 +8,27 @@ import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.database.DatabaseManager
-import com.example.myapplication.databinding.LdsPictureSpellBinding
-import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.lds_picture_spell.*
+import com.example.myapplication.databinding.HdsChooseWordSpellBinding
+import com.example.myapplication.tasks_types.lds_tasks.LdsPictureActivity
 
 
-class LdsPictureActivity : AppCompatActivity() {
-    lateinit var binding: LdsPictureSpellBinding
+class HdsChooseWordActivity : AppCompatActivity() {
+    lateinit var binding : HdsChooseWordSpellBinding
 
     val dbManager = DatabaseManager(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = LdsPictureSpellBinding.inflate(layoutInflater)
+        binding = HdsChooseWordSpellBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         dbManager.openDB()
-        val datalist = dbManager.GetLdsPictureInfo()
+        val datalist = dbManager.GetHdsChooseWordInfo()
 
         val right_answer:String = datalist[1]
 
-        Picasso.get().load(datalist[0]).into(image_task)
+        //Выводит фразу, в которую нужно вставить слово
+        binding.task.text = datalist[0]
 
         //Подписывает кнопки с вариантами ответов
         val answers = datalist[2].split(" ").toMutableList()
@@ -65,6 +65,7 @@ class LdsPictureActivity : AppCompatActivity() {
             ShowResult(result)
 
         }
+
     }
 
     override fun onBackPressed() {
@@ -90,12 +91,11 @@ class LdsPictureActivity : AppCompatActivity() {
         }
         Handler(Looper.getMainLooper()).postDelayed( {
             val intent = Intent()
-            intent.putExtra(RIGHT, result)
+            intent.putExtra(LdsPictureActivity.RIGHT, result)
             setResult(Activity.RESULT_OK, intent)
             finish()
         }, 1000)
     }
-
     companion object{
         @JvmStatic val RIGHT = "RIGHT"
     }

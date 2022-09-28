@@ -3,12 +3,9 @@ package com.example.myapplication
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.myapplication.database.DatabaseManager
 import com.example.myapplication.databinding.LvlSelectBinding
-import kotlinx.android.parcel.Parcelize
 import kotlinx.android.synthetic.main.lvl_select.*
 
 var currentLvl : Int = -1
@@ -36,7 +33,7 @@ class LvlSelectActivity : AppCompatActivity() {
     }
 
     var getAction = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
-        UpdateCurrentLvl()
+        //UpdateCurrentLvl()
         chooseCurrentLvl(currentLvl)
     }
 

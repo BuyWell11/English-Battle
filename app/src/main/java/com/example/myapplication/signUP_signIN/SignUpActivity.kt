@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.signUP_signIN
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.database.DatabaseManager
 import com.example.myapplication.databinding.SignUpBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.parcel.Parcelize
 
 class SignUpActivity : AppCompatActivity() {
@@ -17,6 +18,7 @@ class SignUpActivity : AppCompatActivity() {
 
     //FIREBASE
     lateinit var mAuth : FirebaseAuth
+    lateinit var db : FirebaseFirestore
     //FIREBASE
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,6 +28,7 @@ class SignUpActivity : AppCompatActivity() {
 
         //FIREBASE
         mAuth = FirebaseAuth.getInstance()
+        db = FirebaseFirestore.getInstance()
         //FIREBASE
 
         state = savedInstanceState?.getParcelable(KEY_STATE) ?: State(
@@ -43,6 +46,14 @@ class SignUpActivity : AppCompatActivity() {
             }
             else{
                 //FIREBASE
+                val user : HashMap<String, Any> = hashMapOf()
+                user.put("user_name", binding.nickname.text.toString())
+                user.put("user_email", binding.email.text.toString())
+                user.put("user_avatar", "-")
+                user.put("current_lvl", 1)
+
+                db.collection("User")
+                    .add(user)
                 mAuth.createUserWithEmailAndPassword(binding.email.text.toString(), binding.password.text.toString()).addOnCompleteListener {
                     val intent = Intent(this, LogInActivity::class.java)
                     startActivity(intent)

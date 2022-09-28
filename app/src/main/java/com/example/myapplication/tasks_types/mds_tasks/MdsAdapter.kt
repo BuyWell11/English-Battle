@@ -1,11 +1,11 @@
-package com.example.myapplication
+package com.example.myapplication.tasks_types.mds_tasks
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import kotlin.collections.mutableListOf
+import com.example.myapplication.R
 
 class MdsAdapter(ItemList: MutableList<String>) : RecyclerView.Adapter<MdsAdapter.MyViewHolder>() {
     private var list: MutableList<String> = ItemList
