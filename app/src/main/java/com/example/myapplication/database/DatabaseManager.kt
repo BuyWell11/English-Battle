@@ -288,7 +288,7 @@ class DatabaseManager(val context : Context) {
     @SuppressLint("Range")
     fun GetMdsMakeSentenceInfo() : ArrayList<String>
     {
-        val currentTask = GetCurrentTask(4)
+        val currentTask = 1
 
         val dataList = ArrayList<String>()
         val cursor = db?.query(

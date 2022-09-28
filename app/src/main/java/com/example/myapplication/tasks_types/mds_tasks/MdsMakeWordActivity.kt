@@ -2,10 +2,12 @@ package com.example.myapplication.tasks_types.mds_tasks
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,6 +16,8 @@ import com.example.myapplication.R
 import com.example.myapplication.database.DatabaseManager
 import com.example.myapplication.databinding.MdsMakeSentenceSpellBinding
 import com.example.myapplication.tasks_types.lds_tasks.LdsPictureActivity
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import java.util.*
 import kotlin.collections.mutableListOf
 
@@ -24,7 +28,7 @@ class MdsMakeWordActivity : AppCompatActivity() {
     private lateinit var adapter : MdsAdapter
     private lateinit var recyclerView: RecyclerView
 
-    val dbManager = DatabaseManager(this)
+    val db = Firebase.firestore
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,20 +43,38 @@ class MdsMakeWordActivity : AppCompatActivity() {
         linearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
         recyclerView.layoutManager = linearLayoutManager
 
-        dbManager.openDB()
-        val datalist = dbManager.GetMdsMakeWordInfo()
+        var right_answer = String()
+        var letterList = String()
+        var skillTask = String()
 
-        binding.task.text = "Make word '${datalist[0]}' using these letters:"
+        db.collection("MDS_make_word")
+            .whereEqualTo("skill_id", 1)
+            .get()
+            .addOnSuccessListener{result ->
+                for (document in result)
+                {
+                    skillTask = document.get("skill_task").toString()
+                    binding.task.text = "Make word '${skillTask}' using these letters:"
 
-        list = datalist[1].split(" ").toMutableList()
+                    letterList = document.get("letter_list").toString()
+                    /*adapter = MdsAdapter(wordList.split(" ").toMutableList())
+                    recyclerView.adapter = adapter
+                    val itemTouchHelper = ItemTouchHelper(simpleCallback)
+                    itemTouchHelper.attachToRecyclerView(recyclerView)*/
 
+                    right_answer = document.get("right_answer").toString()
+                }
+            }
+            .addOnFailureListener{ result ->
+                Log.d(ContentValues.TAG, "Shto-to poshlo ne tak")
+            }
+
+        list = letterList.split(" ").toMutableList()
         adapter = MdsAdapter(list)
         recyclerView.adapter = adapter
 
         val itemTouchHelper = ItemTouchHelper(simpleCallback)
         itemTouchHelper.attachToRecyclerView(recyclerView)
-
-        val right_answer = datalist[2]
 
         binding.enterBtn.setOnClickListener{
             val keyword : String = MakeAnswer()
@@ -138,10 +160,5 @@ class MdsMakeWordActivity : AppCompatActivity() {
             setResult(Activity.RESULT_OK, intent)
             finish()
         }, 1000)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        dbManager.closeDB()
     }
 }

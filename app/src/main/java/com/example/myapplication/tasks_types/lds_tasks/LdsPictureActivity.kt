@@ -7,12 +7,12 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
-import com.example.myapplication.database.DatabaseManager
 import com.example.myapplication.databinding.LdsPictureSpellBinding
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.lds_picture_spell.*
+import com.example.myapplication.database.DatabaseManager
 
 
 class LdsPictureActivity : AppCompatActivity() {
@@ -25,9 +25,8 @@ class LdsPictureActivity : AppCompatActivity() {
         binding = LdsPictureSpellBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        var answerOptionsList : String = String()
+        var answerOptionsList : MutableList<String>
         var right_answer : String = String()
-        var skillPicture : String = String()
 
         db.collection("LDS_picture")
             .whereEqualTo("skill_id", 1)
@@ -35,21 +34,17 @@ class LdsPictureActivity : AppCompatActivity() {
             .addOnSuccessListener { result ->
                 for (document in result)
                 {
-                    answerOptionsList = document.get("answer_options").toString()
+                    answerOptionsList = document.get("answer_options").toString().split(" ").toMutableList()
+                    binding.answer1.text = answerOptionsList[0]
+                    binding.answer2.text = answerOptionsList[1]
+                    binding.answer3.text = answerOptionsList[2]
+                    binding.answer4.text = answerOptionsList[3]
+
+                    Picasso.get().load(document.get("task_picture").toString()).into(image_task)
+
                     right_answer = document.get("right_answer").toString()
-                    skillPicture = document.get("task_picture").toString()
                 }
             }
-
-        Picasso.get().load(skillPicture).into(image_task)
-
-        //Подписывает кнопки с вариантами ответов
-        val answers = answerOptionsList.split(" ").toMutableList()
-
-        binding.answer1.text = answers[0]
-        binding.answer2.text = answers[1]
-        binding.answer3.text = answers[2]
-        binding.answer4.text = answers[3]
 
         binding.answer1.setOnClickListener{
             val answer: String = binding.answer1.text as String

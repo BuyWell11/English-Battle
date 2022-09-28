@@ -53,14 +53,15 @@ open class FightActivity : AppCompatActivity() {
 
     private fun onLDSpressed()
     {
-        val random = (0..1).random()
-        if (random == 0) {
+        val random = (0..100).random()
+        if (random < 50)
+        {
             val intent = Intent(this, LdsWordActivity::class.java)
             startActivityIfNeeded(intent, LOW_DMG_REQUEST_CODE)
         }
-        else if(random == 1)
+        else if(random > 50)
         {
-            val intent = Intent(this, LdsWordActivity::class.java)
+            val intent = Intent(this, LdsPictureActivity::class.java)
             startActivityIfNeeded(intent, LOW_DMG_REQUEST_CODE)
         }
     }
@@ -80,12 +81,12 @@ open class FightActivity : AppCompatActivity() {
 
     private fun onHDSpressed()
     {
-        val random = (0..1).random()
-        if (random == 0) {
+        val random = (0..100).random()
+        if (random < 50) {
             val intent = Intent(this, HdsTranslationActivity::class.java)
             startActivityIfNeeded(intent, HIGH_DMG_REQUEST_CODE)
         }
-        else if(random == 1) {
+        else if(random > 50) {
             val intent = Intent(this, HdsChooseWordActivity::class.java)
             startActivityIfNeeded(intent, HIGH_DMG_REQUEST_CODE)
         }

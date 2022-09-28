@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.databinding.LdsWordSpellBinding
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.example.myapplication.database.DatabaseManager
 
 
 class LdsWordActivity : AppCompatActivity() {
@@ -34,11 +35,11 @@ class LdsWordActivity : AppCompatActivity() {
                 {
                     binding.task.text = document.get("skill_task").toString()
 
-                    val answers = document.get("answer_options").toString().split(" ").toMutableList()
-                    binding.answer1.text = answers[0]
-                    binding.answer2.text = answers[1]
-                    binding.answer3.text = answers[2]
-                    binding.answer4.text = answers[3]
+                    val answerOptionsList = document.get("answer_options").toString().split(" ").toMutableList()
+                    binding.answer1.text = answerOptionsList[0]
+                    binding.answer2.text = answerOptionsList[1]
+                    binding.answer3.text = answerOptionsList[2]
+                    binding.answer4.text = answerOptionsList[3]
 
                     rightAnswer = document.get("right_answer").toString()
                 }
@@ -46,8 +47,6 @@ class LdsWordActivity : AppCompatActivity() {
             .addOnFailureListener{ result ->
                 Log.d(TAG, "Shto-to poshlo ne tak")
             }
-
-        binding.task.text
 
         binding.answer1.setOnClickListener{
             val answer: String = binding.answer1.text as String

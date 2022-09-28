@@ -2,10 +2,12 @@ package com.example.myapplication.tasks_types.mds_tasks
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,6 +16,8 @@ import com.example.myapplication.R
 import com.example.myapplication.database.DatabaseManager
 import com.example.myapplication.databinding.MdsMakeSentenceSpellBinding
 import com.example.myapplication.tasks_types.lds_tasks.LdsPictureActivity
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import java.util.*
 import kotlin.collections.mutableListOf
 
@@ -24,8 +28,7 @@ class MdsMakeSentenceActivity : AppCompatActivity() {
     private lateinit var adapter : MdsAdapter
     private lateinit var recyclerView: RecyclerView
 
-    val dbManager = DatabaseManager(this)
-
+    val db = Firebase.firestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,10 +42,29 @@ class MdsMakeSentenceActivity : AppCompatActivity() {
         linearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
         recyclerView.layoutManager = linearLayoutManager
 
-        dbManager.openDB()
-        val datalist = dbManager.GetMdsMakeSentenceInfo()
+        var right_answer = String()
+        var wordList = String()
 
-        list = datalist[0].split(" ").toMutableList()
+        db.collection("MDS_make_sentence")
+            .whereEqualTo("skill_id", 1)
+            .get()
+            .addOnSuccessListener{result ->
+                for (document in result)
+                {
+                    wordList = document.get("word_list").toString()
+                    /*adapter = MdsAdapter(wordList.split(" ").toMutableList())
+                    recyclerView.adapter = adapter
+                    val itemTouchHelper = ItemTouchHelper(simpleCallback)
+                    itemTouchHelper.attachToRecyclerView(recyclerView)*/
+
+                    right_answer = document.get("right_answer").toString()
+                }
+            }
+            .addOnFailureListener{ result ->
+                Log.d(ContentValues.TAG, "Shto-to poshlo ne tak")
+            }
+
+        list = wordList.split(" ").toMutableList()
 
         adapter = MdsAdapter(list)
         recyclerView.adapter = adapter
@@ -50,14 +72,13 @@ class MdsMakeSentenceActivity : AppCompatActivity() {
         val itemTouchHelper = ItemTouchHelper(simpleCallback)
         itemTouchHelper.attachToRecyclerView(recyclerView)
 
-        val right_answer = datalist[1]
-
         binding.enterBtn.setOnClickListener{
             val keyword : String = MakeAnswer()
             val result: Boolean = IsAnswerTrue(keyword, right_answer)
             ShowResult(result)
         }
     }
+
 
     override fun onBackPressed() {
 
@@ -136,10 +157,5 @@ class MdsMakeSentenceActivity : AppCompatActivity() {
             setResult(Activity.RESULT_OK, intent)
             finish()
         }, 1000)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        dbManager.closeDB()
     }
 }
