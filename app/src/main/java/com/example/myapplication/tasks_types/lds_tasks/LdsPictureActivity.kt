@@ -14,7 +14,6 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.lds_picture_spell.*
-import com.example.myapplication.database.DatabaseManager
 
 
 class LdsPictureActivity : AppCompatActivity() {
@@ -86,9 +85,9 @@ class LdsPictureActivity : AppCompatActivity() {
 
     }
 
-    private fun IsAnswerTrue(user_ans:String, right_ans:String): Boolean
+    private fun IsAnswerTrue(userAnswer:String, rightAnswer:String): Boolean
     {
-        return user_ans == right_ans
+        return userAnswer == rightAnswer
     }
 
     @SuppressLint("SetTextI18n")

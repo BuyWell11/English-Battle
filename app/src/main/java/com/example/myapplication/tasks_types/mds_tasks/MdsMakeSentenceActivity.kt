@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
-import com.example.myapplication.database.DatabaseManager
 import com.example.myapplication.databinding.MdsMakeSentenceSpellBinding
 import com.example.myapplication.tasks_types.lds_tasks.LdsPictureActivity
 import com.google.firebase.firestore.ktx.firestore
@@ -42,7 +41,7 @@ class MdsMakeSentenceActivity : AppCompatActivity() {
         linearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
         recyclerView.layoutManager = linearLayoutManager
 
-        var right_answer = String()
+        var rightAnswer = String()
         var wordList = String()
 
         db.collection("MDS_make_sentence")
@@ -57,7 +56,7 @@ class MdsMakeSentenceActivity : AppCompatActivity() {
                     val itemTouchHelper = ItemTouchHelper(simpleCallback)
                     itemTouchHelper.attachToRecyclerView(recyclerView)*/
 
-                    right_answer = document.get("right_answer").toString()
+                    rightAnswer = document.get("right_answer").toString()
                 }
             }
             .addOnFailureListener{ result ->
@@ -74,7 +73,7 @@ class MdsMakeSentenceActivity : AppCompatActivity() {
 
         binding.enterBtn.setOnClickListener{
             val keyword : String = MakeAnswer()
-            val result: Boolean = IsAnswerTrue(keyword, right_answer)
+            val result: Boolean = IsAnswerTrue(keyword, rightAnswer)
             ShowResult(result)
         }
     }
@@ -125,18 +124,18 @@ class MdsMakeSentenceActivity : AppCompatActivity() {
 
     private fun MakeAnswer() : String
     {
-        val user_answer = StringBuilder()
+        val userAnswer = StringBuilder()
         for (i in 0..list.size-1)
         {
-            user_answer.append(list[i])
+            userAnswer.append(list[i])
         }
 
-        return user_answer.toString()
+        return userAnswer.toString()
     }
 
-    private fun IsAnswerTrue(user_ans:String, right_ans:String): Boolean
+    private fun IsAnswerTrue(userAnswer:String, rightAnswer:String): Boolean
     {
-        return user_ans == right_ans
+        return userAnswer == rightAnswer
     }
 
     @SuppressLint("SetTextI18n")

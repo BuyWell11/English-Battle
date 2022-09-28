@@ -9,7 +9,6 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.example.myapplication.database.DatabaseManager
 import com.example.myapplication.databinding.HdsTranslationSpellBinding
 import com.example.myapplication.tasks_types.lds_tasks.LdsPictureActivity
 import com.google.firebase.firestore.ktx.firestore
@@ -55,9 +54,9 @@ class HdsTranslationActivity : AppCompatActivity() {
 
     }
 
-    private fun IsAnswerTrue(user_ans:String, right_ans:String): Boolean
+    private fun IsAnswerTrue(userAnswer:String, rightAnswer:String): Boolean
     {
-        return user_ans == right_ans
+        return userAnswer == rightAnswer
     }
 
     @SuppressLint("SetTextI18n")

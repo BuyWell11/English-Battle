@@ -1,9 +1,7 @@
 package com.example.myapplication
 
-import android.content.ContentValues
 import android.content.Intent
 import android.os.*
-import android.util.Log
 import android.widget.MediaController
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.databinding.FightBinding
@@ -13,8 +11,6 @@ import com.example.myapplication.tasks_types.lds_tasks.LdsPictureActivity
 import com.example.myapplication.tasks_types.lds_tasks.LdsWordActivity
 import com.example.myapplication.tasks_types.mds_tasks.MdsMakeSentenceActivity
 import com.example.myapplication.tasks_types.mds_tasks.MdsMakeWordActivity
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 
 import kotlinx.android.parcel.Parcelize
 
@@ -22,13 +18,13 @@ open class FightActivity : AppCompatActivity() {
     lateinit var binding:FightBinding
     lateinit var state: State
     lateinit var anim: Anim
-    var anim_map = MapOfAnim
+    var animMap = MapOfAnim
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         MediaController(this)
         binding = FightBinding.inflate(layoutInflater)
-        get_anim(intent.getIntExtra(ENEMY_PICS, 0))
+        getAnim(intent.getIntExtra(ENEMY_PICS, 0))
         binding.monster.setImageResource(anim.stand)
         setContentView(binding.root)
 
@@ -104,7 +100,7 @@ open class FightActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        var temp_bool:Boolean
+        var tempBool:Boolean
         var right = data?.getBooleanExtra(LdsPictureActivity.RIGHT, false)
         when(requestCode){
             LOW_DMG_REQUEST_CODE -> {
@@ -177,16 +173,16 @@ open class FightActivity : AppCompatActivity() {
         binding.monster.setImageResource(anim.stand)
         renderState()
         if(state.hp <= 0){
-            temp_bool = true
-            fight_finish(temp_bool)
+            tempBool = true
+            fightFinish(tempBool)
         }
         else if(state.boss_hp <= 0){
-            temp_bool = false
-            fight_finish(temp_bool)
+            tempBool = false
+            fightFinish(tempBool)
         }
     }
 
-    private fun fight_finish(dead:Boolean){
+    private fun fightFinish(dead:Boolean){
         if (dead){
             Handler(Looper.getMainLooper()).postDelayed( {
                 binding.monster.setImageResource(anim.stand)
@@ -205,8 +201,8 @@ open class FightActivity : AppCompatActivity() {
         }, 2000)
     }
 
-    private fun get_anim(enemy : Int){
-        anim = anim_map[enemy]!!
+    private fun getAnim(enemy : Int){
+        anim = animMap[enemy]!!
     }
 
     @Parcelize

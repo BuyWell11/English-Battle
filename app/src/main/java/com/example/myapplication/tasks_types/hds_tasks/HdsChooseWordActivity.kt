@@ -9,13 +9,10 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.example.myapplication.database.DatabaseManager
 import com.example.myapplication.databinding.HdsChooseWordSpellBinding
 import com.example.myapplication.tasks_types.lds_tasks.LdsPictureActivity
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.lds_picture_spell.*
 
 
 class HdsChooseWordActivity : AppCompatActivity() {
@@ -87,9 +84,9 @@ class HdsChooseWordActivity : AppCompatActivity() {
 
     }
 
-    private fun IsAnswerTrue(user_ans:String, right_ans:String): Boolean
+    private fun IsAnswerTrue(userAnswer:String, rightAnswer:String): Boolean
     {
-        return user_ans == right_ans
+        return userAnswer == rightAnswer
     }
 
     @SuppressLint("SetTextI18n")
