@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.os.Parcelable
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.MainActivity
-import com.example.myapplication.database.DatabaseManager
 import com.example.myapplication.databinding.LogInBinding
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.parcel.Parcelize
@@ -17,7 +16,6 @@ import kotlinx.android.parcel.Parcelize
 class LogInActivity : AppCompatActivity() {
     lateinit var binding: LogInBinding
     lateinit var state: State
-    val dbManager = DatabaseManager(this)
     lateinit var sharedPref: SharedPreferences
 
     //FIREBASE

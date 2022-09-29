@@ -4,7 +4,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
-import com.example.myapplication.database.DatabaseManager
 import com.example.myapplication.databinding.LvlSelectBinding
 import kotlinx.android.synthetic.main.lvl_select.*
 
@@ -63,14 +62,6 @@ class LvlSelectActivity : AppCompatActivity() {
                 btn3.isEnabled = true
             }
         }
-    }
-
-    private fun UpdateCurrentLvl()
-    {
-        val dbManager = DatabaseManager(this)
-        dbManager.openDB()
-        currentLvl = dbManager.GetCurrentLvl()
-        dbManager.closeDB()
     }
 
     companion object {

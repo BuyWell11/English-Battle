@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.os.Parcelable
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.myapplication.database.DatabaseManager
 import com.example.myapplication.databinding.SignUpBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -14,7 +13,6 @@ import kotlinx.android.parcel.Parcelize
 class SignUpActivity : AppCompatActivity() {
     lateinit var binding: SignUpBinding
     lateinit var state: State
-    val dbManager = DatabaseManager(this)
 
     //FIREBASE
     lateinit var mAuth : FirebaseAuth
