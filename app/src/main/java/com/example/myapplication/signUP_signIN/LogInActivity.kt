@@ -34,8 +34,6 @@ class LogInActivity : AppCompatActivity() {
         // Initialize Firebase Auth
         mAuth = Firebase.auth
 
-
-
         state = savedInstanceState?.getParcelable(KEY_STATE) ?: State(
             email = "",
             password = "",

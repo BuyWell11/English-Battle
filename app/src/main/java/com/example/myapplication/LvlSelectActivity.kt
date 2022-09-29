@@ -7,10 +7,11 @@ import androidx.activity.result.contract.ActivityResultContracts
 import com.example.myapplication.databinding.LvlSelectBinding
 import kotlinx.android.synthetic.main.lvl_select.*
 
-var currentLvl : Int = -1
+var currentLvl : Int = 0
 
 class LvlSelectActivity : AppCompatActivity() {
     lateinit var binding: LvlSelectBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,9 +33,9 @@ class LvlSelectActivity : AppCompatActivity() {
     }
 
     var getAction = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
-        //UpdateCurrentLvl()
         chooseCurrentLvl(currentLvl)
     }
+
 
     private fun onLvl(lvl: Int) {
         val intent = Intent(this, FightActivity::class.java)

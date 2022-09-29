@@ -51,10 +51,6 @@ class MdsMakeSentenceActivity : AppCompatActivity() {
                 for (document in result)
                 {
                     wordList = document.get("word_list").toString()
-                    /*adapter = MdsAdapter(wordList.split(" ").toMutableList())
-                    recyclerView.adapter = adapter
-                    val itemTouchHelper = ItemTouchHelper(simpleCallback)
-                    itemTouchHelper.attachToRecyclerView(recyclerView)*/
                     list = wordList.split(" ").toMutableList()
 
                     adapter = MdsAdapter(list)

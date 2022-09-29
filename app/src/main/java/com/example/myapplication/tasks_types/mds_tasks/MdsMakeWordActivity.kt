@@ -56,10 +56,6 @@ class MdsMakeWordActivity : AppCompatActivity() {
                     binding.task.text = "Make word '${skillTask}' using these letters:"
 
                     letterList = document.get("letter_list").toString()
-                    /*adapter = MdsAdapter(wordList.split(" ").toMutableList())
-                    recyclerView.adapter = adapter
-                    val itemTouchHelper = ItemTouchHelper(simpleCallback)
-                    itemTouchHelper.attachToRecyclerView(recyclerView)*/
 
                     right_answer = document.get("right_answer").toString()
                     list = letterList.split(" ").toMutableList()

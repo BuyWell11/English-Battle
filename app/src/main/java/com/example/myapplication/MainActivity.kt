@@ -1,6 +1,5 @@
 package com.example.myapplication
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -19,16 +18,15 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mAuth: FirebaseAuth
 
     var db = Firebase.firestore
+    var currentLvl : Int = 0
+    val user = Firebase.auth.currentUser
+    val email = user?.email
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = MainMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
         sharedPref = getSharedPreferences("PREFERENCE", Context.MODE_PRIVATE)
-
-        var currentLvl : Int = 0
-        val user = Firebase.auth.currentUser
-        val email = user?.email
 
         db.collection("User")
             .whereEqualTo("user_email", email)
