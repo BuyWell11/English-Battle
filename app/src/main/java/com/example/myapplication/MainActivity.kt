@@ -7,6 +7,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.databinding.MainMenuBinding
 import android.content.SharedPreferences
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -14,6 +16,7 @@ import com.google.firebase.ktx.Firebase
 class MainActivity : AppCompatActivity() {
     lateinit var binding: MainMenuBinding
     lateinit var sharedPref: SharedPreferences
+    private lateinit var mAuth: FirebaseAuth
 
     var db = Firebase.firestore
 
@@ -24,9 +27,11 @@ class MainActivity : AppCompatActivity() {
         sharedPref = getSharedPreferences("PREFERENCE", Context.MODE_PRIVATE)
 
         var currentLvl : Int = 0
+        val user = Firebase.auth.currentUser
+        val email = user?.email
 
         db.collection("User")
-            .whereEqualTo("user_name", "test7")
+            .whereEqualTo("user_email", email)
             .get()
             .addOnSuccessListener { result ->
                 for (document in result)
@@ -57,11 +62,8 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    @SuppressLint("CommitPrefEdits")
     private fun onExitPressed(){
-        val editor = sharedPref.edit()
-        editor.clear()
-        editor.apply()
+        FirebaseAuth.getInstance().signOut()
         finish()
     }
 

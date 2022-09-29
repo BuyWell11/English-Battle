@@ -62,15 +62,15 @@ class MdsMakeWordActivity : AppCompatActivity() {
                     itemTouchHelper.attachToRecyclerView(recyclerView)*/
 
                     right_answer = document.get("right_answer").toString()
+                    list = letterList.split(" ").toMutableList()
+                    adapter = MdsAdapter(list)
+                    recyclerView.adapter = adapter
                 }
             }
             .addOnFailureListener{ result ->
                 Log.d(ContentValues.TAG, "Shto-to poshlo ne tak")
             }
 
-        list = letterList.split(" ").toMutableList()
-        adapter = MdsAdapter(list)
-        recyclerView.adapter = adapter
 
         val itemTouchHelper = ItemTouchHelper(simpleCallback)
         itemTouchHelper.attachToRecyclerView(recyclerView)

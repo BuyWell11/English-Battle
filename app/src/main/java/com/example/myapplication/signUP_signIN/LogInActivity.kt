@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.MainActivity
 import com.example.myapplication.databinding.LogInBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.parcel.Parcelize
 
 
@@ -18,8 +20,8 @@ class LogInActivity : AppCompatActivity() {
     lateinit var state: State
     lateinit var sharedPref: SharedPreferences
 
-    //FIREBASE
-    lateinit var mAuth : FirebaseAuth
+
+    private lateinit var mAuth: FirebaseAuth
     //FIREBASE
 
     @SuppressLint("CommitPrefEdits")
@@ -29,9 +31,10 @@ class LogInActivity : AppCompatActivity() {
         setContentView(binding.root)
         sharedPref = getSharedPreferences("PREFERENCE", Context.MODE_PRIVATE)
 
-        //FIREBASE
-        mAuth = FirebaseAuth.getInstance()
-        //FIREBASE
+        // Initialize Firebase Auth
+        mAuth = Firebase.auth
+
+
 
         state = savedInstanceState?.getParcelable(KEY_STATE) ?: State(
             email = "",
@@ -43,11 +46,9 @@ class LogInActivity : AppCompatActivity() {
             mAuth.signInWithEmailAndPassword(binding.email.text.toString(), binding.password.text.toString()).addOnCompleteListener{ task ->
                 if (task.isSuccessful) {
                     val intent = Intent(this, MainActivity::class.java)
-                    val editor = sharedPref.edit()
-                    editor.putString("Login", "123")
-                    editor.putString("Password", "123")
-                    editor.apply()
                     startActivity(intent)
+                    binding.email.text = null
+                    binding.password.text = null
                 }
                 else
                 {
@@ -61,6 +62,17 @@ class LogInActivity : AppCompatActivity() {
             val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    public override fun onStart() {
+        super.onStart()
+        // Check if user is signed in (non-null) and update UI accordingly.
+        val currentUser = mAuth.currentUser
+        if(currentUser != null){
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+        mAuth = FirebaseAuth.getInstance()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

@@ -1,8 +1,10 @@
 package com.example.myapplication.signUP_signIN
 
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.databinding.SignUpBinding
@@ -42,6 +44,10 @@ class SignUpActivity : AppCompatActivity() {
             if (!is_same_pass(pass, conf_pass)){
                 Toast.makeText(this, "Пароли не совпадают", Toast.LENGTH_LONG).show()
             }
+            else if(binding.email.text.toString().length < 6){
+                Toast.makeText(baseContext, "Input a password of 6 characters or more",
+                    Toast.LENGTH_SHORT).show()
+            }
             else{
                 //FIREBASE
                 val user : HashMap<String, Any> = hashMapOf("user_name" to binding.nickname.text.toString(),
@@ -49,11 +55,17 @@ class SignUpActivity : AppCompatActivity() {
                                                             "user_avatar" to "-",
                                                             "current_lvl" to 1)
 
-                db.collection("User")
-                    .add(user)
-                mAuth.createUserWithEmailAndPassword(binding.email.text.toString(), binding.password.text.toString()).addOnCompleteListener {
-                    val intent = Intent(this, LogInActivity::class.java)
-                    startActivity(intent)
+                mAuth.createUserWithEmailAndPassword(binding.email.text.toString(), binding.password.text.toString()).addOnCompleteListener {task ->
+                    if (task.isSuccessful) {
+                        // Sign in success, update UI with the signed-in user's information
+                        finish()
+                        db.collection("User").add(user)
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Log.w(TAG, "createUserWithEmail:failure", task.exception)
+                        Toast.makeText(baseContext, "Authentication failed.",
+                            Toast.LENGTH_SHORT).show()
+                    }
                 }
                 //FIREBASE
             }
@@ -61,7 +73,7 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-
+        finish()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

@@ -17,7 +17,7 @@
         <activity
             android:name=".signUP_signIN.LogInActivity"
             android:exported="true"
-            android:screenOrientation="landscape">
+            android:screenOrientation="fullSensor">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,7 +31,7 @@
         <activity
             android:name=".signUP_signIN.SignUpActivity"
             android:exported="true"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="fullSensor" />
         <activity
             android:name=".SelectActivity"
             android:exported="true"
