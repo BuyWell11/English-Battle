@@ -58,7 +58,7 @@ class SignUpActivity : AppCompatActivity() {
                 mAuth.createUserWithEmailAndPassword(binding.email.text.toString(), binding.password.text.toString()).addOnCompleteListener {task ->
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
-                        db.collection("User").add(user)
+                        db.collection("User").document(binding.email.text.toString()).set(user)
                         finish()
                     } else {
                         // If sign in fails, display a message to the user.

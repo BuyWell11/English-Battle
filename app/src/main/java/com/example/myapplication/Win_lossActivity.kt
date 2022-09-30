@@ -42,7 +42,7 @@ class Win_lossActivity : AppCompatActivity() {
                 val userEmail = user.email
 
                 db.collection("User")
-                    .document("g3pVwYbHs29OiWJ1cQQ3")
+                    .document("${userEmail}")
                     .update("current_lvl", currentLvl)
                     .addOnSuccessListener {
                         Log.d(TAG, "Current level successfully updated!")
