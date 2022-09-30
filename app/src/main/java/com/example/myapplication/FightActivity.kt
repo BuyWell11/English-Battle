@@ -20,6 +20,13 @@ open class FightActivity : AppCompatActivity() {
     lateinit var anim: Anim
     var animMap = MapOfAnim
 
+    val LDS_BOSS_DMG = 100
+    val LDS_PLAYER_DMG = 20
+    val MDS_BOSS_DMG = 250
+    val MDS_PLAYER_DMG = 20
+    val HDS_BOSS_DMG = 400
+    val HDS_PLAYER_DMG = 20
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         MediaController(this)
@@ -105,6 +112,16 @@ open class FightActivity : AppCompatActivity() {
         when(requestCode){
             LOW_DMG_REQUEST_CODE -> {
                 if(right == true){
+
+                    if (state.boss_hp - LDS_BOSS_DMG > 0)
+                    {
+                        state.boss_hp -= LDS_BOSS_DMG
+                    }
+                    else
+                    {
+                        state.boss_hp = 0;
+                    }
+
                     Handler(Looper.getMainLooper()).postDelayed( {
                         binding.monster.setImageResource(anim.take_dmg)
                     }, 500)
@@ -112,10 +129,18 @@ open class FightActivity : AppCompatActivity() {
                     Handler(Looper.getMainLooper()).postDelayed( {
                         binding.monster.setImageResource(anim.stand)
                     }, 2000)
-                    state.boss_hp -= 100
                 }
                 else{
-                    state.hp -= 20
+
+                    if (state.hp - LDS_PLAYER_DMG > 0)
+                    {
+                        state.hp -= LDS_PLAYER_DMG
+                    }
+                    else
+                    {
+                        state.hp = 0;
+                    }
+
                     Handler(Looper.getMainLooper()).postDelayed( {
                         binding.monster.setImageResource(anim.attack)
                     }, 500)
@@ -127,7 +152,16 @@ open class FightActivity : AppCompatActivity() {
         }
             MID_DMG_REQUEST_CODE ->{
                 if(right == true){
-                    state.boss_hp -= 250
+
+                    if (state.boss_hp - MDS_BOSS_DMG > 0)
+                    {
+                        state.boss_hp -= MDS_BOSS_DMG
+                    }
+                    else
+                    {
+                        state.boss_hp = 0;
+                    }
+
                     Handler(Looper.getMainLooper()).postDelayed( {
                         binding.monster.setImageResource(anim.take_dmg)
                     }, 500)
@@ -137,7 +171,16 @@ open class FightActivity : AppCompatActivity() {
                     }, 2000)
                 }
                 else{
-                    state.hp -= 20
+
+                    if (state.hp - MDS_PLAYER_DMG > 0)
+                    {
+                        state.hp -= MDS_PLAYER_DMG
+                    }
+                    else
+                    {
+                        state.hp = 0;
+                    }
+
                     Handler(Looper.getMainLooper()).postDelayed( {
                         binding.monster.setImageResource(anim.attack)
                     }, 500)
@@ -149,7 +192,16 @@ open class FightActivity : AppCompatActivity() {
             }
             HIGH_DMG_REQUEST_CODE ->{
                 if(right == true){
-                    state.boss_hp -= 400
+
+                    if (state.boss_hp - HDS_BOSS_DMG > 0)
+                    {
+                        state.boss_hp -= HDS_BOSS_DMG
+                    }
+                    else
+                    {
+                        state.boss_hp = 0;
+                    }
+
                     Handler(Looper.getMainLooper()).postDelayed( {
                         binding.monster.setImageResource(anim.take_dmg)
                     }, 500)
@@ -159,7 +211,16 @@ open class FightActivity : AppCompatActivity() {
                     }, 2000)
                 }
                 else{
-                    state.hp -= 20
+
+                    if (state.hp - HDS_PLAYER_DMG > 0)
+                    {
+                        state.hp -= HDS_PLAYER_DMG
+                    }
+                    else
+                    {
+                        state.hp = 0;
+                    }
+
                     Handler(Looper.getMainLooper()).postDelayed( {
                         binding.monster.setImageResource(anim.attack)
                     }, 500)
@@ -172,11 +233,11 @@ open class FightActivity : AppCompatActivity() {
         }
         binding.monster.setImageResource(anim.stand)
         renderState()
-        if(state.hp <= 0){
+        if(state.hp == 0){
             tempBool = true
             fightFinish(tempBool)
         }
-        else if(state.boss_hp <= 0){
+        else if(state.boss_hp == 0){
             tempBool = false
             fightFinish(tempBool)
         }
@@ -191,7 +252,7 @@ open class FightActivity : AppCompatActivity() {
         else{
             Handler(Looper.getMainLooper()).postDelayed( {
                 binding.monster.setImageResource(anim.dead)
-            }, 2000)
+            }, 1000)
         }
         Handler(Looper.getMainLooper()).postDelayed( {
             var intent = Intent(this, Win_lossActivity::class.java)
