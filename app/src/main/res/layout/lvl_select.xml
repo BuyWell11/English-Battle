@@ -52,6 +52,28 @@
                 android:enabled="false"
                 android:background="@drawable/round"/>
 
+            <Button
+                android:id="@+id/btn4"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="40dp"
+                android:layout_gravity="top"
+                android:gravity="center"
+                android:text="4"
+                android:enabled="false"
+                android:background="@drawable/round"/>
+
+            <Button
+                android:id="@+id/btn5"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="40dp"
+                android:layout_gravity="top"
+                android:gravity="center"
+                android:text="5"
+                android:enabled="false"
+                android:background="@drawable/round"/>
+
         </LinearLayout>
 
     </HorizontalScrollView>

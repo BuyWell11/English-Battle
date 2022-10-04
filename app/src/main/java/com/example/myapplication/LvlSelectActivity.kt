@@ -30,6 +30,12 @@ class LvlSelectActivity : AppCompatActivity() {
         binding.btn3.setOnClickListener{
             onLvl(3)
         }
+        binding.btn4.setOnClickListener{
+            onLvl(4)
+        }
+        binding.btn5.setOnClickListener{
+            onLvl(5)
+        }
     }
 
     var getAction = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
@@ -46,22 +52,42 @@ class LvlSelectActivity : AppCompatActivity() {
 
     private fun chooseCurrentLvl(currentLvl : Int)
     {
-        when(currentLvl % 3)
+        when(currentLvl % 5)
         {
             0 -> {
                 btn1.isEnabled = true
                 btn2.isEnabled = false
                 btn3.isEnabled = false
+                btn4.isEnabled = false
+                btn5.isEnabled = false
             }
             1 -> {
                 btn1.isEnabled = false
                 btn2.isEnabled = true
                 btn3.isEnabled = false
+                btn4.isEnabled = false
+                btn5.isEnabled = false
             }
             2 -> {
                 btn1.isEnabled = false
                 btn2.isEnabled = false
                 btn3.isEnabled = true
+                btn4.isEnabled = false
+                btn5.isEnabled = false
+            }
+            3 -> {
+                btn1.isEnabled = false
+                btn2.isEnabled = false
+                btn3.isEnabled = false
+                btn4.isEnabled = true
+                btn5.isEnabled = false
+            }
+            4 -> {
+                btn1.isEnabled = false
+                btn2.isEnabled = false
+                btn3.isEnabled = false
+                btn4.isEnabled = false
+                btn5.isEnabled = true
             }
         }
     }

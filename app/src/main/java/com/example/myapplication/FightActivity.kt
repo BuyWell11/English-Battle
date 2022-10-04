@@ -116,19 +116,9 @@ open class FightActivity : AppCompatActivity() {
         when(requestCode){
             LOW_DMG_REQUEST_CODE -> {
                 if(right == true){
-
                     if (state.boss_hp - LDS_BOSS_DMG > 0)
                     {
                         state.boss_hp -= LDS_BOSS_DMG
-
-                        //Player animation
-                        Handler(Looper.getMainLooper()).postDelayed( {
-                            binding.wizard.setImageResource(playerAnim.lds_spell_attack)
-                        }, 500)
-
-                        Handler(Looper.getMainLooper()).postDelayed( {
-                            binding.wizard.setImageResource(playerAnim.stand)
-                        }, 2000)
 
                         //Enemy animation
                         Handler(Looper.getMainLooper()).postDelayed( {
@@ -143,21 +133,21 @@ open class FightActivity : AppCompatActivity() {
                     {
                         state.boss_hp = 0;
                     }
+
+                    //Player animation
+                    Handler(Looper.getMainLooper()).postDelayed( {
+                        binding.wizard.setImageResource(playerAnim.lds_spell_attack)
+                    }, 500)
+
+                    Handler(Looper.getMainLooper()).postDelayed( {
+                        binding.wizard.setImageResource(playerAnim.stand)
+                    }, 2000)
                 }
                 else{
 
                     if (state.hp - LDS_PLAYER_DMG > 0)
                     {
                         state.hp -= LDS_PLAYER_DMG
-
-                        //Player animation
-                        Handler(Looper.getMainLooper()).postDelayed( {
-                            binding.wizard.setImageResource(playerAnim.take_dmg)
-                        }, 500)
-
-                        Handler(Looper.getMainLooper()).postDelayed( {
-                            binding.wizard.setImageResource(playerAnim.stand)
-                        }, 2000)
 
                         //Enemy animation
                         Handler(Looper.getMainLooper()).postDelayed( {
@@ -172,6 +162,15 @@ open class FightActivity : AppCompatActivity() {
                     {
                         state.hp = 0;
                     }
+
+                    //Player animation
+                    Handler(Looper.getMainLooper()).postDelayed( {
+                        binding.wizard.setImageResource(playerAnim.take_dmg)
+                    }, 500)
+
+                    Handler(Looper.getMainLooper()).postDelayed( {
+                        binding.wizard.setImageResource(playerAnim.stand)
+                    }, 2000)
                 }
         }
             MID_DMG_REQUEST_CODE ->{
@@ -181,16 +180,6 @@ open class FightActivity : AppCompatActivity() {
                     {
                         state.boss_hp -= MDS_BOSS_DMG
 
-                        //Player animation
-                        Handler(Looper.getMainLooper()).postDelayed( {
-                            binding.wizard.setImageResource(playerAnim.mds_spell_attack)
-                        }, 500)
-
-                        Handler(Looper.getMainLooper()).postDelayed( {
-                            binding.wizard.setImageResource(playerAnim.stand)
-                        }, 2000)
-
-
                         //Enemy animation
                         Handler(Looper.getMainLooper()).postDelayed( {
                             binding.monster.setImageResource(anim.take_dmg)
@@ -204,22 +193,21 @@ open class FightActivity : AppCompatActivity() {
                     {
                         state.boss_hp = 0;
                     }
+
+                    //Player animation
+                    Handler(Looper.getMainLooper()).postDelayed( {
+                        binding.wizard.setImageResource(playerAnim.mds_spell_attack)
+                    }, 500)
+
+                    Handler(Looper.getMainLooper()).postDelayed( {
+                        binding.wizard.setImageResource(playerAnim.stand)
+                    }, 2000)
                 }
                 else{
 
                     if (state.hp - MDS_PLAYER_DMG > 0)
                     {
                         state.hp -= MDS_PLAYER_DMG
-
-                        //Player animation
-                        Handler(Looper.getMainLooper()).postDelayed( {
-                            binding.wizard.setImageResource(playerAnim.take_dmg)
-                        }, 500)
-
-                        Handler(Looper.getMainLooper()).postDelayed( {
-                            binding.wizard.setImageResource(playerAnim.stand)
-                        }, 2000)
-
 
                         //Enemy animation
                         Handler(Looper.getMainLooper()).postDelayed( {
@@ -234,6 +222,15 @@ open class FightActivity : AppCompatActivity() {
                     {
                         state.hp = 0;
                     }
+
+                    //Player animation
+                    Handler(Looper.getMainLooper()).postDelayed( {
+                        binding.wizard.setImageResource(playerAnim.take_dmg)
+                    }, 500)
+
+                    Handler(Looper.getMainLooper()).postDelayed( {
+                        binding.wizard.setImageResource(playerAnim.stand)
+                    }, 2000)
                 }
             }
             HIGH_DMG_REQUEST_CODE ->{
@@ -243,16 +240,6 @@ open class FightActivity : AppCompatActivity() {
                     {
                         state.boss_hp -= HDS_BOSS_DMG
 
-                        //Player animation
-                        Handler(Looper.getMainLooper()).postDelayed( {
-                            binding.wizard.setImageResource(playerAnim.hds_spell_attack)
-                        }, 500)
-
-                        Handler(Looper.getMainLooper()).postDelayed( {
-                            binding.wizard.setImageResource(playerAnim.stand)
-                        }, 2000)
-
-
                         //Enemy animation
                         Handler(Looper.getMainLooper()).postDelayed( {
                             binding.monster.setImageResource(anim.take_dmg)
@@ -266,22 +253,21 @@ open class FightActivity : AppCompatActivity() {
                     {
                         state.boss_hp = 0;
                     }
+
+                    //Player animation
+                    Handler(Looper.getMainLooper()).postDelayed( {
+                        binding.wizard.setImageResource(playerAnim.hds_spell_attack)
+                    }, 500)
+
+                    Handler(Looper.getMainLooper()).postDelayed( {
+                        binding.wizard.setImageResource(playerAnim.stand)
+                    }, 2000)
                 }
                 else{
 
                     if (state.hp - HDS_PLAYER_DMG > 0)
                     {
                         state.hp -= HDS_PLAYER_DMG
-
-                        //Player animation
-                        Handler(Looper.getMainLooper()).postDelayed( {
-                            binding.wizard.setImageResource(playerAnim.take_dmg)
-                        }, 500)
-
-                        Handler(Looper.getMainLooper()).postDelayed( {
-                            binding.wizard.setImageResource(playerAnim.stand)
-                        }, 2000)
-
 
                         //Enemy animation
                         Handler(Looper.getMainLooper()).postDelayed( {
@@ -296,6 +282,15 @@ open class FightActivity : AppCompatActivity() {
                     {
                         state.hp = 0;
                     }
+
+                    //Player animation
+                    Handler(Looper.getMainLooper()).postDelayed( {
+                        binding.wizard.setImageResource(playerAnim.take_dmg)
+                    }, 500)
+
+                    Handler(Looper.getMainLooper()).postDelayed( {
+                        binding.wizard.setImageResource(playerAnim.stand)
+                    }, 2000)
                 }
             }
         }
