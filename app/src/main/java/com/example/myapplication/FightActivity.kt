@@ -116,19 +116,19 @@ open class FightActivity : AppCompatActivity() {
                     if (state.boss_hp - LDS_BOSS_DMG > 0)
                     {
                         state.boss_hp -= LDS_BOSS_DMG
+
+                        Handler(Looper.getMainLooper()).postDelayed( {
+                            binding.monster.setImageResource(anim.take_dmg)
+                        }, 500)
+
+                        Handler(Looper.getMainLooper()).postDelayed( {
+                            binding.monster.setImageResource(anim.stand)
+                        }, 2000)
                     }
                     else
                     {
                         state.boss_hp = 0;
                     }
-
-                    Handler(Looper.getMainLooper()).postDelayed( {
-                        binding.monster.setImageResource(anim.take_dmg)
-                    }, 500)
-
-                    Handler(Looper.getMainLooper()).postDelayed( {
-                        binding.monster.setImageResource(anim.stand)
-                    }, 2000)
                 }
                 else{
 
@@ -156,19 +156,19 @@ open class FightActivity : AppCompatActivity() {
                     if (state.boss_hp - MDS_BOSS_DMG > 0)
                     {
                         state.boss_hp -= MDS_BOSS_DMG
+
+                        Handler(Looper.getMainLooper()).postDelayed( {
+                            binding.monster.setImageResource(anim.take_dmg)
+                        }, 500)
+
+                        Handler(Looper.getMainLooper()).postDelayed( {
+                            binding.monster.setImageResource(anim.stand)
+                        }, 2000)
                     }
                     else
                     {
                         state.boss_hp = 0;
                     }
-
-                    Handler(Looper.getMainLooper()).postDelayed( {
-                        binding.monster.setImageResource(anim.take_dmg)
-                    }, 500)
-
-                    Handler(Looper.getMainLooper()).postDelayed( {
-                        binding.monster.setImageResource(anim.stand)
-                    }, 2000)
                 }
                 else{
 
@@ -196,19 +196,19 @@ open class FightActivity : AppCompatActivity() {
                     if (state.boss_hp - HDS_BOSS_DMG > 0)
                     {
                         state.boss_hp -= HDS_BOSS_DMG
+
+                        Handler(Looper.getMainLooper()).postDelayed( {
+                            binding.monster.setImageResource(anim.take_dmg)
+                        }, 500)
+
+                        Handler(Looper.getMainLooper()).postDelayed( {
+                            binding.monster.setImageResource(anim.stand)
+                        }, 2000)
                     }
                     else
                     {
                         state.boss_hp = 0;
                     }
-
-                    Handler(Looper.getMainLooper()).postDelayed( {
-                        binding.monster.setImageResource(anim.take_dmg)
-                    }, 500)
-
-                    Handler(Looper.getMainLooper()).postDelayed( {
-                        binding.monster.setImageResource(anim.stand)
-                    }, 2000)
                 }
                 else{
 
@@ -233,27 +233,32 @@ open class FightActivity : AppCompatActivity() {
         }
         binding.monster.setImageResource(anim.stand)
         renderState()
+
         if(state.hp == 0){
+            disableSkills()
             tempBool = true
             fightFinish(tempBool)
         }
         else if(state.boss_hp == 0){
+            disableSkills()
             tempBool = false
             fightFinish(tempBool)
         }
     }
 
+    private fun disableSkills() {
+        binding.lowdmg.isEnabled = false
+        binding.middmg.isEnabled = false
+        binding.highdmg.isEnabled = false
+    }
+
     private fun fightFinish(dead:Boolean){
-        if (dead){
-            Handler(Looper.getMainLooper()).postDelayed( {
-                binding.monster.setImageResource(anim.stand)
-            }, 2000)
-        }
-        else{
+        if (!dead) {
             Handler(Looper.getMainLooper()).postDelayed( {
                 binding.monster.setImageResource(anim.dead)
             }, 1000)
         }
+
         Handler(Looper.getMainLooper()).postDelayed( {
             var intent = Intent(this, Win_lossActivity::class.java)
             intent.putExtra(Win_lossActivity.RESULT, dead)
