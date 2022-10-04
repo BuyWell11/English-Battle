@@ -18,7 +18,9 @@ open class FightActivity : AppCompatActivity() {
     lateinit var binding:FightBinding
     lateinit var state: State
     lateinit var anim: Anim
+    lateinit var playerAnim: PlayerAnim
     var animMap = MapOfAnim
+    var playerAnimMap = MapOfPlayerAnim
 
     val LDS_BOSS_DMG = 100
     val LDS_PLAYER_DMG = 20
@@ -31,8 +33,10 @@ open class FightActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         MediaController(this)
         binding = FightBinding.inflate(layoutInflater)
-        getAnim(intent.getIntExtra(ENEMY_PICS, 0))
+        getEnemyAnim(intent.getIntExtra(ENEMY_PICS, 0))
+        getPlayerAnim(intent.getIntExtra(PLAYER_PICS, 0))
         binding.monster.setImageResource(anim.stand)
+        binding.wizard.setImageResource(playerAnim.stand)
         setContentView(binding.root)
 
         binding.lowdmg.setOnClickListener{
@@ -117,6 +121,16 @@ open class FightActivity : AppCompatActivity() {
                     {
                         state.boss_hp -= LDS_BOSS_DMG
 
+                        //Player animation
+                        Handler(Looper.getMainLooper()).postDelayed( {
+                            binding.wizard.setImageResource(playerAnim.lds_spell_attack)
+                        }, 500)
+
+                        Handler(Looper.getMainLooper()).postDelayed( {
+                            binding.wizard.setImageResource(playerAnim.stand)
+                        }, 2000)
+
+                        //Enemy animation
                         Handler(Looper.getMainLooper()).postDelayed( {
                             binding.monster.setImageResource(anim.take_dmg)
                         }, 500)
@@ -135,19 +149,29 @@ open class FightActivity : AppCompatActivity() {
                     if (state.hp - LDS_PLAYER_DMG > 0)
                     {
                         state.hp -= LDS_PLAYER_DMG
+
+                        //Player animation
+                        Handler(Looper.getMainLooper()).postDelayed( {
+                            binding.wizard.setImageResource(playerAnim.take_dmg)
+                        }, 500)
+
+                        Handler(Looper.getMainLooper()).postDelayed( {
+                            binding.wizard.setImageResource(playerAnim.stand)
+                        }, 2000)
+
+                        //Enemy animation
+                        Handler(Looper.getMainLooper()).postDelayed( {
+                            binding.monster.setImageResource(anim.attack)
+                        }, 500)
+
+                        Handler(Looper.getMainLooper()).postDelayed( {
+                            binding.monster.setImageResource(anim.stand)
+                        }, 2000)
                     }
                     else
                     {
                         state.hp = 0;
                     }
-
-                    Handler(Looper.getMainLooper()).postDelayed( {
-                        binding.monster.setImageResource(anim.attack)
-                    }, 500)
-
-                    Handler(Looper.getMainLooper()).postDelayed( {
-                        binding.monster.setImageResource(anim.stand)
-                    }, 2000)
                 }
         }
             MID_DMG_REQUEST_CODE ->{
@@ -157,6 +181,17 @@ open class FightActivity : AppCompatActivity() {
                     {
                         state.boss_hp -= MDS_BOSS_DMG
 
+                        //Player animation
+                        Handler(Looper.getMainLooper()).postDelayed( {
+                            binding.wizard.setImageResource(playerAnim.mds_spell_attack)
+                        }, 500)
+
+                        Handler(Looper.getMainLooper()).postDelayed( {
+                            binding.wizard.setImageResource(playerAnim.stand)
+                        }, 2000)
+
+
+                        //Enemy animation
                         Handler(Looper.getMainLooper()).postDelayed( {
                             binding.monster.setImageResource(anim.take_dmg)
                         }, 500)
@@ -175,19 +210,30 @@ open class FightActivity : AppCompatActivity() {
                     if (state.hp - MDS_PLAYER_DMG > 0)
                     {
                         state.hp -= MDS_PLAYER_DMG
+
+                        //Player animation
+                        Handler(Looper.getMainLooper()).postDelayed( {
+                            binding.wizard.setImageResource(playerAnim.take_dmg)
+                        }, 500)
+
+                        Handler(Looper.getMainLooper()).postDelayed( {
+                            binding.wizard.setImageResource(playerAnim.stand)
+                        }, 2000)
+
+
+                        //Enemy animation
+                        Handler(Looper.getMainLooper()).postDelayed( {
+                            binding.monster.setImageResource(anim.attack)
+                        }, 500)
+
+                        Handler(Looper.getMainLooper()).postDelayed( {
+                            binding.monster.setImageResource(anim.stand)
+                        }, 2000)
                     }
                     else
                     {
                         state.hp = 0;
                     }
-
-                    Handler(Looper.getMainLooper()).postDelayed( {
-                        binding.monster.setImageResource(anim.attack)
-                    }, 500)
-
-                    Handler(Looper.getMainLooper()).postDelayed( {
-                        binding.monster.setImageResource(anim.stand)
-                    }, 2000)
                 }
             }
             HIGH_DMG_REQUEST_CODE ->{
@@ -197,6 +243,17 @@ open class FightActivity : AppCompatActivity() {
                     {
                         state.boss_hp -= HDS_BOSS_DMG
 
+                        //Player animation
+                        Handler(Looper.getMainLooper()).postDelayed( {
+                            binding.wizard.setImageResource(playerAnim.hds_spell_attack)
+                        }, 500)
+
+                        Handler(Looper.getMainLooper()).postDelayed( {
+                            binding.wizard.setImageResource(playerAnim.stand)
+                        }, 2000)
+
+
+                        //Enemy animation
                         Handler(Looper.getMainLooper()).postDelayed( {
                             binding.monster.setImageResource(anim.take_dmg)
                         }, 500)
@@ -215,23 +272,35 @@ open class FightActivity : AppCompatActivity() {
                     if (state.hp - HDS_PLAYER_DMG > 0)
                     {
                         state.hp -= HDS_PLAYER_DMG
+
+                        //Player animation
+                        Handler(Looper.getMainLooper()).postDelayed( {
+                            binding.wizard.setImageResource(playerAnim.take_dmg)
+                        }, 500)
+
+                        Handler(Looper.getMainLooper()).postDelayed( {
+                            binding.wizard.setImageResource(playerAnim.stand)
+                        }, 2000)
+
+
+                        //Enemy animation
+                        Handler(Looper.getMainLooper()).postDelayed( {
+                            binding.monster.setImageResource(anim.attack)
+                        }, 500)
+
+                        Handler(Looper.getMainLooper()).postDelayed( {
+                            binding.monster.setImageResource(anim.stand)
+                        }, 2000)
                     }
                     else
                     {
                         state.hp = 0;
                     }
-
-                    Handler(Looper.getMainLooper()).postDelayed( {
-                        binding.monster.setImageResource(anim.attack)
-                    }, 500)
-
-                    Handler(Looper.getMainLooper()).postDelayed( {
-                        binding.monster.setImageResource(anim.stand)
-                    }, 2000)
                 }
             }
         }
         binding.monster.setImageResource(anim.stand)
+        binding.wizard.setImageResource(playerAnim.stand)
         renderState()
 
         if(state.hp == 0){
@@ -267,8 +336,12 @@ open class FightActivity : AppCompatActivity() {
         }, 2000)
     }
 
-    private fun getAnim(enemy : Int){
+    private fun getEnemyAnim(enemy : Int){
         anim = animMap[enemy]!!
+    }
+
+    private fun getPlayerAnim(player : Int){
+        playerAnim = playerAnimMap[player]!!
     }
 
     @Parcelize
@@ -285,9 +358,20 @@ open class FightActivity : AppCompatActivity() {
         var dead: Int
     ) : Parcelable
 
+    @Parcelize
+    class PlayerAnim(
+        var stand: Int,
+        var lds_spell_attack: Int,
+        var mds_spell_attack: Int,
+        var hds_spell_attack: Int,
+        var take_dmg: Int,
+        var win: Int
+    ) : Parcelable
+
     companion object {
         @JvmStatic private val KEY_STATE = "STATE"
         @JvmStatic val ENEMY_PICS = "ANIM"
+        @JvmStatic val PLAYER_PICS = "PLAYER_ANIM"
         @JvmStatic private val LOW_DMG_REQUEST_CODE = 1
         @JvmStatic private val MID_DMG_REQUEST_CODE = 2
         @JvmStatic private val HIGH_DMG_REQUEST_CODE = 3
