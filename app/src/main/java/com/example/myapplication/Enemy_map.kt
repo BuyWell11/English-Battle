@@ -12,5 +12,5 @@ val MapOfAnim = mutableMapOf(
 )
 
 val MapOfPlayerAnim = mutableMapOf(
-    0 to PlayerAnim(R.drawable.wiz, R.drawable.wiz_lspel, R.drawable.wiz_mspel, R.drawable.wiz_hspel, R.drawable.wiz_takedmg, R.drawable.wiz_win)
+    0 to PlayerAnim(R.drawable.wiz, R.drawable.wiz_lspel, R.drawable.wiz_mspel, R.drawable.wiz_hspel,R.drawable.wiz_attack, R.drawable.wiz_takedmg, R.drawable.wiz_win)
 )

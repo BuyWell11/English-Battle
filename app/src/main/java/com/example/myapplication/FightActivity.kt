@@ -123,7 +123,7 @@ open class FightActivity : AppCompatActivity() {
                         //Enemy animation
                         Handler(Looper.getMainLooper()).postDelayed( {
                             binding.monster.setImageResource(anim.take_dmg)
-                        }, 500)
+                        }, 1500)
 
                         Handler(Looper.getMainLooper()).postDelayed( {
                             binding.monster.setImageResource(anim.stand)
@@ -138,6 +138,10 @@ open class FightActivity : AppCompatActivity() {
                     Handler(Looper.getMainLooper()).postDelayed( {
                         binding.wizard.setImageResource(playerAnim.lds_spell_attack)
                     }, 500)
+
+                    Handler(Looper.getMainLooper()).postDelayed( {
+                        binding.wizard.setImageResource(playerAnim.attack)
+                    }, 1000)
 
                     Handler(Looper.getMainLooper()).postDelayed( {
                         binding.wizard.setImageResource(playerAnim.stand)
@@ -183,7 +187,7 @@ open class FightActivity : AppCompatActivity() {
                         //Enemy animation
                         Handler(Looper.getMainLooper()).postDelayed( {
                             binding.monster.setImageResource(anim.take_dmg)
-                        }, 500)
+                        }, 1500)
 
                         Handler(Looper.getMainLooper()).postDelayed( {
                             binding.monster.setImageResource(anim.stand)
@@ -198,6 +202,10 @@ open class FightActivity : AppCompatActivity() {
                     Handler(Looper.getMainLooper()).postDelayed( {
                         binding.wizard.setImageResource(playerAnim.mds_spell_attack)
                     }, 500)
+
+                    Handler(Looper.getMainLooper()).postDelayed( {
+                        binding.wizard.setImageResource(playerAnim.attack)
+                    }, 1000)
 
                     Handler(Looper.getMainLooper()).postDelayed( {
                         binding.wizard.setImageResource(playerAnim.stand)
@@ -228,6 +236,7 @@ open class FightActivity : AppCompatActivity() {
                         binding.wizard.setImageResource(playerAnim.take_dmg)
                     }, 500)
 
+
                     Handler(Looper.getMainLooper()).postDelayed( {
                         binding.wizard.setImageResource(playerAnim.stand)
                     }, 2000)
@@ -243,7 +252,7 @@ open class FightActivity : AppCompatActivity() {
                         //Enemy animation
                         Handler(Looper.getMainLooper()).postDelayed( {
                             binding.monster.setImageResource(anim.take_dmg)
-                        }, 500)
+                        }, 1500)
 
                         Handler(Looper.getMainLooper()).postDelayed( {
                             binding.monster.setImageResource(anim.stand)
@@ -258,6 +267,10 @@ open class FightActivity : AppCompatActivity() {
                     Handler(Looper.getMainLooper()).postDelayed( {
                         binding.wizard.setImageResource(playerAnim.hds_spell_attack)
                     }, 500)
+
+                    Handler(Looper.getMainLooper()).postDelayed( {
+                        binding.wizard.setImageResource(playerAnim.attack)
+                    }, 1000)
 
                     Handler(Looper.getMainLooper()).postDelayed( {
                         binding.wizard.setImageResource(playerAnim.stand)
@@ -328,7 +341,7 @@ open class FightActivity : AppCompatActivity() {
             intent.putExtra(Win_lossActivity.RESULT, dead)
             startActivity(intent)
             finish()
-        }, 2000)
+        }, 1500)
     }
 
     private fun getEnemyAnim(enemy : Int){
@@ -359,6 +372,7 @@ open class FightActivity : AppCompatActivity() {
         var lds_spell_attack: Int,
         var mds_spell_attack: Int,
         var hds_spell_attack: Int,
+        var attack: Int,
         var take_dmg: Int,
         var win: Int
     ) : Parcelable

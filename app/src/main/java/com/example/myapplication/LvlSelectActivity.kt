@@ -1,11 +1,14 @@
 package com.example.myapplication
 
+import android.R
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.databinding.LvlSelectBinding
 import kotlinx.android.synthetic.main.lvl_select.*
+
 
 var currentLvl : Int = 0
 
@@ -52,7 +55,16 @@ class LvlSelectActivity : AppCompatActivity() {
 
     private fun chooseCurrentLvl(currentLvl : Int)
     {
-        when(currentLvl % 5)
+        val buttons = ArrayList<Button>()
+        for (i in 1..5) {
+            val idString = "btn$i"
+            val buttonID = resources.getIdentifier(idString, "id", packageName)
+            buttons.add(findViewById(buttonID))
+            if (i == currentLvl){
+                buttons[i-1].isEnabled = true
+            }
+        }
+        /*when(currentLvl % 5)
         {
             0 -> {
                 btn1.isEnabled = true
@@ -89,7 +101,7 @@ class LvlSelectActivity : AppCompatActivity() {
                 btn4.isEnabled = false
                 btn5.isEnabled = true
             }
-        }
+        }*/
     }
 
     companion object {

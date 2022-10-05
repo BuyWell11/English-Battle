@@ -1,6 +1,7 @@
 package com.example.myapplication
 
 import android.content.ContentValues.TAG
+import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -53,8 +54,11 @@ class Win_lossActivity : AppCompatActivity() {
             }
         }
         Handler(Looper.getMainLooper()).postDelayed( {
+            val intent = Intent(this, LvlSelectActivity::class.java)
+            intent.putExtra("CURRENT_LEVEL", currentLvl)
+            startActivity(intent)
             finish()
-        }, 2000)
+        }, 3000)
     }
 
     companion object{
