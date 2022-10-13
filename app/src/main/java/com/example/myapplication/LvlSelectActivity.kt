@@ -64,44 +64,6 @@ class LvlSelectActivity : AppCompatActivity() {
                 buttons[i-1].isEnabled = true
             }
         }
-        /*when(currentLvl % 5)
-        {
-            0 -> {
-                btn1.isEnabled = true
-                btn2.isEnabled = false
-                btn3.isEnabled = false
-                btn4.isEnabled = false
-                btn5.isEnabled = false
-            }
-            1 -> {
-                btn1.isEnabled = false
-                btn2.isEnabled = true
-                btn3.isEnabled = false
-                btn4.isEnabled = false
-                btn5.isEnabled = false
-            }
-            2 -> {
-                btn1.isEnabled = false
-                btn2.isEnabled = false
-                btn3.isEnabled = true
-                btn4.isEnabled = false
-                btn5.isEnabled = false
-            }
-            3 -> {
-                btn1.isEnabled = false
-                btn2.isEnabled = false
-                btn3.isEnabled = false
-                btn4.isEnabled = true
-                btn5.isEnabled = false
-            }
-            4 -> {
-                btn1.isEnabled = false
-                btn2.isEnabled = false
-                btn3.isEnabled = false
-                btn4.isEnabled = false
-                btn5.isEnabled = true
-            }
-        }*/
     }
 
     companion object {
