@@ -9,6 +9,7 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.example.myapplication.TasksQuantity.LDS_WORD_MAX
 import com.example.myapplication.databinding.LdsWordSpellBinding
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -16,6 +17,8 @@ import com.google.firebase.ktx.Firebase
 
 class LdsWordActivity : AppCompatActivity() {
     lateinit var binding : LdsWordSpellBinding
+
+    val MAX_TASKS = 20
 
     var db = Firebase.firestore
 
@@ -29,7 +32,7 @@ class LdsWordActivity : AppCompatActivity() {
         var rightAnswer : String = String()
 
         db.collection("LDS_word")
-            .whereEqualTo("skill_id", 1)
+            .whereEqualTo("skill_id", (1..LDS_WORD_MAX).random())
             .get()
             .addOnSuccessListener{result ->
                 for (document in result)

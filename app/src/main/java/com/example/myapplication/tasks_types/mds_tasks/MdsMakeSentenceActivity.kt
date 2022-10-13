@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
+import com.example.myapplication.TasksQuantity
 import com.example.myapplication.databinding.MdsMakeSentenceSpellBinding
 import com.example.myapplication.tasks_types.lds_tasks.LdsPictureActivity
 import com.google.firebase.firestore.ktx.firestore
@@ -45,7 +46,7 @@ class MdsMakeSentenceActivity : AppCompatActivity() {
         var wordList = String()
 
         db.collection("MDS_make_sentence")
-            .whereEqualTo("skill_id", 1)
+            .whereEqualTo("skill_id", (1..TasksQuantity.MDS_MAKE_SENTENCE_MAX).random())
             .get()
             .addOnSuccessListener{result ->
                 for (document in result)

@@ -9,6 +9,7 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.example.myapplication.TasksQuantity
 import com.example.myapplication.databinding.HdsChooseWordSpellBinding
 import com.example.myapplication.tasks_types.lds_tasks.LdsPictureActivity
 import com.google.firebase.firestore.ktx.firestore
@@ -30,7 +31,7 @@ class HdsChooseWordActivity : AppCompatActivity() {
         var skillTask : String = String()
 
         db.collection("HDS_choose_word")
-            .whereEqualTo("skill_id", 1)
+            .whereEqualTo("skill_id", (1..TasksQuantity.HDS_CHOOSE_WORD_MAX).random())
             .get()
             .addOnSuccessListener { result ->
                 for (document in result)

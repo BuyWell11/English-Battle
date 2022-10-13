@@ -9,6 +9,7 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.example.myapplication.TasksQuantity
 import com.example.myapplication.databinding.LdsPictureSpellBinding
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -31,7 +32,7 @@ class LdsPictureActivity : AppCompatActivity() {
         var taskPictureURL : String = String()
 
         db.collection("LDS_picture")
-            .whereEqualTo("skill_id", 1)
+            .whereEqualTo("skill_id", (1..TasksQuantity.LDS_PICTURE_MAX).random())
             .get()
             .addOnSuccessListener { result ->
                 for (document in result)

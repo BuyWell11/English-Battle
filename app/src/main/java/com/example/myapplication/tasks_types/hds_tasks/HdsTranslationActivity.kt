@@ -9,6 +9,7 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.example.myapplication.TasksQuantity
 import com.example.myapplication.databinding.HdsTranslationSpellBinding
 import com.example.myapplication.tasks_types.lds_tasks.LdsPictureActivity
 import com.google.firebase.firestore.ktx.firestore
@@ -29,7 +30,7 @@ class HdsTranslationActivity : AppCompatActivity() {
         var skillTask : String = String()
 
         db.collection("HDS_translation")
-            .whereEqualTo("skill_id", 1)
+            .whereEqualTo("skill_id", (1..TasksQuantity.HDS_TRANSLATION_MAX).random())
             .get()
             .addOnSuccessListener { result ->
                 for (document in result)

@@ -15,7 +15,6 @@ import com.google.firebase.ktx.Firebase
 class MainActivity : AppCompatActivity() {
     lateinit var binding: MainMenuBinding
     lateinit var sharedPref: SharedPreferences
-    private lateinit var mAuth: FirebaseAuth
 
     var db = Firebase.firestore
     var currentLvl : Int = 0
@@ -64,5 +63,4 @@ class MainActivity : AppCompatActivity() {
         FirebaseAuth.getInstance().signOut()
         finish()
     }
-
 }
