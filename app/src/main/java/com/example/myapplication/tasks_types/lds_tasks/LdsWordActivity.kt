@@ -18,8 +18,6 @@ import com.google.firebase.ktx.Firebase
 class LdsWordActivity : AppCompatActivity() {
     lateinit var binding : LdsWordSpellBinding
 
-    val MAX_TASKS = 20
-
     var db = Firebase.firestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -98,11 +96,11 @@ class LdsWordActivity : AppCompatActivity() {
         binding.result.visibility = android.view.View.VISIBLE
         if(result)
         {
-            binding.result.text = "You are right!"
+            binding.result.text = "Верно!"
         }
         else
         {
-            binding.result.text = "You are wrong!"
+            binding.result.text = "Неверно!"
         }
         Handler(Looper.getMainLooper()).postDelayed( {
             val intent = Intent()

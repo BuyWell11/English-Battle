@@ -54,7 +54,7 @@ class MdsMakeWordActivity : AppCompatActivity() {
                 for (document in result)
                 {
                     skillTask = document.get("skill_task").toString()
-                    binding.task.text = "Make word '${skillTask}' using these letters:"
+                    binding.task.text = "Составьте слово '${skillTask}' из букв ниже:"
 
                     letterList = document.get("letter_list").toString()
 
@@ -144,11 +144,11 @@ class MdsMakeWordActivity : AppCompatActivity() {
         binding.result.visibility = android.view.View.VISIBLE
         if(result)
         {
-            binding.result.text = "You are right!"
+            binding.result.text = "Верно!"
         }
         else
         {
-            binding.result.text = "You are wrong!"
+            binding.result.text = "Неверно!"
         }
         Handler(Looper.getMainLooper()).postDelayed( {
             val intent = Intent()
