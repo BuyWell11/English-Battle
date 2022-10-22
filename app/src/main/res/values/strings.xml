@@ -1,12 +1,25 @@
 <resources>
     <string name="app_name">English Battle</string>
-    <string name="new_character">New Character</string>
-    <string name="input_wizard_name">Input wizard name</string>
-    <string name="lds_task_1">What does this word mean?</string>
-    <string name="lds_task_2">What is in the picture?</string>
-    <string name="hds_task_1">Choose the correct word.</string>
-    <string name="hds_task_2">Translate this word.</string>
-    <string name="hint">Enter word here</string>
-    <string name="check">Check your answer"</string>
-    <string name="mds_task_1">Make sentence using these words.</string>
+    <string name="new_character">Новый персонаж</string>
+    <string name="input_wizard_name">Введите имя волшебника</string>
+    <string name="lds_task_1">Как переводится это слово?</string>
+    <string name="lds_task_2">Что изображено на картинке?</string>
+    <string name="hds_task_1">Выберите нужное слово.</string>
+    <string name="hds_task_2">Переведите слово.</string>
+    <string name="hint">Введите слово</string>
+    <string name="check">Проверить ответ"</string>
+    <string name="mds_task_1">Составьте предложение из слов ниже.</string>
+    <string name="lds_skill">Слабое\nзаклинание</string>
+    <string name="hint_for_login_email">Введите адрес ел.почты</string>
+    <string name="hint_for_login_password">Введите пароль</string>
+    <string name="login_btn">Вход</string>
+    <string name="signup_btn">Регистрация</string>
+    <string name="main_menu_play_btn">Играть</string>
+    <string name="main_menu_select_wizard_btn">Сменить волшебника</string>
+    <string name="main_menu_exit_btn">Выход</string>
+    <string name="signup_hint_nickname">Введите имя</string>
+    <string name="signup_hint_email">Введите адрес ел.почты</string>
+    <string name="signup_hint_password">Введите пароль</string>
+    <string name="signup_hint_confirm_password">Подтвердите пароль</string>
+    <string name="signup_confirm_btn">Зарегистрироваться</string>
 </resources>

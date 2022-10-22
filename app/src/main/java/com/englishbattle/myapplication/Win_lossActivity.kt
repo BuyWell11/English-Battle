@@ -31,11 +31,11 @@ class Win_lossActivity : AppCompatActivity() {
         if(dead)
         {
             binding.result.setTextColor(Color.parseColor("#ff0000"))
-            binding.result.text = "You're dead"
+            binding.result.text = "Поражение!"
         }
         else
         {
-            binding.result.text = "You won!"
+            binding.result.text = "Победа!"
 
             currentLvl += 1
 

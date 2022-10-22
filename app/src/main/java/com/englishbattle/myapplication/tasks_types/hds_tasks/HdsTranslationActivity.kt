@@ -66,11 +66,11 @@ class HdsTranslationActivity : AppCompatActivity() {
         binding.result.visibility = android.view.View.VISIBLE
         if(result)
         {
-            binding.result.text = "You are right!"
+            binding.result.text = "Верно!"
         }
         else
         {
-            binding.result.text = "You are wrong!"
+            binding.result.text = "Неверно!"
         }
         Handler(Looper.getMainLooper()).postDelayed( {
             val intent = Intent()
