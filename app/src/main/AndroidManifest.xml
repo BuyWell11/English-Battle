@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.englishbattle.myapplication"
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -15,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity
-            android:name=".signUP_signIN.LogInActivity"
+            android:name="com.englishbattle.myapplication.signUP_signIN.LogInActivity"
             android:exported="true"
             android:screenOrientation="fullSensor">
             <intent-filter>
@@ -25,51 +26,51 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name="com.englishbattle.myapplication.MainActivity"
             android:exported="true"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".signUP_signIN.SignUpActivity"
+            android:name="com.englishbattle.myapplication.signUP_signIN.SignUpActivity"
             android:exported="true"
             android:screenOrientation="fullSensor" />
         <activity
-            android:name=".SelectActivity"
+            android:name="com.englishbattle.myapplication.SelectActivity"
             android:exported="true"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".FightActivity"
+            android:name="com.englishbattle.myapplication.FightActivity"
             android:exported="true"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".LvlSelectActivity"
+            android:name="com.englishbattle.myapplication.LvlSelectActivity"
             android:exported="true"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".tasks_types.lds_tasks.LdsWordActivity"
+            android:name="com.englishbattle.myapplication.tasks_types.lds_tasks.LdsWordActivity"
             android:exported="true"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".tasks_types.lds_tasks.LdsPictureActivity"
+            android:name="com.englishbattle.myapplication.tasks_types.lds_tasks.LdsPictureActivity"
             android:exported="true"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".tasks_types.hds_tasks.HdsChooseWordActivity"
+            android:name="com.englishbattle.myapplication.tasks_types.hds_tasks.HdsChooseWordActivity"
             android:exported="true"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".tasks_types.hds_tasks.HdsTranslationActivity"
+            android:name="com.englishbattle.myapplication.tasks_types.hds_tasks.HdsTranslationActivity"
             android:exported="true"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".Win_lossActivity"
+            android:name="com.englishbattle.myapplication.Win_lossActivity"
             android:exported="true"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".tasks_types.mds_tasks.MdsMakeSentenceActivity"
+            android:name="com.englishbattle.myapplication.tasks_types.mds_tasks.MdsMakeSentenceActivity"
             android:exported="true"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".tasks_types.mds_tasks.MdsMakeWordActivity"
+            android:name="com.englishbattle.myapplication.tasks_types.mds_tasks.MdsMakeWordActivity"
             android:exported="true"
             android:screenOrientation="landscape" />
     </application>
