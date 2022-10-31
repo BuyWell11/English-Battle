@@ -12,6 +12,9 @@ import com.example.myapplication.databinding.LogInBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.yandex.mobile.ads.common.AdRequest
+import com.yandex.mobile.ads.interstitial.InterstitialAd
+import com.yandex.mobile.ads.interstitial.InterstitialAdEventListener
 import kotlinx.android.parcel.Parcelize
 
 
@@ -33,6 +36,8 @@ class LogInActivity : AppCompatActivity() {
 
         // Initialize Firebase Auth
         mAuth = Firebase.auth
+
+
 
         state = savedInstanceState?.getParcelable(KEY_STATE) ?: State(
             email = "",

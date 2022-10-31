@@ -18,7 +18,6 @@ import java.lang.IllegalArgumentException
 class Win_lossActivity : AppCompatActivity() {
     lateinit var binding: WinLossScreenBinding
     var dead: Boolean = false
-
     var db = Firebase.firestore
     val user : FirebaseUser? = Firebase.auth.currentUser
 

@@ -10,6 +10,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.yandex.mobile.ads.banner.AdSize
+import com.yandex.mobile.ads.common.AdRequest
 
 
 class MainActivity : AppCompatActivity() {
@@ -46,6 +48,14 @@ class MainActivity : AppCompatActivity() {
         binding.btn3.setOnClickListener{
             onExitPressed()
         }
+
+        val banner = binding.banner
+        banner.setAdUnitId("R-M-1973138-3")
+        banner.setAdSize(AdSize.BANNER_320x50)
+        val adRequest = AdRequest.Builder().build()
+
+        banner.loadAd(adRequest)
+
     }
 
     private fun onPlayPressed(currentLvl : Int){
