@@ -45,7 +45,6 @@ class LvlSelectActivity : AppCompatActivity() {
         chooseCurrentLvl(currentLvl)
     }
 
-
     private fun onLvl(lvl: Int) {
         val intent = Intent(this, FightActivity::class.java)
         intent.putExtra(FightActivity.ENEMY_PICS, lvl)

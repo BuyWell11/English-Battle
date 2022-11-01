@@ -337,9 +337,10 @@ open class FightActivity : AppCompatActivity() {
         }
 
         Handler(Looper.getMainLooper()).postDelayed( {
-            var intent = Intent(this, Win_lossActivity::class.java)
+            val intent = Intent(this, Win_lossActivity::class.java)
             intent.putExtra(Win_lossActivity.RESULT, dead)
             startActivity(intent)
+
             finish()
         }, 1500)
     }

@@ -25,6 +25,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        //Загруска полноэкранной рекламы
+        val interstitialAdsManager : InterstitialAds = InterstitialAds()
+        interstitialAdsManager.loadAndShowAd(this)
+
         binding = MainMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
         sharedPref = getSharedPreferences("PREFERENCE", Context.MODE_PRIVATE)

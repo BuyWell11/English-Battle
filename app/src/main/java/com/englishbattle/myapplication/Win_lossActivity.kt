@@ -52,6 +52,7 @@ class Win_lossActivity : AppCompatActivity() {
                     }
             }
         }
+
         Handler(Looper.getMainLooper()).postDelayed( {
             val intent = Intent(this, LvlSelectActivity::class.java)
             intent.putExtra("CURRENT_LEVEL", currentLvl)

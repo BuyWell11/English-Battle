@@ -53,7 +53,7 @@ class SignUpActivity : AppCompatActivity() {
                 val user : HashMap<String, Any> = hashMapOf("user_name" to binding.nickname.text.toString(),
                                                             "user_email" to binding.email.text.toString(),
                                                             "user_avatar" to "-",
-                                                            "current_lvl" to 0)
+                                                            "current_lvl" to 1)
 
                 mAuth.createUserWithEmailAndPassword(binding.email.text.toString(), binding.password.text.toString()).addOnCompleteListener {task ->
                     if (task.isSuccessful) {

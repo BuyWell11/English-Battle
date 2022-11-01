@@ -1,26 +1,28 @@
 package com.englishbattle.myapplication
 
 import android.app.Activity
+import android.content.Context
 import com.yandex.mobile.ads.interstitial.InterstitialAd
 import android.os.Bundle
-import com.englishbattle.myapplication.test
 import com.yandex.mobile.ads.common.AdRequest
 import com.yandex.mobile.ads.interstitial.InterstitialAdEventListener
 import com.yandex.mobile.ads.common.AdRequestError
 import com.yandex.mobile.ads.common.ImpressionData
 
-class test : Activity() {
-    private var mInterstitialAd: InterstitialAd? = null
-    public override fun onCreate(savedInstanceState: Bundle?) {
-        // Создание экземпляра InterstitialAd.
-        super.onCreate(savedInstanceState)
-        mInterstitialAd = InterstitialAd(this)
+class InterstitialAds : Activity() {
+    var mInterstitialAd: InterstitialAd? = null
+
+    // Creating an ad targeting object.
+    val adRequest = AdRequest.Builder().build()
+
+    fun loadAndShowAd(context : Context)
+    {
+        // Creating an InterstitialAd instance.
+        mInterstitialAd = InterstitialAd(context)
         mInterstitialAd!!.setAdUnitId(AdUnitId)
 
-        // Создание объекта таргетирования рекламы.
-        val adRequest = AdRequest.Builder().build()
 
-        // Регистрация слушателя для отслеживания событий, происходящих в рекламе.
+        // Registering a listener to track events in the ad.
         mInterstitialAd!!.setInterstitialAdEventListener(object : InterstitialAdEventListener {
             override fun onAdLoaded() {
                 mInterstitialAd!!.show()
@@ -35,11 +37,11 @@ class test : Activity() {
             override fun onImpression(impressionData: ImpressionData?) {}
         })
 
-        // Загрузка объявления.
+        // Loading ads.
         mInterstitialAd!!.loadAd(adRequest)
     }
 
     companion object {
-        private const val AdUnitId = "YOUR_AdUnitId"
+        const val AdUnitId = "R-M-1973138-3"
     }
 }
