@@ -50,6 +50,7 @@ class LvlSelectActivity : AppCompatActivity() {
         intent.putExtra(FightActivity.ENEMY_PICS, lvl)
         intent.putExtra(FightActivity.PLAYER_PICS, 0)
         getAction.launch(intent)
+        finish()
     }
 
     private fun chooseCurrentLvl(currentLvl : Int)
