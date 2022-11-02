@@ -30,7 +30,7 @@ class LdsWordActivity : AppCompatActivity() {
         var rightAnswer : String = String()
 
         db.collection("LDS_word")
-            .whereEqualTo("skill_id", (1..LDS_WORD_MAX).random())
+            .whereEqualTo("skill_id", randomTask(1, LDS_WORD_MAX))
             .get()
             .addOnSuccessListener{result ->
                 for (document in result)
@@ -83,6 +83,11 @@ class LdsWordActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
 
+    }
+
+    private fun randomTask(start: Int, end: Int): Int {
+        require(start <= end) { "Illegal Argument" }
+        return (start..end).shuffled().first()
     }
 
     private fun IsAnswerTrue(userAnswer:String, rightAnswer:String): Boolean

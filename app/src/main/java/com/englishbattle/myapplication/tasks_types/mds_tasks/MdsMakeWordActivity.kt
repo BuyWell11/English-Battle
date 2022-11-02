@@ -48,7 +48,7 @@ class MdsMakeWordActivity : AppCompatActivity() {
         var skillTask = String()
 
         db.collection("MDS_make_word")
-            .whereEqualTo("skill_id", (1..TasksQuantity.MDS_MAKE_WORD_MAX).random())
+            .whereEqualTo("skill_id", randomTask(1, TasksQuantity.MDS_MAKE_WORD_MAX))
             .get()
             .addOnSuccessListener{result ->
                 for (document in result)
@@ -81,6 +81,11 @@ class MdsMakeWordActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
 
+    }
+
+    private fun randomTask(start: Int, end: Int): Int {
+        require(start <= end) { "Illegal Argument" }
+        return (start..end).shuffled().first()
     }
 
     private val simpleCallback = object : ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP or

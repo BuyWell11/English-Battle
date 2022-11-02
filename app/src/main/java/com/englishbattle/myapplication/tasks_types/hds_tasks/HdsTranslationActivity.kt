@@ -14,6 +14,8 @@ import com.example.myapplication.databinding.HdsTranslationSpellBinding
 import com.englishbattle.myapplication.tasks_types.lds_tasks.LdsPictureActivity
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import java.util.concurrent.ThreadLocalRandom
+import kotlin.random.Random
 
 
 class HdsTranslationActivity : AppCompatActivity() {
@@ -30,7 +32,7 @@ class HdsTranslationActivity : AppCompatActivity() {
         var skillTask : String = String()
 
         db.collection("HDS_translation")
-            .whereEqualTo("skill_id", (1..TasksQuantity.HDS_TRANSLATION_MAX).random())
+            .whereEqualTo("skill_id", randomTask(1,TasksQuantity.HDS_TRANSLATION_MAX))
             .get()
             .addOnSuccessListener { result ->
                 for (document in result)
@@ -53,6 +55,11 @@ class HdsTranslationActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
 
+    }
+
+    private fun randomTask(start: Int, end: Int): Int {
+        require(start <= end) { "Illegal Argument" }
+        return (start..end).shuffled().first()
     }
 
     private fun IsAnswerTrue(userAnswer:String, rightAnswer:String): Boolean

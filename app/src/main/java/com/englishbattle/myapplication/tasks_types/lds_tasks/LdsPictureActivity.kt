@@ -32,7 +32,7 @@ class LdsPictureActivity : AppCompatActivity() {
         var taskPictureURL : String = String()
 
         db.collection("LDS_picture")
-            .whereEqualTo("skill_id", (1..TasksQuantity.LDS_PICTURE_MAX).random())
+            .whereEqualTo("skill_id", randomTask(1, TasksQuantity.LDS_PICTURE_MAX))
             .get()
             .addOnSuccessListener { result ->
                 for (document in result)
@@ -84,6 +84,11 @@ class LdsPictureActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
 
+    }
+
+    private fun randomTask(start: Int, end: Int): Int {
+        require(start <= end) { "Illegal Argument" }
+        return (start..end).shuffled().first()
     }
 
     private fun IsAnswerTrue(userAnswer:String, rightAnswer:String): Boolean
