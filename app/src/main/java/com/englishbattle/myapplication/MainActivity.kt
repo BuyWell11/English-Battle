@@ -67,6 +67,7 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, LvlSelectActivity::class.java)
         intent.putExtra("CURRENT_LEVEL", currentLvl)
         startActivity(intent)
+        finish()
     }
 
     private fun onSelectPressed(){
