@@ -1,6 +1,5 @@
 package com.englishbattle.myapplication
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -32,7 +31,7 @@ class MainActivity : AppCompatActivity() {
 
         binding = MainMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        sharedPref = getSharedPreferences("PREFERENCE", Context.MODE_PRIVATE)
+        sharedPref = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
 
         db.collection("User")
             .whereEqualTo("user_email", email)
