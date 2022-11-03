@@ -8,7 +8,9 @@ on:
 
 jobs:
   build:
+  
     runs-on: ubuntu-latest
+    if: ${{ github.ref == 'refs/heads/betatest' }}
     steps:
       - name: Checkout the code
         uses: actions/checkout@v2
@@ -38,31 +40,32 @@ jobs:
     if: ${{ github.ref == 'refs/heads/main' }}
     steps:
     - uses: actions/checkout@v3
-    - uses: actions/setup-java@v1
-      with: { java-version: 11 }
+    - name: Set up JDK 17
+      uses: actions/setup-java@v2
+      with:
+        java-version: 17
+        distribution: "adopt"
+        
     - uses: android-actions/setup-android@v2
-
-    - name: Run tests
-      run: |
-        chmod +x ./gradlew
-        ./gradlew --no-daemon test
+    
+    - name: Make gradlew executable
+      run: chmod +x ./gradlew
 
     - name: Build release APK
       if: success()
-      run: |
-        ./gradlew --no-daemon assembleCicd
+      run: ./gradlew assembleRelease
 
     - name: Clearing
       if: success()
       run: |
-        for filename in app/build/outputs/apk/cicd/*.apk; do mv "./$filename" "./$(echo "$filename" | sed -e 's/-unsigned//g')";  done
+        for filename in app/build/outputs/apk/release/*.apk; do mv "./$filename" "./$(echo "$filename" | sed -e 's/-unsigned//g')";  done
     
     - name: Sign APK
       if: success()
       uses: r0adkll/sign-android-release@v1
       id: sign_app
       with:
-        releaseDirectory: app/build/outputs/apk/cicd
+        releaseDirectory: app/build/outputs/apk/release
         signingKeyBase64: ${{ secrets.SIGNING_KEY }}
         alias: ${{ secrets.SIGNING_KEY_ALIAS }}
         keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
@@ -75,7 +78,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: app-release
-        path: app/build/outputs/apk/cicd/*-signed.apk
+        path: app/build/outputs/apk/release/*-signed.apk
         retention-days: 30
 
   # download-and-send:
