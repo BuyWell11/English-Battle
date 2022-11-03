@@ -54,11 +54,6 @@ jobs:
     - name: Build release APK
       if: success()
       run: ./gradlew assembleRelease
-
-    - name: Clearing
-      if: success()
-      run: |
-        for filename in app/build/outputs/apk/release/*.apk; do mv "./$filename" "./$(echo "$filename" | sed -e 's/-unsigned//g')";  done
     
     - name: Sign APK
       if: success()
