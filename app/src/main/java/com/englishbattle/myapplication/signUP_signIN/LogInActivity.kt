@@ -46,7 +46,7 @@ class LogInActivity : AppCompatActivity() {
         )
 
         binding.btnLog.setOnClickListener {
-            if (binding.email.text == null || binding.password.text == null){
+            if (binding.email.text.toString() == "" || binding.password.text.toString() == ""){
                 Toast.makeText(baseContext, "Заполните все поля",
                     Toast.LENGTH_SHORT).show()
             }
