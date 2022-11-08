@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.Parcelable
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.englishbattle.myapplication.MainActivity
 import com.example.myapplication.databinding.LogInBinding
@@ -45,21 +46,27 @@ class LogInActivity : AppCompatActivity() {
         )
 
         binding.btnLog.setOnClickListener {
-            //FIREBASE
-            mAuth.signInWithEmailAndPassword(binding.email.text.toString(), binding.password.text.toString()).addOnCompleteListener{ task ->
-                if (task.isSuccessful) {
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-                    binding.email.text = null
-                    binding.password.text = null
-                }
-                else
-                {
-                    binding.error.text = "Неверный логин или пароль\nИли такого пользователя не существует"
-                    binding.error.visibility = android.view.View.VISIBLE
-                }
+            if (binding.email.text == null || binding.password.text == null){
+                Toast.makeText(baseContext, "Заполните все поля",
+                    Toast.LENGTH_SHORT).show()
             }
-            //FIREBASE
+            else{
+                //FIREBASE
+                mAuth.signInWithEmailAndPassword(binding.email.text.toString(), binding.password.text.toString()).addOnCompleteListener{ task ->
+                    if (task.isSuccessful) {
+                        val intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
+                        binding.email.text = null
+                        binding.password.text = null
+                    }
+                    else
+                    {
+                        binding.error.text = "Неверный логин или пароль\nИли такого пользователя не существует"
+                        binding.error.visibility = android.view.View.VISIBLE
+                    }
+                }
+                //FIREBASE
+            }
         }
         binding.btnSign.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)

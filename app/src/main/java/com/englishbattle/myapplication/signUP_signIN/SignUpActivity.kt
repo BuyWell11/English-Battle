@@ -1,7 +1,6 @@
 package com.englishbattle.myapplication.signUP_signIN
 
 import android.content.ContentValues.TAG
-import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
 import android.util.Log
@@ -44,8 +43,8 @@ class SignUpActivity : AppCompatActivity() {
             if (!is_same_pass(pass, conf_pass)){
                 Toast.makeText(this, "Пароли не совпадают", Toast.LENGTH_LONG).show()
             }
-            else if(binding.email.text.toString().length < 6){
-                Toast.makeText(baseContext, "Input a password of 6 characters or more",
+            else if(binding.password.text.length < 6){
+                Toast.makeText(baseContext, "Пароль должен быть больше 6",
                     Toast.LENGTH_SHORT).show()
             }
             else{
